@@ -1,0 +1,22 @@
+@media (max-width: 992px) {
+
+    .mobileMenu {
+        position: fixed;
+        top: 25px;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        transform: translateX(-100%);
+        transition: all ease 1.3s;
+    }
+
+}
+
+@media (max-width: 576px) {
+
+    .mobileMenu {
+        top: 68px;
+    }
+
+
+}

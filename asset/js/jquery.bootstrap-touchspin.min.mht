@@ -1,0 +1,191 @@
+From: <Saved by Blink>
+Subject: 
+Date: Mon, 9 Aug 2020 13:24:46 -0000
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--7PSEiahr7zuvEuS60D0lQRAPPXLw9VznS7mWLi98wJ----"
+
+------MultipartBoundary--7PSEiahr7zuvEuS60D0lQRAPPXLw9VznS7mWLi98wJ----
+Content-Type: text/html
+Content-ID: <frame-8-73aae321-ca32-4ce6-bb4e-e0e5012a8ab4@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://cdnjs.cloudflare.com/ajax/libs/bootstrap-touchspin/4.3.0/jquery.bootstrap-touchspin.min.js
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; charset=
+=3DUTF-8"></head><body><pre style=3D"word-wrap: break-word; white-space: pr=
+e-wrap;">/*
+ *  Bootstrap TouchSpin - v4.3.0
+ *  A mobile and touch friendly input spinner component for Bootstrap 3 &am=
+p; 4.
+ *  http://www.virtuosoft.eu/code/bootstrap-touchspin/
+ *
+ *  Made by Istv=C3=A1n Ujj-M=C3=A9sz=C3=A1ros
+ *  Under Apache License v2.0 License
+ */
+
+!function(o){"function"=3D=3Dtypeof define&amp;&amp;define.amd?define(["jqu=
+ery"],o):"object"=3D=3Dtypeof module&amp;&amp;module.exports?module.exports=
+=3Dfunction(t,n){return void 0=3D=3D=3Dn&amp;&amp;(n=3D"undefined"!=3Dtypeo=
+f window?require("jquery"):require("jquery")(t)),o(n),n}:o(jQuery)}(functio=
+n(D){"use strict";var N=3D0;D.fn.TouchSpin=3Dfunction(k){var C=3D{min:0,max=
+:100,initval:"",replacementval:"",firstclickvalueifempty:null,step:1,decima=
+ls:0,stepinterval:100,forcestepdivisibility:"round",stepintervaldelay:500,v=
+erticalbuttons:!1,verticalup:"+",verticaldown:"-",verticalupclass:"",vertic=
+aldownclass:"",prefix:"",postfix:"",prefix_extraclass:"",postfix_extraclass=
+:"",booster:!0,boostat:10,maxboostedstep:!1,mousewheel:!0,buttondown_class:=
+"btn btn-primary",buttonup_class:"btn btn-primary",buttondown_txt:"-",butto=
+nup_txt:"+",callback_before_calculation:function(t){return t},callback_afte=
+r_calculation:function(t){return t}},j=3D{min:"min",max:"max",initval:"init=
+-val",replacementval:"replacement-val",firstclickvalueifempty:"first-click-=
+value-if-empty",step:"step",decimals:"decimals",stepinterval:"step-interval=
+",verticalbuttons:"vertical-buttons",verticalupclass:"vertical-up-class",ve=
+rticaldownclass:"vertical-down-class",forcestepdivisibility:"force-step-div=
+isibility",stepintervaldelay:"step-interval-delay",prefix:"prefix",postfix:=
+"postfix",prefix_extraclass:"prefix-extra-class",postfix_extraclass:"postfi=
+x-extra-class",booster:"booster",boostat:"boostat",maxboostedstep:"max-boos=
+ted-step",mousewheel:"mouse-wheel",buttondown_class:"button-down-class",but=
+tonup_class:"button-up-class",buttondown_txt:"button-down-txt",buttonup_txt=
+:"button-up-txt"};return this.each(function(){var i,o,s,u,p,a,t,n,e,r,c=3DD=
+(this),l=3Dc.data(),d=3D0,f=3D!1;function b(){""=3D=3D=3Di.prefix&amp;&amp;=
+(o=3Dp.prefix.detach()),""=3D=3D=3Di.postfix&amp;&amp;(s=3Dp.postfix.detach=
+())}function h(){var t,n,o;""!=3D=3D(t=3Di.callback_before_calculation(c.va=
+l()))?0&lt;i.decimals&amp;&amp;"."=3D=3D=3Dt||(n=3DparseFloat(t),isNaN(n)&a=
+mp;&amp;(n=3D""!=3D=3Di.replacementval?i.replacementval:0),(o=3Dn).toString=
+()!=3D=3Dt&amp;&amp;(o=3Dn),null!=3D=3Di.min&amp;&amp;n&lt;i.min&amp;&amp;(=
+o=3Di.min),null!=3D=3Di.max&amp;&amp;n&gt;i.max&amp;&amp;(o=3Di.max),o=3Dfu=
+nction(t){switch(i.forcestepdivisibility){case"round":return(Math.round(t/i=
+.step)*i.step).toFixed(i.decimals);case"floor":return(Math.floor(t/i.step)*=
+i.step).toFixed(i.decimals);case"ceil":return(Math.ceil(t/i.step)*i.step).t=
+oFixed(i.decimals);default:return t.toFixed(i.decimals)}}(o),Number(t).toSt=
+ring()!=3D=3Do.toString()&amp;&amp;(c.val(o),c.trigger("change"))):""!=3D=
+=3Di.replacementval&amp;&amp;(c.val(i.replacementval),c.trigger("change"))}=
+function v(){if(i.booster){var t=3DMath.pow(2,Math.floor(d/i.boostat))*i.st=
+ep;return i.maxboostedstep&amp;&amp;t&gt;i.maxboostedstep&amp;&amp;(t=3Di.m=
+axboostedstep,a=3DMath.round(a/t)*t),Math.max(i.step,t)}return i.step}funct=
+ion x(){return"number"=3D=3Dtypeof i.firstclickvalueifempty?i.firstclickval=
+ueifempty:(i.min+i.max)/2}function g(){h();var t,n=3Da=3DparseFloat(i.callb=
+ack_before_calculation(p.input.val()));isNaN(a)?a=3Dx():(t=3Dv(),a+=3Dt),nu=
+ll!=3D=3Di.max&amp;&amp;a&gt;i.max&amp;&amp;(a=3Di.max,c.trigger("touchspin=
+.on.max"),y()),p.input.val(i.callback_after_calculation(Number(a).toFixed(i=
+.decimals))),n!=3D=3Da&amp;&amp;c.trigger("change")}function m(){h();var t,=
+n=3Da=3DparseFloat(i.callback_before_calculation(p.input.val()));isNaN(a)?a=
+=3Dx():(t=3Dv(),a-=3Dt),null!=3D=3Di.min&amp;&amp;a&lt;i.min&amp;&amp;(a=3D=
+i.min,c.trigger("touchspin.on.min"),y()),p.input.val(i.callback_after_calcu=
+lation(Number(a).toFixed(i.decimals))),n!=3D=3Da&amp;&amp;c.trigger("change=
+")}function w(){y(),d=3D0,f=3D"down",c.trigger("touchspin.on.startspin"),c.=
+trigger("touchspin.on.startdownspin"),e=3DsetTimeout(function(){t=3DsetInte=
+rval(function(){d++,m()},i.stepinterval)},i.stepintervaldelay)}function _()=
+{y(),d=3D0,f=3D"up",c.trigger("touchspin.on.startspin"),c.trigger("touchspi=
+n.on.startupspin"),r=3DsetTimeout(function(){n=3DsetInterval(function(){d++=
+,g()},i.stepinterval)},i.stepintervaldelay)}function y(){switch(clearTimeou=
+t(e),clearTimeout(r),clearInterval(t),clearInterval(n),f){case"up":c.trigge=
+r("touchspin.on.stopupspin"),c.trigger("touchspin.on.stopspin");break;case"=
+down":c.trigger("touchspin.on.stopdownspin"),c.trigger("touchspin.on.stopsp=
+in")}d=3D0,f=3D!1}!function(){if(c.data("alreadyinitialized"))return;if(c.d=
+ata("alreadyinitialized",!0),N+=3D1,c.data("spinnerid",N),!c.is("input"))re=
+turn console.log("Must be an input.");i=3DD.extend({},C,l,function(){var s=
+=3D{};return D.each(j,function(t,n){var o=3D"bts-"+n;c.is("[data-"+o+"]")&a=
+mp;&amp;(s[t]=3Dc.data(o))}),s}(),k),""!=3D=3Di.initval&amp;&amp;""=3D=3D=
+=3Dc.val()&amp;&amp;c.val(i.initval),h(),function(){var t=3Dc.val(),n=3Dc.p=
+arent();""!=3D=3Dt&amp;&amp;(t=3Di.callback_after_calculation(Number(t).toF=
+ixed(i.decimals)));c.data("initvalue",t).val(t),c.addClass("form-control"),=
+n.hasClass("input-group")?function(t){t.addClass("bootstrap-touchspin");var=
+ n,o,s=3Dc.prev(),p=3Dc.next(),a=3D'&lt;span class=3D"input-group-addon inp=
+ut-group-prepend bootstrap-touchspin-prefix input-group-prepend bootstrap-t=
+ouchspin-injected"&gt;&lt;span class=3D"input-group-text"&gt;'+i.prefix+"&l=
+t;/span&gt;&lt;/span&gt;",e=3D'&lt;span class=3D"input-group-addon input-gr=
+oup-append bootstrap-touchspin-postfix input-group-append bootstrap-touchsp=
+in-injected"&gt;&lt;span class=3D"input-group-text"&gt;'+i.postfix+"&lt;/sp=
+an&gt;&lt;/span&gt;";s.hasClass("input-group-btn")||s.hasClass("input-group=
+-prepend")?(n=3D'&lt;button class=3D"'+i.buttondown_class+' bootstrap-touch=
+spin-down bootstrap-touchspin-injected" type=3D"button"&gt;'+i.buttondown_t=
+xt+"&lt;/button&gt;",s.append(n)):(n=3D'&lt;span class=3D"input-group-btn i=
+nput-group-prepend bootstrap-touchspin-injected"&gt;&lt;button class=3D"'+i=
+.buttondown_class+' bootstrap-touchspin-down" type=3D"button"&gt;'+i.button=
+down_txt+"&lt;/button&gt;&lt;/span&gt;",D(n).insertBefore(c));p.hasClass("i=
+nput-group-btn")||p.hasClass("input-group-append")?(o=3D'&lt;button class=
+=3D"'+i.buttonup_class+' bootstrap-touchspin-up bootstrap-touchspin-injecte=
+d" type=3D"button"&gt;'+i.buttonup_txt+"&lt;/button&gt;",p.prepend(o)):(o=
+=3D'&lt;span class=3D"input-group-btn input-group-append bootstrap-touchspi=
+n-injected"&gt;&lt;button class=3D"'+i.buttonup_class+' bootstrap-touchspin=
+-up" type=3D"button"&gt;'+i.buttonup_txt+"&lt;/button&gt;&lt;/span&gt;",D(o=
+).insertAfter(c));D(a).insertBefore(c),D(e).insertAfter(c),u=3Dt}(n):functi=
+on(){var t,n=3D"";c.hasClass("input-sm")&amp;&amp;(n=3D"input-group-sm");c.=
+hasClass("input-lg")&amp;&amp;(n=3D"input-group-lg");t=3Di.verticalbuttons?=
+'&lt;div class=3D"input-group '+n+' bootstrap-touchspin bootstrap-touchspin=
+-injected"&gt;&lt;span class=3D"input-group-addon input-group-prepend boots=
+trap-touchspin-prefix"&gt;&lt;span class=3D"input-group-text"&gt;'+i.prefix=
++'&lt;/span&gt;&lt;/span&gt;&lt;span class=3D"input-group-addon bootstrap-t=
+ouchspin-postfix input-group-append"&gt;&lt;span class=3D"input-group-text"=
+&gt;'+i.postfix+'&lt;/span&gt;&lt;/span&gt;&lt;span class=3D"input-group-bt=
+n-vertical"&gt;&lt;button class=3D"'+i.buttondown_class+" bootstrap-touchsp=
+in-up "+i.verticalupclass+'" type=3D"button"&gt;'+i.verticalup+'&lt;/button=
+&gt;&lt;button class=3D"'+i.buttonup_class+" bootstrap-touchspin-down "+i.v=
+erticaldownclass+'" type=3D"button"&gt;'+i.verticaldown+"&lt;/button&gt;&lt=
+;/span&gt;&lt;/div&gt;":'&lt;div class=3D"input-group bootstrap-touchspin b=
+ootstrap-touchspin-injected"&gt;&lt;span class=3D"input-group-btn input-gro=
+up-prepend"&gt;&lt;button class=3D"'+i.buttondown_class+' bootstrap-touchsp=
+in-down" type=3D"button"&gt;'+i.buttondown_txt+'&lt;/button&gt;&lt;/span&gt=
+;&lt;span class=3D"input-group-addon bootstrap-touchspin-prefix input-group=
+-prepend"&gt;&lt;span class=3D"input-group-text"&gt;'+i.prefix+'&lt;/span&g=
+t;&lt;/span&gt;&lt;span class=3D"input-group-addon bootstrap-touchspin-post=
+fix input-group-append"&gt;&lt;span class=3D"input-group-text"&gt;'+i.postf=
+ix+'&lt;/span&gt;&lt;/span&gt;&lt;span class=3D"input-group-btn input-group=
+-append"&gt;&lt;button class=3D"'+i.buttonup_class+' bootstrap-touchspin-up=
+" type=3D"button"&gt;'+i.buttonup_txt+"&lt;/button&gt;&lt;/span&gt;&lt;/div=
+&gt;";u=3DD(t).insertBefore(c),D(".bootstrap-touchspin-prefix",u).after(c),=
+c.hasClass("input-sm")?u.addClass("input-group-sm"):c.hasClass("input-lg")&=
+amp;&amp;u.addClass("input-group-lg")}()}(),p=3D{down:D(".bootstrap-touchsp=
+in-down",u),up:D(".bootstrap-touchspin-up",u),input:D("input",u),prefix:D("=
+.bootstrap-touchspin-prefix",u).addClass(i.prefix_extraclass),postfix:D(".b=
+ootstrap-touchspin-postfix",u).addClass(i.postfix_extraclass)},b(),c.on("ke=
+ydown.touchspin",function(t){var n=3Dt.keyCode||t.which;38=3D=3D=3Dn?("up"!=
+=3D=3Df&amp;&amp;(g(),_()),t.preventDefault()):40=3D=3D=3Dn&amp;&amp;("down=
+"!=3D=3Df&amp;&amp;(m(),w()),t.preventDefault())}),c.on("keyup.touchspin",f=
+unction(t){var n=3Dt.keyCode||t.which;38!=3D=3Dn&amp;&amp;40!=3D=3Dn||y()})=
+,c.on("blur.touchspin",function(){h(),c.val(i.callback_after_calculation(c.=
+val()))}),p.down.on("keydown",function(t){var n=3Dt.keyCode||t.which;32!=3D=
+=3Dn&amp;&amp;13!=3D=3Dn||("down"!=3D=3Df&amp;&amp;(m(),w()),t.preventDefau=
+lt())}),p.down.on("keyup.touchspin",function(t){var n=3Dt.keyCode||t.which;=
+32!=3D=3Dn&amp;&amp;13!=3D=3Dn||y()}),p.up.on("keydown.touchspin",function(=
+t){var n=3Dt.keyCode||t.which;32!=3D=3Dn&amp;&amp;13!=3D=3Dn||("up"!=3D=3Df=
+&amp;&amp;(g(),_()),t.preventDefault())}),p.up.on("keyup.touchspin",functio=
+n(t){var n=3Dt.keyCode||t.which;32!=3D=3Dn&amp;&amp;13!=3D=3Dn||y()}),p.dow=
+n.on("mousedown.touchspin",function(t){p.down.off("touchstart.touchspin"),c=
+.is(":disabled")||(m(),w(),t.preventDefault(),t.stopPropagation())}),p.down=
+.on("touchstart.touchspin",function(t){p.down.off("mousedown.touchspin"),c.=
+is(":disabled")||(m(),w(),t.preventDefault(),t.stopPropagation())}),p.up.on=
+("mousedown.touchspin",function(t){p.up.off("touchstart.touchspin"),c.is(":=
+disabled")||(g(),_(),t.preventDefault(),t.stopPropagation())}),p.up.on("tou=
+chstart.touchspin",function(t){p.up.off("mousedown.touchspin"),c.is(":disab=
+led")||(g(),_(),t.preventDefault(),t.stopPropagation())}),p.up.on("mouseup.=
+touchspin mouseout.touchspin touchleave.touchspin touchend.touchspin touchc=
+ancel.touchspin",function(t){f&amp;&amp;(t.stopPropagation(),y())}),p.down.=
+on("mouseup.touchspin mouseout.touchspin touchleave.touchspin touchend.touc=
+hspin touchcancel.touchspin",function(t){f&amp;&amp;(t.stopPropagation(),y(=
+))}),p.down.on("mousemove.touchspin touchmove.touchspin",function(t){f&amp;=
+&amp;(t.stopPropagation(),t.preventDefault())}),p.up.on("mousemove.touchspi=
+n touchmove.touchspin",function(t){f&amp;&amp;(t.stopPropagation(),t.preven=
+tDefault())}),c.on("mousewheel.touchspin DOMMouseScroll.touchspin",function=
+(t){if(i.mousewheel&amp;&amp;c.is(":focus")){var n=3Dt.originalEvent.wheelD=
+elta||-t.originalEvent.deltaY||-t.originalEvent.detail;t.stopPropagation(),=
+t.preventDefault(),(n&lt;0?m:g)()}}),c.on("touchspin.destroy",function(){!f=
+unction(){var t=3Dc.parent();y(),c.off(".touchspin"),t.hasClass("bootstrap-=
+touchspin-injected")?(c.siblings().remove(),c.unwrap()):(D(".bootstrap-touc=
+hspin-injected",t).remove(),t.removeClass("bootstrap-touchspin"));c.data("a=
+lreadyinitialized",!1)}()}),c.on("touchspin.uponce",function(){y(),g()}),c.=
+on("touchspin.downonce",function(){y(),m()}),c.on("touchspin.startupspin",f=
+unction(){_()}),c.on("touchspin.startdownspin",function(){w()}),c.on("touch=
+spin.stopspin",function(){y()}),c.on("touchspin.updatesettings",function(t,=
+n){!function(t){(function(t){if(i=3DD.extend({},i,t),t.postfix){0=3D=3D=3Dc=
+.parent().find(".bootstrap-touchspin-postfix").length&amp;&amp;s.insertAfte=
+r(c),c.parent().find(".bootstrap-touchspin-postfix .input-group-text").text=
+(t.postfix)}if(t.prefix){0=3D=3D=3Dc.parent().find(".bootstrap-touchspin-pr=
+efix").length&amp;&amp;o.insertBefore(c),c.parent().find(".bootstrap-touchs=
+pin-prefix .input-group-text").text(t.prefix)}b()})(t),h();var n=3Dp.input.=
+val();""!=3D=3Dn&amp;&amp;(n=3DNumber(i.callback_before_calculation(p.input=
+.val())),p.input.val(i.callback_after_calculation(Number(n).toFixed(i.decim=
+als))))}(n)})}()})}});
+</pre></body></html>
+------MultipartBoundary--7PSEiahr7zuvEuS60D0lQRAPPXLw9VznS7mWLi98wJ------
