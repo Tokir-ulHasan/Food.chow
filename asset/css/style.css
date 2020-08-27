@@ -7,6 +7,9 @@
 .mobileMenu{
 
 }
+.fa-bars{
+color :red;
+}
 #navitem{}
 #navitem li{
     font-family: serif;
@@ -127,7 +130,6 @@
 #SearchConten h6{
     font-family: serif;
 }
-C:/xamp/htdocs/Food.chow
 /*=================Catagorory Slide=============================*/
 
 .owl-prev,
@@ -144,8 +146,17 @@ C:/xamp/htdocs/Food.chow
     font-size: 40px;
     color: red;
 }
+.owl-nav .owl-prev:focus{
+    border: none;
+    box-shadow: none;
+}
+.owl-prev span, .owl-next span:focus{
+    border: none;
+    box-shadow: none;
+}
 .owl-prev span:hover, .owl-prev span:active{
     background-color: none;
+    box-shadow: none;
 }
 .owl-theme .owl-nav [class*='owl-']:hover {
     background: none;
@@ -371,4 +382,20 @@ C:/xamp/htdocs/Food.chow
 }
 .close:hover{
     color: red;
+}
+.boxinfo .success-bg{
+    box-shadow: 2px 2px 6px 6px #a6e49ed6;
+}
+.boxinfo span{
+    font-size: small;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-shadow: 1px 1px 1px #ff000029;
+    padding-top: 7px;
+}
+.boxinfo .error-bg{
+    box-shadow: 2px 2px 6px 6px #e2afafd6;
+}
+.btnSin{
+    
 }

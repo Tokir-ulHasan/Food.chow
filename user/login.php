@@ -9,13 +9,16 @@
                     </div>
                     <div class="modal-body">
                         <div class="d-flex justify-content-center boxuser"><i class="fa fa-user"></i></div>
-                        <div class="container box ">
+                         <form action="#" method="post" >
+                         <div class="container box ">
                             <div class=" d-flex justify-content-center"><p class="pt-5 font-weight-bolder userfont">User Login</p></div>
                             <div class="my-1 boxinfo">
-                                <input type="text"  placeholder="Enter Your Email">
+                                <input type="text"  placeholder="Enter Your Email" id="loginEmail">
+                                <span id="loginEmailMess" class="text-danger"></span>
                             </div>
                             <div class="my-1  boxinfo">
-                                <input type="Password" placeholder="Enter Your Password">
+                                <input type="Password" placeholder="Enter Your Password" id="logimpass">
+                                <span id="" class="text-danger"></span>
                             </div>
                             <div class="my-3 d-flex justify-content-center">
                                 <input type="submit" class="btn btn-sm btn-outline-danger px-5 font-weight-bolder mt-3" value="Login">
@@ -25,9 +28,11 @@
                                 <p class="float-right"><a class="text-danger" href="#regitration" data-toggle="modal" data-dismiss="modal" aria-label="Close">Registration</a></p>
                             </div>
                         </div>
+                         </form>
                     </div>
                 </div>
             
             </div>
         </div>
     </section>
+   
