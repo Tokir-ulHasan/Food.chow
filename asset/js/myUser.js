@@ -50,3 +50,13 @@ function myFun(){
 }
 }
 
+$('#spinner').inputSpinner({
+    grouoClass: 'input-groupe-md',
+    buttonsClass: 'btn-danger',
+    buttonsWidth: '.1rem',
+    textAlign: 'center'
+
+  });
+  $('#spinner').on('input',function(e){
+      $('#minput').html($(this).val());
+  });

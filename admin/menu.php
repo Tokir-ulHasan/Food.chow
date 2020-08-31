@@ -1,5 +1,65 @@
 <?php include_once "adminincludes/header.php" ?>
+<?php 
+$db = new Database();
+ 
+?>
+<?php
 
+$query = "SELECT * FROM `tbl_cat`";
+$res   = $db->SelectData($query);
+
+$tab_menu    = "";
+$tab_content = "";
+
+$i = 0;
+if($res){
+  while($fdData = $res->fetch_assoc()){
+      
+    if($i == 0){
+
+     $tab_menu .='<li class="nav-item clearfix active">
+     <a class="nav-link float-left mt-2  " data-toggle="tab"  href="#cat'.$fdData['cat_id'].'"   role="tab" aria-controls="profile" aria-selected="false">'.$fdData['cat_name'].'</a>
+     <span class="float-right mr-3 mt-1" id="menuitem"><a class="float-right mt-3" href="dish_type.php?discat='.$fdData['cat_id'].'" ><i class="fa fa-edit"></i></a></span> 
+     </li>';
+
+     $tab_content .=' <div class="tab-pane fade  show  active"   id="cat'.$fdData['cat_id'].'" role="tabpanel" aria-labelledby="nav-home-tab">
+     <div class="scroll" id="scroll-style1">
+         <ul class="nav nav-tabs flex-column " id="" role="tablist">';
+
+
+    }else{
+        $tab_menu .='<li class="nav-item clearfix ">
+        <a class="nav-link float-left mt-2  " data-toggle="tab"  href="#cat'.$fdData['cat_id'].'"   role="tab" aria-controls="profile" aria-selected="false">'.$fdData['cat_name'].'</a>
+        <span class="float-right mr-3 mt-1" id="menuitem"><a class="float-right mt-3" href="dish_type.php?discat='.$fdData['cat_id'].'" ><i class="fa fa-edit"></i></a></span> 
+        </li>';
+   
+        $tab_content .=' <div class="tab-pane fade  show  "   id="cat'.$fdData['cat_id'].'" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div class="scroll" id="scroll-style1">
+            <ul class="nav nav-tabs flex-column " id="" role="tablist">';
+    }
+   
+    $tab_content .='<li class="nav-item clearfix">
+     <span class="font-weight-bold float-left " >'.$fdData['cat_name'].'</span>
+     <a class=" float-right mr-3 font-weight-bold" id="mainMenu-head" href="#"><i class="fa fa-plus "></i></a>
+     </li>';
+
+     $fdCtId  = $fdData['cat_id'] ;
+     $queryFd = "SELECT * FROM `tbl_fooddetails` WHERE `fd_catagoery` = '$fdCtId' ";
+     $result  = $db->SelectData($queryFd);
+     if($result){
+     while($fd_data = $result->fetch_assoc()){
+        $tab_content .=' <li class="nav-item clearfix">
+        <a class="nav-link float-left mt-2" id="profile-tab" data-toggle="tab" href="#Asian" role="tab" aria-controls="profile" aria-selected="false">'.$fd_data['fd_name'].'</a>
+
+        <span class="float-right mr-3 mt-1" id="menuitem"><a class="float-right mt-3" href="#" ><i class="fa fa-edit"></i></a></span> 
+        </li>';
+     }}
+     $tab_content .=' </ul> </div> </div>';
+    $i++;
+
+  }
+}
+?>
 <div id="content" class="wrappwer">
 
     <!--==========Sidebar Section============-->
@@ -9,91 +69,21 @@
         <h3 class="h4 m-2">Menu</h3>
         <div class="row mt-5 pt-5" id="menu"> 
             <div class="col-md-4">
-                <span class="font-weight-bold " id="mainMenu-head">Catagory<a class=" mll-5 pl-5 " href=""><i class="fa fa-plus "></i></a></span>
-                <nav class="scroll" id="scroll-style1">
-                <div class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
-                
-                <span class="clearfix mr-2" id="menuitem"> <a class="nav-item nav-link float-left pr-5 text-dark" id="nav-home-tab" data-toggle="tab" href="#Asian" >Asian</a> <a class="float-right mt-3" href="#Asian" ><i class="fa fa-edit"></i></a></span> 
-
-                <span class="clearfix mr-2" id="menuitem"> <a class="nav-item nav-link float-left pr-5 text-dark" id="nav-home-tab" data-toggle="tab" href="#Maxican" >Maxican</a> <a class="float-right mt-3" href="#Asian" ><i class="fa fa-edit"></i></a></span> 
-
-                <span class="clearfix mr-2" id="menuitem"> <a class="nav-item nav-link float-left pr-5 text-dark" id="nav-home-tab" data-toggle="tab" href="#Italian" >Italian</a> <a class="float-right mt-3" href="#Asian" ><i class="fa fa-edit"></i></a></span> 
-
-                <span class="clearfix mr-2" id="menuitem"> <a class="nav-item nav-link float-left pr-5 text-dark" id="nav-home-tab" data-toggle="tab" href="#Comfort" >Comfort</a> <a class="float-right mt-3" href="#Asian" ><i class="fa fa-edit"></i></a></span> 
-
-                <span class="clearfix mr-2" id="menuitem"> <a class="nav-item nav-link float-left pr-5 text-dark" id="nav-home-tab" data-toggle="tab" href="#Indians" >Indians</a> <a class="float-right mt-3" href="#Asian" ><i class="fa fa-edit"></i></a></span> 
-
-                <span class="clearfix mr-2" id="menuitem"> <a class="nav-item nav-link float-left pr-5 text-dark" id="nav-home-tab" data-toggle="tab" href="#Chinies" >Chinies</a> <a class="float-right mt-3" href="#Asian" ><i class="fa fa-edit"></i></a></span> 
-
-                <span class="clearfix mr-2" id="menuitem"> <a class="nav-item nav-link float-left pr-5 text-dark" id="nav-home-tab" data-toggle="tab" href="#Indians" >South Indian</a> <a class="float-right mt-3" href="#Asian" ><i class="fa fa-edit"></i></a></span> 
-
-                <span class="clearfix mr-2" id="menuitem"> <a class="nav-item nav-link float-left pr-5 text-dark" id="nav-home-tab" data-toggle="tab" href="#Italian" >Italian</a> <a class="float-right mt-3" href="#Asian" ><i class="fa fa-edit"></i></a></span> 
-               
-                </div>
-                </nav>
+               <div class="scroll" id="scroll-style1">
+                 <ul class="nav nav-tabs flex-column " id="" role="tablist"> 
+                    <li class="nav-item clearfix">
+                       <span class="font-weight-bold float-left " >Catagory</span>
+                        <a class=" float-right mr-3 font-weight-bold" id="mainMenu-head" href="dish_type.php?addcat"><i class="fa fa-plus "></i></a>
+                    </li>
+                    <?php echo $tab_menu; ?>
+                </ul>
+               </div>
             </div>
             <div class="tab-content col-md-4" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="nav-home-tab"></div>
-                
-                <div class="tab-pane fade show " id="Asian" role="tabpanel" aria-labelledby="nav-home-tab">
-                    <span class="font-weight-bold " id="mainMenu-head">Asian<a class=" mll-5 pl-5 " href=""><i class="fa fa-plus "></i></a></span>
-                    <nav class="scroll" id="scroll-style1">
-                    <div class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
-                    
-                    <span class="clearfix mr-2" id="menuitem"> <a class="nav-item nav-link float-left pr-5 text-dark" id="nav-home-tab" data-toggle="tab" href="#Entradas" >Entradas</a> <a class="float-right mt-3" href="#Asian" ><i class="fa fa-edit"></i></a></span> 
-
-                    <span class="clearfix mr-2" id="menuitem"> <a class="nav-item nav-link float-left pr-5 text-dark" id="nav-home-tab" data-toggle="tab" href="#Pasta" >Pasta Rise</a> <a class="float-right mt-3" href="#Asian" ><i class="fa fa-edit"></i></a></span> 
-
-                    <span class="clearfix mr-2" id="menuitem"> <a class="nav-item nav-link float-left pr-5 text-dark" id="nav-home-tab" data-toggle="tab" href="#Barger" >Poke Barger</a> <a class="float-right mt-3" href="#Asian" ><i class="fa fa-edit"></i></a></span> 
-
-                    <span class="clearfix mr-2" id="menuitem"> <a class="nav-item nav-link float-left pr-5 text-dark" id="nav-home-tab" data-toggle="tab" href="#Comfort" >Comfort</a> <a class="float-right mt-3" href="#Asian" ><i class="fa fa-edit"></i></a></span> 
-
-                    <span class="clearfix mr-2" id="menuitem"> <a class="nav-item nav-link float-left pr-5 text-dark" id="nav-home-tab" data-toggle="tab" href="#Indians" >Indians</a> <a class="float-right mt-3" href="#Asian" ><i class="fa fa-edit"></i></a></span> 
-
-                    <span class="clearfix mr-2" id="menuitem"> <a class="nav-item nav-link float-left pr-5 text-dark" id="nav-home-tab" data-toggle="tab" href="#Chinies" >Chinies</a> <a class="float-right mt-3" href="#Asian" ><i class="fa fa-edit"></i></a></span> 
-
-                    <span class="clearfix mr-2" id="menuitem"> <a class="nav-item nav-link float-left pr-5 text-dark" id="nav-home-tab" data-toggle="tab" href="#Indians" >South Indian</a> <a class="float-right mt-3" href="#Asian" ><i class="fa fa-edit"></i></a></span> 
-
-                    <span class="clearfix mr-2" id="menuitem"> <a class="nav-item nav-link float-left pr-5 text-dark" id="nav-home-tab" data-toggle="tab" href="#Italian" >Italian</a> <a class="float-right mt-3" href="#Asian" ><i class="fa fa-edit"></i></a></span> 
-                
-                    </div>
-                    </nav>
-                    </div>
-                    <div class="tab-pane fade show " id="Maxican" role="tabpanel" aria-labelledby="nav-home-tab">
-                    <span class="font-weight-bold " id="mainMenu-head">Maxican<a class=" mll-5 pl-5 " href=""><i class="fa fa-plus "></i></a></span>
-                    <nav class="scroll" id="scroll-style1">
-                    <div class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
-                    
-                    <span class="clearfix mr-2" id="menuitem"> <a class="nav-item nav-link float-left pr-5 text-dark" id="nav-home-tab" data-toggle="tab" href="#Entradas" >Entradas</a> <a class="float-right mt-3" href="#Asian" ><i class="fa fa-edit"></i></a></span> 
-
-                    <span class="clearfix mr-2" id="menuitem"> <a class="nav-item nav-link float-left pr-5 text-dark" id="nav-home-tab" data-toggle="tab" href="#Pasta" >Pasta Rise</a> <a class="float-right mt-3" href="#Asian" ><i class="fa fa-edit"></i></a></span> 
-
-                    <span class="clearfix mr-2" id="menuitem"> <a class="nav-item nav-link float-left pr-5 text-dark" id="nav-home-tab" data-toggle="tab" href="#Barger" >Poke Barger</a> <a class="float-right mt-3" href="#Asian" ><i class="fa fa-edit"></i></a></span> 
-
-                   
-                
-                    </div>
-                    </nav>
-                </div>
-            </div>
-            <div class="tab-content col-md-4" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="nav-home-tab"></div>
-                <div class="tab-pane fade show " id="Entradas" role="tabpanel" aria-labelledby="nav-home-tab">
-                <span class="font-weight-bold " id="mainMenu-head">Entradas<a class=" mll-5 pl-5 " href=""><i class="fa fa-plus "></i></a></span>
-                    <nav class="scroll" id="scroll-style1">
-                    <div class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
-                    
-                    <span class="clearfix mr-2" id="menuitem"> <a class="nav-item nav-link float-left pr-5 text-dark" id="nav-home-tab" data-toggle="tab" href="#Entradas" >Entradas</a> <a class="float-right mt-3" href="#Asian" ><i class="fa fa-edit"></i></a></span> 
-
-                   
-                
-                    </div>
-                    </nav>
-                </div>
+              <?php echo $tab_content; ?>
             </div>
         </div>
     </div>
-
 </div>
 <!--============Footer Section================-->
 <?php include_once "adminincludes/footer.php" ?> 

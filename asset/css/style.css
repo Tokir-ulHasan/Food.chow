@@ -239,6 +239,7 @@ color :red;
 }
 
 #popularFoodimg{
+    height: 195px;
     width: 100%;
 }
 #popularFoodimg img{
@@ -398,4 +399,122 @@ color :red;
 }
 .btnSin{
     
+}
+
+/*Order Page*/
+.listA{
+
+}
+.listA a{
+    text-decoration: none;
+    color: #8b7d7d;
+    font-weight: 500;
+}
+.listA a:hover{
+    color: red;
+    border-left: 2px solid palevioletred;
+    padding-left: 2px;
+    border-left-width: thick;
+}
+.listA .active{
+    color: red;
+    border-left: 2px solid palevioletred;
+    padding-left: 2px;
+    border-left-width: thick;
+}
+.orderviwe{
+
+}
+.orderviwe img{
+    height: 340px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px 6px #cfc3c3;
+}
+.orderImg{
+
+}
+.orderImg p{
+    padding: 2px;
+    font-size: larger;
+    font-family: monospace;
+    font-weight: bolder;
+}
+.orderImg p img{
+    margin: 0 2%;
+    padding: 0 4px 0 4px;
+    width: 89%;
+    height: 110px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 7px 2px #686868a6;
+}
+.orderConfirmlist{
+    border: 1px solid red;
+    padding: 25px 0px 0px 0;
+    border-radius: 5px;
+}
+.ordfoodnam{
+   
+    padding-bottom: 5px;
+}
+.ordfoodnam a{
+text-decoration: none;
+color: #2d2c2c;
+}
+.ordfoodnam a:hover{
+   
+    color: red;
+    }
+
+
+.star{
+
+}
+
+.star .fa-star{
+    font-size: 20px;
+    color: #9aac80;
+    text-shadow: 0px 0px 2px red;
+}
+.star .fa-star:hover{
+    
+    color: #ee8a06;
+    
+}
+#prices{
+    border: 1px solid red;
+    border-bottom: none;
+    padding: 6%;
+    margin: 0 7% -3px 7%;
+    background-color: #ffdfdf;
+    border-radius: 5px;
+}
+#parchesinfo{
+    background-color: #000000c4;
+    color: white;
+    padding: 26px 3%;
+}
+#locadd{}
+#locadd h6{}
+#locadd textarea{
+    width: 100%;
+    border-radius: 6px;
+}
+#paMeth{}
+#paMeth h6{}
+#paMeth input{}
+#confirbtn{
+    margin-top: 12px
+}
+#confirbtn input{
+    margin: 0px  22%;
+    padding: 8px 15%;
+    position: absolute
+}
+.slidcat{
+
+}
+.slidcat a{
+    text-decoration: none;
+    color: black;
 }

@@ -35,69 +35,85 @@
             <div class="container mt-4">
                  <div class="owl-carousel owl-theme">
                      
-                     <div class="ml-2 mr-2 ">
-                         <div class="card slidecard ">
-                               <img id="slideImg" class="img-fluid" src="../asset/images/01.png">
-                         </div>
-                         <div class="card-body">
-                             <div class="card-title font-weight-bold cat-font">BREAKFAST</div>
-                         </div>
+                     <div class="ml-2 mr-2 slidcat">
+                        <a href="">
+                            <div class="card slidecard ">
+                                <img id="slideImg" class="img-fluid" src="../asset/images/01.png">
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title font-weight-bold cat-font">BREAKFAST</div>
+                            </div>
+                        </a>
                      </div>
-                     <div class="ml-2 mr-2 ">
-                         <div class="card slidecard">
-                             <img id="slideImg" class="img-fluid" src="../asset/images/02.png">
-                         </div>
-                         <div class="card-body">
-                             <div class="card-title font-weight-bold cat-font">LUNCH</div>
-                         </div>
+                     <div class="ml-2 mr-2 slidcat">
+                       <a href="">
+                            <div class="card slidecard">
+                                <img id="slideImg" class="img-fluid" src="../asset/images/02.png">
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title font-weight-bold cat-font">LUNCH</div>
+                            </div>
+                        </a>
                      </div>
-                     <div class="ml-2 mr-2 ">
-                         <div class="card slidecard">
-                             <img id="slideImg" class="img-fluid" src="../asset/images/03.png">
-                         </div>
-                         <div class="card-body">
-                             <div class="card-title font-weight-bold cat-font">DINNER</div>
-                         </div>
+                     <div class="ml-2 mr-2 slidcat">
+                        <a href="">
+                            <div class="card slidecard">
+                                <img id="slideImg" class="img-fluid" src="../asset/images/03.png">
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title font-weight-bold cat-font">DINNER</div>
+                            </div>
+                        </a>
                      </div>
-                     <div class="ml-2 mr-2 ">
-                         <div class="card slidecard">
-                             <img class="img-fluid" id="slideImg" src="../asset/images/04.png">
-                         </div>
-                         <div class="card-body">
-                             <div class="card-title font-weight-bold cat-font">DRINK</div>
-                         </div>
+                     <div class="ml-2 mr-2 slidcat">
+                        <a href="">
+                            <div class="card slidecard">
+                                <img class="img-fluid" id="slideImg" src="../asset/images/04.png">
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title font-weight-bold cat-font">DRINK</div>
+                            </div>
+                        </a>
                      </div>
-                     <div class="ml-2 mr-2 ">
-                         <div class="card slidecard">
-                             <img class="img-fluid font-weight-bold cat-font"  id="slideImg" src="../asset/images/05.png">
-                         </div>
-                         <div class="card-body">
-                             <div class="card-title font-weight-bold cat-font">JUICE</div>
-                         </div>
+                     <div class="ml-2 mr-2 slidcat">
+                        <a href="">
+                            <div class="card slidecard">
+                                <img class="img-fluid font-weight-bold cat-font"  id="slideImg" src="../asset/images/05.png">
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title font-weight-bold cat-font">JUICE</div>
+                            </div>
+                        </a>
                      </div>
-                     <div class="ml-2 mr-2 ">
-                         <div class="card slidecard">
-                             <img class="img-fluid " id="slideImg" src="../asset/images/06.png">
-                         </div>
-                         <div class="card-body">
-                             <div class="card-title font-weight-bold cat-font">COFFEE</div>
-                         </div>
+                     <div class="ml-2 mr-2 slidcat">
+                        <a href="">
+                            <div class="card slidecard">
+                                <img class="img-fluid " id="slideImg" src="../asset/images/06.png">
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title font-weight-bold cat-font">COFFEE</div>
+                            </div>
+                        </a>
                      </div>
-                     <div class="ml-2 mr-2 ">
-                         <div class="card slidecard">
-                             <img class="img-fluid " id="slideImg" src="../asset/images/07.png">
-                         </div>
-                         <div class="card-body">
-                             <div class="card-title font-weight-bold cat-font">Tea</div>
-                         </div>
+                     <div class="ml-2 mr-2 slidcat">
+                        <a href="">
+                            <div class="card slidecard">
+                                <img class="img-fluid " id="slideImg" src="../asset/images/07.png">
+                            </div>
+                            <div class="card-body">
+                                <div class="card-title font-weight-bold cat-font">Tea</div>
+                            </div>
+                         </a>
                      </div>
-                     <div class="ml-2 mr-2 ">
+                     <div class="ml-2 mr-2 slidcat">
+                     <a href="">
                          <div class="card slidecard">
                              <img class="img-fluid " id="slideImg" src="../asset/images/08.png">
                          </div>
                          <div class="card-body">
                              <div class="card-title font-weight-bold cat-font">BEFF ROAST</div>
                          </div>
+                         </a>
                      </div>
                      
                 </div>
@@ -157,270 +173,8 @@
           </div>
       </div>
     </section>
-    <!----Most Popukar foods---->
-    <section id="popularFoodsection">
-        <div class="container">
-            <div class="card">
-                <div class="mt-4" >
-                    <h1 class="h3 text-center">Most Popukar Foods</h1>
-                    <p class="text-center font-weight-sm cat-font">Complete Network impactful users whereas next-generation application engage out thinking vai tactical action </p>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 mt-4">
-                        <div class="card">
-                            <div class="card">
-                                <div class="d-block" id="popularFoodimg">
-                                    <img src="../asset/images/img-04.jpg">
-                                    <div class="d-flex">
-                                    <span  id="popularFoodlogo">
-                                    <img src="../asset/images/04.jpg">
-                                    </span>
-                                    </div>
-                                    <span class="d-block" id="popularFoodprice"><p>$20</p></span>
-                                </div>
-                            </div>
-                            <div class="d-block ">
-                                <p class=" text-center mt-4 font-weight-bold ">Subway</p>
-                                <p class=" text-center  "><span>Type of food:Best Roast,Pizza,Stakes</span></p>
-                                <div class="d-flex justify-content-center"><a class="btn btn-outline-danger" href="">Order Now</a></div>
-                            </div>
-                            <div class="mt-3">
-                                <div class="clearfix brd">
-                                    <div class="float-left brd-l pt-3 pr-5">
-                                        <span class="popularFoodRating"><i class="fa fa-star-o"></i> 4.25</span>
-                                    </div>
-                                    <div class="float-right pt-3 ">
-                                        <span class="popularFoodCat"><i class="fa fa-home"></i>Related Food</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                       
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 mt-4">
-                        <div class="card">
-                            <div class="card">
-                                <div class="d-block" id="popularFoodimg">
-                                    <img src="../asset/images/img-04.jpg">
-                                    <div class="d-flex">
-                                    <span  id="popularFoodlogo">
-                                    <img src="../asset/images/04.jpg">
-                                    </span>
-                                    </div>
-                                    <span class="d-block" id="popularFoodprice"><p>$20</p></span>
-                                </div>
-                            </div>
-                            <div class="d-block ">
-                                <p class=" text-center mt-4 font-weight-bold ">Subway</p>
-                                <p class=" text-center  "><span>Type of food:Best Roast,Pizza,Stakes</span></p>
-                                <div class="d-flex justify-content-center"><a class="btn btn-outline-danger" href="">Order Now</a></div>
-                            </div>
-                            <div class="mt-3">
-                                <div class="clearfix brd">
-                                    <div class="float-left brd-l pt-3 pr-5">
-                                        <span class="popularFoodRating"><i class="fa fa-star-o"></i> 4.25</span>
-                                    </div>
-                                    <div class="float-right pt-3 ">
-                                        <span class="popularFoodCat"><i class="fa fa-home"></i>Related Food</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-    
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 mt-4">
-                        <div class="card">
-                            <div class="card">
-                                <div class="d-block" id="popularFoodimg">
-                                    <img src="../asset/images/img-04.jpg">
-                                    <div class="d-flex">
-                                    <span  id="popularFoodlogo">
-                                    <img src="../asset/images/04.jpg">
-                                    </span>
-                                    </div>
-                                    <span class="d-block" id="popularFoodprice"><p>$20</p></span>
-                                </div>
-                            </div>
-                            <div class="d-block ">
-                                <p class=" text-center mt-4 font-weight-bold ">Subway</p>
-                                <p class=" text-center  "><span>Type of food:Best Roast,Pizza,Stakes</span></p>
-                                <div class="d-flex justify-content-center"><a class="btn btn-outline-danger" href="">Order Now</a></div>
-                            </div>
-                            <div class="mt-3">
-                                <div class="clearfix brd">
-                                    <div class="float-left brd-l pt-3 pr-5">
-                                        <span class="popularFoodRating"><i class="fa fa-star-o"></i> 4.25</span>
-                                    </div>
-                                    <div class="float-right pt-3 ">
-                                        <span class="popularFoodCat"><i class="fa fa-home"></i>Related Food</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-    
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 mt-4">
-                        <div class="card">
-                            <div class="card">
-                                <div class="d-block" id="popularFoodimg">
-                                    <img src="../asset/images/img-04.jpg">
-                                    <div class="d-flex">
-                                    <span  id="popularFoodlogo">
-                                    <img src="../asset/images/04.jpg">
-                                    </span>
-                                    </div>
-                                    <span class="d-block" id="popularFoodprice"><p>$20</p></span>
-                                </div>
-                            </div>
-                            <div class="d-block ">
-                                <p class=" text-center mt-4 font-weight-bold ">Subway</p>
-                                <p class=" text-center  "><span>Type of food:Best Roast,Pizza,Stakes</span></p>
-                                <div class="d-flex justify-content-center"><a class="btn btn-outline-danger" href="">Order Now</a></div>
-                            </div>
-                            <div class="mt-3">
-                                <div class="clearfix brd">
-                                    <div class="float-left brd-l pt-3 pr-5">
-                                        <span class="popularFoodRating"><i class="fa fa-star-o"></i> 4.25</span>
-                                    </div>
-                                    <div class="float-right pt-3 ">
-                                        <span class="popularFoodCat"><i class="fa fa-home"></i>Related Food</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-    
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 mt-4">
-                        <div class="card">
-                            <div class="card">
-                                <div class="d-block" id="popularFoodimg">
-                                    <img src="../asset/images/img-04.jpg">
-                                    <div class="d-flex">
-                                    <span  id="popularFoodlogo">
-                                    <img src="../asset/images/04.jpg">
-                                    </span>
-                                    </div>
-                                    <span class="d-block" id="popularFoodprice"><p>$20</p></span>
-                                </div>
-                            </div>
-                            <div class="d-block ">
-                                <p class=" text-center mt-4 font-weight-bold ">Subway</p>
-                                <p class=" text-center  "><span>Type of food:Best Roast,Pizza,Stakes</span></p>
-                                <div class="d-flex justify-content-center"><a class="btn btn-outline-danger" href="">Order Now</a></div>
-                            </div>
-                            <div class="mt-3">
-                                <div class="clearfix brd">
-                                    <div class="float-left brd-l pt-3 pr-5">
-                                        <span class="popularFoodRating"><i class="fa fa-star-o"></i> 4.25</span>
-                                    </div>
-                                    <div class="float-right pt-3 ">
-                                        <span class="popularFoodCat"><i class="fa fa-home"></i>Related Food</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-    
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 mt-4">
-                        <div class="card">
-                            <div class="card">
-                                <div class="d-block" id="popularFoodimg">
-                                    <img src="../asset/images/img-04.jpg">
-                                    <div class="d-flex">
-                                    <span  id="popularFoodlogo">
-                                    <img src="../asset/images/04.jpg">
-                                    </span>
-                                    </div>
-                                    <span class="d-block" id="popularFoodprice"><p>$20</p></span>
-                                </div>
-                            </div>
-                            <div class="d-block ">
-                                <p class=" text-center mt-4 font-weight-bold ">Subway</p>
-                                <p class=" text-center  "><span>Type of food:Best Roast,Pizza,Stakes</span></p>
-                                <div class="d-flex justify-content-center"><a class="btn btn-outline-danger" href="">Order Now</a></div>
-                            </div>
-                            <div class="mt-3">
-                                <div class="clearfix brd">
-                                    <div class="float-left brd-l pt-3 pr-5">
-                                        <span class="popularFoodRating"><i class="fa fa-star-o"></i> 4.25</span>
-                                    </div>
-                                    <div class="float-right pt-3 ">
-                                        <span class="popularFoodCat"><i class="fa fa-home"></i>Related Food</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-    
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 mt-4">
-                        <div class="card">
-                            <div class="card">
-                                <div class="d-block" id="popularFoodimg">
-                                    <img src="../asset/images/img-04.jpg">
-                                    <div class="d-flex">
-                                    <span  id="popularFoodlogo">
-                                    <img src="../asset/images/04.jpg">
-                                    </span>
-                                    </div>
-                                    <span class="d-block" id="popularFoodprice"><p>$20</p></span>
-                                </div>
-                            </div>
-                            <div class="d-block ">
-                                <p class=" text-center mt-4 font-weight-bold ">Subway</p>
-                                <p class=" text-center  "><span>Type of food:Best Roast,Pizza,Stakes</span></p>
-                                <div class="d-flex justify-content-center"><a class="btn btn-outline-danger" href="">Order Now</a></div>
-                            </div>
-                            <div class="mt-3">
-                                <div class="clearfix brd">
-                                    <div class="float-left brd-l pt-3 pr-5">
-                                        <span class="popularFoodRating"><i class="fa fa-star-o"></i> 4.25</span>
-                                    </div>
-                                    <div class="float-right pt-3 ">
-                                        <span class="popularFoodCat"><i class="fa fa-home"></i>Related Food</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-    
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 mt-4">
-                        <div class="card">
-                            <div class="card">
-                                <div class="d-block" id="popularFoodimg">
-                                    <img src="../asset/images/img-04.jpg">
-                                    <div class="d-flex">
-                                    <span  id="popularFoodlogo">
-                                    <img src="../asset/images/04.jpg">
-                                    </span>
-                                    </div>
-                                    <span class="d-block" id="popularFoodprice"><p>$20</p></span>
-                                </div>
-                            </div>
-                            <div class="d-block ">
-                                <p class=" text-center mt-4 font-weight-bold ">Subway</p>
-                                <p class=" text-center  "><span>Type of food:Best Roast,Pizza,Stakes</span></p>
-                                <div class="d-flex justify-content-center"><a class="btn btn-outline-danger" href="">Order Now</a></div>
-                            </div>
-                            <div class="mt-3">
-                                <div class="clearfix brd">
-                                    <div class="float-left brd-l pt-3 pr-5">
-                                        <span class="popularFoodRating"><i class="fa fa-star-o"></i> 4.25</span>
-                                    </div>
-                                    <div class="float-right pt-3 ">
-                                        <span class="popularFoodCat"><i class="fa fa-home"></i>Related Food</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-    
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!----Most Popular foods---->
+    <?php include 'popular_food.php' ?>
     <!----Footer Section---->
     <?php include 'includesUser/footer.php' ?>
-    C:/xamp/htdocs/Food.chow/user
   

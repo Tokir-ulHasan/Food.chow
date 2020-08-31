@@ -1,3 +1,9 @@
+<?php
+include_once '../lib/Database.php';
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>

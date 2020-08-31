@@ -115,6 +115,7 @@ a.navbar-brand b span{
     background: #2f323a;
     min-width:190px;
     max-width: 190px;
+    height: 98vh;
 }
 
 /**--------User Admin---------**/
@@ -170,7 +171,7 @@ a.navbar-brand b span{
 /*===========Content===========*/
 /*--------top-content-------*/
 .top-content {
-   width: 78%;
+   width: 90%;
 }
 #navitem{
 
@@ -303,17 +304,12 @@ a.navbar-brand b span{
 #menu{
   
 }
-#mainMenu-head{
-    
-}
-#mainMenu-head a {
+
+#mainMenu-head  {
     text-decoration: none;
     color: #8787879e;
     font-size: 21px;
   
-}
-#mainMenu-head a i{
-    
 }
 .mll-5 {
     margin-left: 7.5rem;
@@ -403,3 +399,7 @@ box-shadow: 2px 2px 6px 7px #0000008a;
 color: white;
 outline: #292929;
    }
+#distcat{
+    width: 30rem;
+    
+}

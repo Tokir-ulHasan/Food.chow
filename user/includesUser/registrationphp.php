@@ -1,5 +1,4 @@
 <?php
-
 if(isset($_POST['nameAdd'])){
     $userName = $_POST['userName'];
     $userEmail = $_POST['userEmail'];

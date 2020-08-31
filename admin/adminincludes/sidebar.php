@@ -13,8 +13,8 @@
           </div>
           <div class="sidebar-sticky pt-3" >
             <ul class="nav flex-column text-light">
-              <li class="nav-item" id="side-nav-item-active">
-                <a class="nav-link active" href="#">
+              <li class="nav-item active" id="side-nav-item-active">
+                <a class="nav-link " href="index0.php">
                   <span data-feather="home"><i class="fa fa-tachometer"></i></span>
                   Dashboard 
                 </a>

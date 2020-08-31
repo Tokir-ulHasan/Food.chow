@@ -3,6 +3,7 @@
 include_once '../lib/Session.php';
 Session::CheackSession();
 include_once '../lib/Database.php';
+include_once '../lib/formatData.php';
 
 ?>
 <?php
