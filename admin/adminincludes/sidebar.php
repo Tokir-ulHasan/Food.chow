@@ -24,26 +24,35 @@
                   <span data-feather="file"><span data-feather="home"><i class="fa fa-braille"></i></span></span>
                   Menu
                 </a>
-              </li>
+
+
+
+              <!---Later We will Try it ---->
+              <!--</li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
                   <span data-feather="shopping-cart"><i class="fa fa-bed"></i></span>
                   ResTourants
                 </a>
-              </li>
+              </li>-->
+
+              
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="delevery_boy.php">
                   <span data-feather="users"><i class="fa fa-id-card-o"></i></span>
-                  Drivers
+                  Delevery Boy
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="orders.php">
                   <span data-feather="bar-chart-2"><i class="fa fa-shopping-basket"></i></span>
                   Order
                 </a>
               </li>
-              <li class="nav-item">
+
+
+              <!---Later We will Try it ---->
+             <!-- <li class="nav-item">
                 <a class="nav-link" href="#">
                   <span data-feather="layers"><i class="fa fa-newspaper-o"></i></span>
                   Banners
@@ -56,25 +65,27 @@
                   <span data-feather="file-text"><i class="fa fa-building-o"></i></span>
                   Promotions
                 </a>
-              </li>
+              </li>-->
+
+
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="users.php">
                   <span data-feather="file-text"><i class="fa fa-users"></i></span>
                   Users
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="Subadmins.php">
                   <span data-feather="file-text"><i class="fa fa-user-secret"></i></span>
                   Sub Admins
                 </a>
               </li>
-              <li class="nav-item">
+             <!-- <li class="nav-item">
                 <a class="nav-link" href="#">
                   <span data-feather="file-text"><i class="fa fa-archive"></i></span>
                   Reports
                 </a>
-              </li>
+              </li>-->
             </ul>
           </div>
         </nav>

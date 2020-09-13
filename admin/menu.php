@@ -40,7 +40,7 @@ if($res){
    
     $tab_content .='<li class="nav-item clearfix">
      <span class="font-weight-bold float-left " >'.$fdData['cat_name'].'</span>
-     <a class=" float-right mr-3 font-weight-bold" id="mainMenu-head" href="#"><i class="fa fa-plus "></i></a>
+     <a class=" float-right mr-3 font-weight-bold" id="mainMenu-head" href="dish_item.php?dishitem='.$fdData['cat_id'].'"><i class="fa fa-plus "></i></a>
      </li>';
 
      $fdCtId  = $fdData['cat_id'] ;
@@ -51,7 +51,7 @@ if($res){
         $tab_content .=' <li class="nav-item clearfix">
         <a class="nav-link float-left mt-2" id="profile-tab" data-toggle="tab" href="#Asian" role="tab" aria-controls="profile" aria-selected="false">'.$fd_data['fd_name'].'</a>
 
-        <span class="float-right mr-3 mt-1" id="menuitem"><a class="float-right mt-3" href="#" ><i class="fa fa-edit"></i></a></span> 
+        <span class="float-right mr-3 mt-1" id="menuitem"><a class="float-right mt-3" href="edit_dish_item.php?chgdishitem='.$fd_data['fd_id'].'" ><i class="fa fa-edit"></i></a></span> 
         </li>';
      }}
      $tab_content .=' </ul> </div> </div>';

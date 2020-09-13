@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
 include_once '../lib/Session.php';
-Session::CheackSession();
+//Session::CheackSession();
 include_once '../lib/Database.php';
 include_once '../lib/formatData.php';
 
@@ -59,7 +59,7 @@ Session::destroySession();
 
             <ul class="navbar-nav">
               <li class="nav-item " id="navmenuitem">
-                <a href="index.html#">
+                <a href="../user/index.php">
                   <i class="fa fa-desktop"></i>
                   <span class="badge bg-theme">Viste Site</span>
                 </a>

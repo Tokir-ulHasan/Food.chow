@@ -17,6 +17,7 @@
     display: flex;
     text-decoration: none;
     transition: 0.3s;
+    min-height: 100vh;
 
 }
 
@@ -115,7 +116,7 @@ a.navbar-brand b span{
     background: #2f323a;
     min-width:190px;
     max-width: 190px;
-    height: 98vh;
+   
 }
 
 /**--------User Admin---------**/
@@ -282,7 +283,7 @@ a.navbar-brand b span{
     padding-top: 19px;
 }
 #penbtn {
-    padding-top: 30px;
+    padding-top: 10px;
 }
 
 #side-nav-item-active a{
@@ -366,14 +367,17 @@ background-color: #09adf981;
     line-height: 1;
    
 }
-tr:nth-of-type(odd){
+#frmW{
+    width: 80%;
+}
+/*tr:nth-of-type(odd){
     background-color: rgba(66, 63, 63, 0.25);
 
 }
 tr:nth-of-type(even){
     background-color: #437e874a;
 
-}
+}*/
 th{
     background-color: #fff;
 }
@@ -403,3 +407,48 @@ outline: #292929;
     width: 30rem;
     
 }
+
+/*------------------dish_item.php Design------------------**/
+
+
+#fdinput{
+    width: 90%;
+}
+#fdinput1{
+    width: 20%;
+    
+}
+#fdinput2{
+    width: 20%;
+   
+}
+  .btn-upload{
+    display: inline-flex;
+    margin-bottom: 20px;
+    padding:6px 12px;
+    border-radius: 5px;
+    background: #4e686c;
+    font-family: sans-serif;
+    color: #fff;
+    text-align: center;
+  }
+  .preview-box{
+    display: inline;
+    width: 100%;
+  }
+  .preview-content{
+    display: inline-flex;
+    padding: 6px;
+    border-radius: 5px;
+    border: 2px solid #757f8161;
+    font-family: sans-serif;
+    color: #fff;
+    text-align: center;
+    height: 135px;
+    width: 15%;
+    margin-left: 60px;
+  }
+    
+ 
+
+

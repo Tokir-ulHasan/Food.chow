@@ -1,12 +1,12 @@
 <?php include_once "adminincludes/header.php" ?>
-
+<?php $db = new Database(); ?>
 <div id="content" class="wrappwer">
 
     <!--==========Sidebar Section============-->
     <?php include_once "adminincludes/sidebar.php" ?>
     <!--===============Main Content Section==================-->
     <div class=" top-content container-fluid" >
-        <h3 class="h4 m-2">Users</h3>
+        <h3 class="h4 m-2">Delevery Boyes</h3>
         <hr>
         <div class="clearfix">
             <div class="float-left w-50" >
@@ -29,57 +29,42 @@
                     <option value="">50</option>
                </select>
         </div>
+        
         <div class="table-responsive " id="user-tbl">
             <table class="table   table-bordered table-sm" id="tbl-user">
+            <br>
             <caption>List of users</caption>
-            <thead class="thead-dark|thead-light " style="display=flex" id="tbl-user-head">
+            <thead class="thead-dark" style="display=flex" id="tbl-user-head">
                 <tr>
-                <th scope="col" width="10%" class="text-center">No.</th>
+                <th scope="col" width="7%" class="text-center">No.</th>
                 <th scope="col" width="15%" class="text-center">IMAGE</th>
                 <th scope="col" width="15%" class="text-center">NAME</th>
                 <th scope="col" width="15%" class="text-center">EMAIL</th>
                 <th scope="col" width="10%" class="text-center">PHONE</th>
+                <th scope="col" width="10%" class="text-center">Address</th>
                 <th scope="col" width="15%" class="text-center">JOIN ON</th>
-                <th scope="col" width="10%" class="text-center">ACTION</th>
+                <th scope="col" width="7%" class="text-center">ACTION</th>
                 </tr>
             </thead>
             <tbody id="tbl-user-body">
+            <?php
+                   $query = " SELECT * FROM `tbl_delevery_boy`";
+                   $res = $db->SelectData($query);
+                   $i=0;
+                   while($delevary_boy = $res->fetch_assoc()){
+                       $i++;
+            ?>
                 <tr>
-                    <td>10000000</td>
-                    <td><img class="img-fluid" src="../asset/images/blog-img-06.jpg" alt=""></td>
-                    <td>Abullah Rahman</td>
-                    <td>Rahman@gmail.com</td>
-                    <td>01835472379</td>
-                    <td>3:40 PM ,20/2/2020</td>
+                    <td><?php echo $i;?></td>
+                    <td><img class="img-fluid" src="<?php echo $delevary_boy['dlb_img'];?>" alt=""></td>
+                    <td><?php echo $delevary_boy['dlb_name'];?></td>
+                    <td><?php echo $delevary_boy['dlb_mail'];?></td>
+                    <td><?php echo $delevary_boy['dlb_phone'];?></td>
+                    <td><?php echo $delevary_boy['dlb_address'];?></td>
+                    <td><?php echo $delevary_boy['dlb_joinDate'];?></td>
                     <td><a class="btn btn-info" href="">Edit</a></td>
                 </tr>
-                <tr>
-                    <td>10000000</td>
-                    <td><img class="img-fluid" src="../asset/images/blog-img-06.jpg" alt=""></td>
-                    <td>Abullah Rahman</td>
-                    <td>Rahman@gmail.com</td>
-                    <td>01835472379</td>
-                    <td>3:40 PM ,20/2/2020</td>
-                    <td><a class="btn btn-info" href="">Edit</a></td>
-                </tr>
-                <tr>
-                    <td>10000000</td>
-                    <td><img class="img-fluid" src="../asset/images/blog-img-06.jpg" alt=""></td>
-                    <td>Abullah Rahman</td>
-                    <td>Rahman@gmail.com</td>
-                    <td>01835472379</td>
-                    <td>3:40 PM ,20/2/2020</td>
-                    <td><a class="btn btn-info" href="">Edit</a></td>
-                </tr>
-                <tr>
-                    <td>10000000</td>
-                    <td><img class="img-fluid" src="../asset/images/blog-img-06.jpg" alt=""></td>
-                    <td>Abullah Rahman</td>
-                    <td>Rahman@gmail.com</td>
-                    <td>01835472379</td>
-                    <td>3:40 PM ,20/2/2020</td>
-                    <td><a class="btn btn-info" href="">Edit</a></td>
-                </tr>
+                   <?php }?>
             </tbody>
             </table>
         </div>

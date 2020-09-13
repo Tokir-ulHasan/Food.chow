@@ -1,4 +1,8 @@
-<footer></footer>
+<footer style="background-color: #2f323a;color: #64616187; padding: 10px 0; font-size: 11px;font-family: serif;">
+   <div class="d-flex justify-content-center mt-2">
+       <h5 >Copyright &copy: Group F 2020</h5>
+   </div>
+</footer>
   </div>
 
 
@@ -27,7 +31,26 @@
   media(x);
   x.addListener(media);
 
-
+  
+/***Image Load */
+  const handleChange = () => {
+  const fileUploader = document.querySelector('#input-file');
+  const getFile = fileUploader.files;
+  if (getFile.length !== 0) {
+    const uploadedFile = getFile[0];
+    readFile(uploadedFile);
+  }
+}
+const readFile = (uploadedFile) => {
+  if (uploadedFile) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const parent = document.querySelector('.preview-box');
+      parent.innerHTML = `<img class="preview-content" src=${reader.result} />`;
+    };
+    reader.readAsDataURL(uploadedFile);
+  }
+};
   
 </script>
 </body>

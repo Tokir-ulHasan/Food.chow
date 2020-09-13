@@ -27,15 +27,20 @@
     td:before{
         position: absolute;
         top: 6px;
-        left: 27px;
+        left: 15px;
         width: 45%;
         padding-right: 10px;
         white-space: nowrap;
-        text-align: start;
+        font-size: 12px;
+        text-align: center;
         
     }
     
-   
+    #tbl-user-body tr td {
+        font-size: 12px;
+        padding-left: 45%;
+    }
+
     td:nth-of-type(1):before{content: "ID";}
     td:nth-of-type(2):before{content: "IMAGE";}
     td:nth-of-type(3):before{content: "NAME";}
@@ -78,6 +83,23 @@
         padding: 0 23%;
     }
 }
+@media(max-width:266px){
+
+    #tbl-user-body tr td {
+        font-size: 9px;
+        padding-left: 43%;
+        text-align: start;
+    }
+
+    td:before{
+      
+     left: 2px; 
+    width: 28%;
+    font-size: 8px;
+    text-align: start;
+        
+    }
+}
 @media(max-width:220px){
     #nav_menu{
       
@@ -91,3 +113,21 @@
         max-width: 200px;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
