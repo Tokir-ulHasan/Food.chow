@@ -1,5 +1,21 @@
+
+<?php
+include_once '../lib/Database.php';
+
+?>
     <!----Header Section---->
-    <?php include 'includesUser/header.php' ?>
+    
+    <?php 
+    session_start();
+    
+   if($_SESSION['customer_login_status']=="loged in" and isset($_SESSION['user_id']) ){
+
+    include 'includesUser/user_header.php' ;
+    }
+    else {
+        include 'includesUser/header.php' ;
+    }
+    ?>
     <!----Login Section------>
     <?php include 'login.php' ?>
     <!----Registration Section------>
