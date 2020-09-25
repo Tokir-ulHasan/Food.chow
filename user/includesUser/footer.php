@@ -39,5 +39,6 @@
 <script src="../asset/js/owl.carousel.min.js" ></script>
 <script src="../asset/js/bootstrap-input-spinner.min.js" ></script>
 <script src="../asset/js/myUser.js" ></script>
+<script src="../asset/js/profile_js.js" ></script>
 </body>
 </html>

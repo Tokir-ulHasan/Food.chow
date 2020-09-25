@@ -1,4 +1,8 @@
-<?php include_once "../config/connect.php"; ?>
+<?php 
+include_once '../lib/Database.php';
+
+$db = new Database();
+?>
 <?php
 /*$databaseHost='localhost';
 $databaseName='foodchow';
@@ -26,17 +30,18 @@ if(isset($_POST['signup'])){
 	$mobile=$_POST['userNum'];
 	$pass=$_POST['userpass'];
 	if($name=="" || $email=="" || $mobile=="" || $address=="" || $pass==""){
-		echo "All fields should be filled.Either one or many fields are empty.";
+		echo "<script>alert('All fields should be filled.Either one or many fields are empty.');</script>";
 		}
 	else{
 
-	$inst="INSERT INTO tbl_user(name,email,phoneNo,address,password) VALUES('$name','$email','$mobile','$address','$pass')"; 
-	$data=mysqli_query($cont,$inst);
-	if($data == TRUE)
+		$inst="INSERT INTO tbl_user(name,email,phoneNo,address,password) VALUES('$name','$email','$mobile','$address','$pass')"; 
+		//$data=mysqli_query($cont,$inst);
+		$res = $db->QueryExcute($inst);
+		if($res == TRUE)
             {
-                echo "<script>alert('Data updated successfully..!');window.location='';</script>";   
+                echo "<script>alert('Your Registration Successful..!');window.location='';</script>";   
             }
-	else{echo mysqli_error($cont);}
+		//else{echo mysqli_error($db);}
 	}
 }
 ?>
