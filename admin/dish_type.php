@@ -19,10 +19,12 @@ $error = -1;
 if(isset($_POST['addCat'])){
 
   $addDishcat = $fm->validation($_POST['add_cat']);
+  date_default_timezone_set("Asia/Dhaka");
+  $cat_date   =  date('j F Y, g:i a');
   if($addDishcat == "")
   { $error = 0;}
   else{
-    $query    = " INSERT INTO `tbl_cat`( `cat_name`) VALUES ('$addDishcat')";
+    $query    = " INSERT INTO `tbl_cat`(`cat_name`, `cat_add_date`) VALUES ('$addDishcat','$cat_date')";
     $result   = $db->QueryExcute($query);
     if($result){
         $error = 1 ;
@@ -46,7 +48,14 @@ if(isset($_POST['editcat'])){
   }
 }
 
+/** ===============Delete Catagory=================*/
 
+if(isset($_GET['delcat'])){
+    $del = $_GET['delcat'] ;
+    $query    = " DELETE FROM `tbl_cat` WHERE `cat_id` =  $del ";
+    $result   = $db->QueryExcute($query);
+    header('Location:menu.php');
+}
 ?>
 <div id="content" class="wrappwer">
 
@@ -60,6 +69,19 @@ if(isset($_POST['editcat'])){
 
         <!--=================Add Dish Catagory======================-->
         <h3 class="h4 m-2">Add Catagory</h3>
+
+        <?php    
+          if( $error == 0 ){ ?>
+            <div class="alert alert-danger alert-dismissible fade show">
+                <strong>Error!</strong> Fill is empty !.
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+          <?php } elseif( $error == 1 ) { ?>
+            <div class="alert alert-success alert-dismissible fade show">     <strong>Success!</strong> Add  successfully.
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+          <?php } ?>
+      
         <div class="justify-content-center  mt-5 pt-5 d-flex">
             <form class="form-inline " action="#" method="post">
                 <div class="form-group mx-sm-3 mb-2">
@@ -69,17 +91,23 @@ if(isset($_POST['editcat'])){
                 <button type="submit" name="addCat" class="btn btn-primary mb-2">Add</button>
             </form>
         </div>
-        <?php
-          if( $error == 0){
-        ?>
-        <Span class="justify-content-center d-flex text-danger">Fill is empty<?echo $addDishcat;?></Span>
-          <?php }elseif( $error == 1 ){?>  
-            <Span class="justify-content-center d-flex text-success">Successfully Add</Span> 
-         <?php }}else{?>
+         <?php  }else{?>
            
 
           <!--=================Edit Dish Catagory======================-->
         <h3 class="h4 m-2">Edit Catagory</h3>
+       
+        <?php    
+          if( $error == 0 ){ ?>
+            <div class="alert alert-danger alert-dismissible fade show">
+                <strong>Error!</strong> Fill is empty !.
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+          <?php } elseif( $error == 1 ) { ?>
+            <div class="alert alert-success alert-dismissible fade show">     <strong>Success!</strong> Update  successfully.
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+          <?php } ?>
         <div class="justify-content-center d-flex my-5 py-5">
             <form class="form-inline" action="#" method="post">
                 <div class="form-group mx-sm-3 mb-2">
@@ -87,16 +115,11 @@ if(isset($_POST['editcat'])){
                 <input type="text" class="form-control" name="changeCat" id="distcat" value="<?php echo  $catname; ?>">
                 </div>
                 <button type="submit" name="editcat" class="btn btn-warning mb-2">Change</button>
-                <a href="" class="btn btn-danger ml-2 mb-2">Delete</a>
+                <a href="?delcat=<?php echo $catid; ?>" onclick="confirm('Are You Sure to Delete <?php echo  $catname; ?> click ok')" class="btn btn-danger ml-2 mb-2">Delete</a>
             </form>
         </div>
-        <?php
-          if( $error == 0){
-        ?>
-        <Span class="justify-content-center d-flex text-danger">Fill is empty<?echo $addDishcat;?></Span>
-          <?php }elseif( $error == 1 ){?>  
-            <Span class="justify-content-center d-flex text-success">Successfully Change</Span> 
-         <?php } }?>
+         <?php } ?>
+       
     </div>
 </div>
 <!--============Footer Section================-->
