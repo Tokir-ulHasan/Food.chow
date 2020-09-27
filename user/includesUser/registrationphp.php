@@ -30,7 +30,7 @@ if(isset($_POST['signup'])){
 	$mobile=$_POST['userNum'];
 	$pass=$_POST['userpass'];
 	if($name=="" || $email=="" || $mobile=="" || $address=="" || $pass==""){
-		echo "<script>alert('All fields should be filled.Either one or many fields are empty.');</script>";
+	//	echo "<script>alert('All fields should be filled.Either one or many fields are empty.');</script>";
 		}
 	else{
 
@@ -39,7 +39,7 @@ if(isset($_POST['signup'])){
 		$res = $db->QueryExcute($inst);
 		if($res == TRUE)
             {
-                echo "<script>alert('Your Registration Successful..!');window.location='';</script>";   
+              //  echo "<script>alert('Your Registration Successful..!');window.location='';</script>";   
             }
 		//else{echo mysqli_error($db);}
 	}

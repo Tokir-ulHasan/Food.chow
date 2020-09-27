@@ -1,30 +1,25 @@
-
-<?php
-include_once '../lib/Database.php';
-
-?>
     <!----Header Section---->
-    
-    <?php 
-    session_start();
-    
-   if($_SESSION['customer_login_status']=="loged in" and isset($_SESSION['user_id']) ){
-
-    include 'includesUser/user_header.php' ;
-    }
-    else {
-        include 'includesUser/header.php' ;
-    }
-    ?>
+    <?php include 'includesUser/header.php' ?>
     <!----Login Section------>
     <?php include 'login.php' ?>
     <!----Registration Section------>
     <?php include 'registration.php' ?>
     <!---Search Section--->
+  
+   
     <section class="mt-5 SearchHead" >
         <div class="container py-5 px-5 w-40">
             <div id="SearchConten">
-         
+            <?php
+    $modelClass = "class='modal fade modll '";
+    if(isset($_GET['sdf']))
+    {
+        echo $_GET['sdf'];
+        echo $userId;
+    }
+
+   
+   ?>
                 <h3 class="text-center txt h4 py-4">Unique Food Network...</h3>
                 <form class="form-inline my-2 my-lg-0 justify-content-center search-box">
                     <div class="input-group ">

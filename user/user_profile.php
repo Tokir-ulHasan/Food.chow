@@ -1,10 +1,10 @@
-<?php
-include_once '../lib/Database.php';
-session_start();
-?>
-   
 <!----Header Section---->
-<?php include 'includesUser/user_header.php' ?>
+<?php include 'includesUser/header.php' ?>
+    <!----Login Section------>
+    <?php include 'login.php' ?>
+    <!----Registration Section------>
+    <?php include 'registration.php' ?>
+    <!---Search Section--->
     
 <br>
 <section>

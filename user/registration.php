@@ -12,7 +12,7 @@
                     
                           <div class="modal-body ">
                             <div class="d-flex justify-content-center boxuser"><i class="fa fa-user"></i></div>
-                            <form method="post" action=""  onsubmit="return Validation()">
+                            <form action=""  onsubmit="return Validation()">
                                 <div class="container box pb-3">
                                     <div class=" d-flex justify-content-center"><p class="pt-5 font-weight-bolder userfont">User Registration</p>
                                     </div>
@@ -25,7 +25,7 @@
                                         <span id="userEmailMess" class="text-danger"></span>
                                     </div>
                                     <div class=" my-2 boxinfo" >
-                                        <textarea class=""  rows="3" placeholder="Enter Your Address" name="userAdd" id="userAdd" autocomplete="off" ></textarea>
+                                        <textarea class=""  rows="3" placeholder="Enter Your Address" name="nameAdd" id="nameAdd" autocomplete="off" ></textarea>
                                         <span id="userAddMess" class="text-danger"></span>
                                     </div>
                                     <div class=" my-2 boxinfo">
@@ -37,7 +37,7 @@
                                         <span id="userpassMess" class="text-danger"></span>
                                     </div>
                                     <div class="my-4 d-flex justify-content-center" >
-                                        <input type="submit" class="btn btn-sm btn-outline-danger btnSin px-5 font-weight-bolder mt-3" value="SignUp" name="signup" required>
+                                        <input type="submit" class="btn btn-sm btn-outline-danger btnSin px-5 font-weight-bolder mt-3" value="SignUp" name="singup" required>
                                     </div>
                                     <div class="container  Loginuserfooter">
                                         <p class="text-muted my-4">If You Have an Account You can <a href="#login"  data-toggle="modal" data-dismiss="modal" aria-label="Close" class="text-danger">Login</a></p>
