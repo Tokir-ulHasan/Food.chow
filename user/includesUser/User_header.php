@@ -23,7 +23,7 @@ include_once "../config/connect.php";
    if(isset($_GET['sign']) and $_GET['sign']=="out") {
 	$_SESSION['customer_login_status']="loged out";
 	unset($_SESSION['user_id']);
-   header("Location:index.php");    
+    header("Location:index.php");    
    }
 
 

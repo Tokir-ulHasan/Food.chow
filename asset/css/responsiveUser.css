@@ -9,6 +9,10 @@
         transform: translateX(-100%);
         transition: all ease 1.3s;
     }
+    .userdrop{
+        top: 64px;
+        left: -51px;
+    }
 
 }
 

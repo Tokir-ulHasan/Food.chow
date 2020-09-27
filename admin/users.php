@@ -70,9 +70,6 @@ $db = new Database();
             </table>
         </div>
     </div>
-    
-    
-
 </div>
 <!--============Footer Section================-->
 <?php include_once "adminincludes/footer.php" ?> 
