@@ -1,4 +1,55 @@
+<?php
+include_once '../lib/Database.php';
+$db = new Database();
+if(isset($_POST['submit']))
+{
 
+    $id=$_SESSION['user_id'];
+    $opass=$_POST['opass'];
+    $npass=$_POST['npass'];
+	$cpass=$_POST['cpass'];
+	if($npass==$cpass)
+	{
+        $sql="select password from tbl_user where password='$opass' and id='$id'";
+        $r=$db->QueryExcute($sql);
+        if(mysqli_num_rows($r)>0)
+        {
+            $sql1="update tbl_user set password='$npass' where id='$id'"; 
+            if($db->QueryExcute($sql1))
+            {
+                echo "<div class='alert alert-primary alert-dismissible fade show' role='alert'>
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                    <span class='sr-only'>Close</span>
+                </button>
+                <strong>Password Changed Successfully!</strong>
+            </div>";
+            }  
+        }
+        else
+        {
+            echo "<div class='alert alert-primary alert-dismissible fade show' role='alert'>
+            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                <span aria-hidden='true'>&times;</span>
+                <span class='sr-only'>Close</span>
+            </button>
+            <strong>Old password does not match!</strong> You should check in on some of those fields below.
+        </div>";
+        }
+	}
+    else
+    {
+        echo "<div class='alert alert-primary alert-dismissible fade show' role='alert'>
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+            <span aria-hidden='true'>&times;</span>
+            <span class='sr-only'>Close</span>
+        </button>
+        <strong>New password does not match with Confirm password!</strong> You should check in on some of those fields below.
+    </div>";
+    }
+}
+
+?>
 <!--<h2 align='center'>Change Your Password</h2> -->
   
   <form action="" method="post">
@@ -37,55 +88,3 @@
   </div>
   </form>
 
-<?php
-include_once '../lib/Database.php';
-$db = new Database();
-if(isset($_POST['submit']))
-{
-
-    $id=$_SESSION['user_id'];
-    $opass=$_POST['opass'];
-    $npass=$_POST['npass'];
-	$cpass=$_POST['cpass'];
-	if($npass==$cpass)
-	{
-        $sql="select password from tbl_user where password='$opass' and id='$id'";
-        $r=$db->QueryExcute($sql);
-        if(mysqli_num_rows($r)>0)
-        {
-            $sql1="update tbl_user set password='$npass' where id='$id'"; 
-            if($db->QueryExcute($sql1))
-            {
-                echo "<div class='alert alert-primary alert-dismissible fade show' role='alert'>
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                    <span aria-hidden='true'>&times;</span>
-                    <span class='sr-only'>Close</span>
-                </button>
-                <strong>Password Changed Successfully!</strong> You should check in on some of those fields below.
-            </div>";
-            }  
-        }
-        else
-        {
-            echo "<div class='alert alert-primary alert-dismissible fade show' role='alert'>
-            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                <span aria-hidden='true'>&times;</span>
-                <span class='sr-only'>Close</span>
-            </button>
-            <strong>Old password does not match!</strong> You should check in on some of those fields below.
-        </div>";
-        }
-	}
-    else
-    {
-        echo "<div class='alert alert-primary alert-dismissible fade show' role='alert'>
-        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-            <span aria-hidden='true'>&times;</span>
-            <span class='sr-only'>Close</span>
-        </button>
-        <strong>New password does not match with Confirm password!</strong> You should check in on some of those fields below.
-    </div>";
-    }
-}
-
-?>

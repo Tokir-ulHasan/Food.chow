@@ -1,12 +1,16 @@
 <!----Header Section---->
 <?php include 'includesUser/header.php' ?>
+<!----Login Section------>
+<?php include 'login.php' ?>
+    <!----Registration Section------>
+    <?php include 'registration.php' ?>
 
    <section class="mt-5 pt-5">
       <div class="row">
         <div class="col-2">
             <ul class="list-unstyled catod">
                 <h6 class="font-bold mt-2">Categories</h6>
-                <li class="list-item mt-3 listA"><a href="" class="active"> Calzone </a>
+                <!--<li class="list-item mt-3 listA"><a href="" class="active"> Calzone </a>
                 </li>
                 <li class="list-item mt-3 listA"><a href="" > Garlic Bread </a>
                 </li>
@@ -27,19 +31,46 @@
                 <li class="list-item mt-3 listA"><a href="" > Starters </a>
                 </li>
                 <li class="list-item mt-3 listA"><a href="" > Traditional Curries </a>
-                </li>
+                </li>-->
+                <?php
+                include_once '../lib/Database.php';
+                $db = new Database();
+                $sql="select distinct cat_name from tbl_cat";
+                $r=$db->SelectData($sql);
+                
+                while($row=mysqli_fetch_array($r))
+                    {
+                        $type=$row['cat_name'];
+                        
+                        echo "<li class='list-item mt-3 listA'><a href='' > $type </a></li>";
+                    }
+                ?>
             </ul>
         </div>
+        <?php
+        
+        $id=$_GET['id'];
+        $sql2="select * from tbl_fooddetails where fd_id='$id' ";
+            $r2=$db->SelectData($sql2);
+            $row=mysqli_fetch_assoc($r2);
+            $name=$row['fd_name'];
+            $des=$row['fd_description'];
+            $price=$row['fd_price'];
+            $image=$row['fd_image'];
+            
+
+        ?>
         <div class="col-6">
          <div class="orderviwe mt-2">
-            <img src="../asset/images/blog-img-06.jpg" alt="">
+           <!-- <img src="../asset/images/blog-img-06.jpg" alt="">-->
+            <img src="<?php echo "$image"; ?>">
             <div class="clearfix mt-2">
-                <h4 class="float-left text-dark">Barger</h4>
-                <h4 class="float-right">$40</h4>
+                <h4 class="float-left text-dark"><?php echo "$name"; ?></h4>
+                <h4 class="float-right">$<?php echo "$price"; ?></h4>
             </div>
          </div>
          <div class="my-2">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis alias sunt, deleniti nam reprehenderit autem in, porro quo, nostrum vitae nulla harum eum. Esse reiciendis eius eveniet qui, in nam!</p>
+            <p><?php echo "$des"; ?></p>
          </div>
         </div>
         <div class="col-4">
@@ -48,11 +79,11 @@
 
                 <div class="orderConfirm my-5">
                     <div class="orderImg clearfix ">
-                       <p class="">1.<img  src="../asset/images/blog-img-06.jpg" alt=""></p>
+                       <p class="offset-1">  <img  src="<?php echo "$image"; ?>" alt=""></p>
                     </div>
                     <div class="clearfix mx-4 ordfoodnam">
-                      <a class="float-left h6 font-weight-bold" href="">Brger</a>
-                      <h5 class="float-right  h6 font-weight-bold">$45</h5>
+                      <a class="float-left h6 font-weight-bold" href=""><?php echo "$name"; ?></a>
+                      <h5 class="float-right  h6 font-weight-bold">$<?php echo "$price"; ?></h5>
                     </div>
                     <div class="mx-4 my-2" id="ratingSection" >
                      
@@ -108,7 +139,7 @@
                   <div id="paMeth">
                     <h6>Payment Method:</h6>
                     <input type="radio" >Cash
-                    <input type="radio">Bekash
+                    <input type="radio">Bkash
                   </div>
                   <div id="confirbtn">
                     <input name=""  class="btn btn-primary" type="button" value="Confirm">
