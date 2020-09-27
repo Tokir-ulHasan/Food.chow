@@ -29,12 +29,13 @@ if(isset($_POST['signup'])){
 	$address=$_POST['userAdd'];
 	$mobile=$_POST['userNum'];
 	$pass=$_POST['userpass'];
+	$file = addslashes(file_get_contents("http://placehold.it/150x150"));
 	if($name=="" || $email=="" || $mobile=="" || $address=="" || $pass==""){
 		echo "<script>alert('All fields should be filled.Either one or many fields are empty.');</script>";
 		}
 	else{
 
-		$inst="INSERT INTO tbl_user(name,email,phoneNo,address,password) VALUES('$name','$email','$mobile','$address','$pass')"; 
+		$inst="INSERT INTO tbl_user(name,email,phoneNo,address,password,image,gender,district,city,post_code,upazilla) VALUES('$name','$email','$mobile','$address','$pass','$file','Add Gender','Add District','Add City','Add Postcode','Add Upazilla')"; 
 		//$data=mysqli_query($cont,$inst);
 		$res = $db->QueryExcute($inst);
 		if($res == TRUE)

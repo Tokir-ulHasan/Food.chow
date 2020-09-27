@@ -7,7 +7,5 @@ $cont=mysqli_connect($databaseHost,$databaseUsername,$databasePassword,$database
 if(!$cont){
 	die("Connection failed: ".mysqli_connect_error());
 }
-else{
- echo"Connected Successfully";
-}
+
 ?>

@@ -1,42 +1,3 @@
-
-<!--<h2 align='center'>Change Your Password</h2> -->
-  
-  <form action="" method="post">
-    <div class="row">
-        <div class="col-sm-3 col-md-2 col-5">
-        <label style="font-weight:bold;">Old Password</label>
-        </div>
-        <div class="col-md-8 col-6">
-        <input type="password" id="pass" name="opass" placeholder="Your old password..">
-        </div>
-    </div>
-    <hr />
-    <div class="row">
-        <div class="col-sm-3 col-md-2 col-5">
-        <label style="font-weight:bold;">New Password</label>
-        </div>
-        <div class="col-md-8 col-6">
-        <input type="password" id="pass" name="npass" placeholder="Your new password..">
-        </div>
-    </div>
-  <hr />
-    <div class="row">
-        <div class="col-sm-3 col-md-2 col-5">
-        <label style="font-weight:bold;">Confirm Password</label>
-        </div>
-        <div class="col-md-8 col-6">
-        <input type="password" id="pass" name="cpass" placeholder="Retype Your password..">
-        </div>
-    </div>
-  <hr />
-  <div class="row">
-    <div class="col-sm-3 col-md-2 col-5">
-        <input type="submit" class="btn btn-primary" value="Change Password" name="submit">
-        <!-- <input type="button" class="btn btn-primary" name="submit" value="Change Password" /> -->
-    </div>
-  </div>
-  </form>
-
 <?php
 include_once '../lib/Database.php';
 $db = new Database();
@@ -89,3 +50,41 @@ if(isset($_POST['submit']))
 }
 
 ?>
+<!--<h2 align='center'>Change Your Password</h2> -->
+  
+  <form action="" method="post">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 col-5">
+        <label style="font-weight:bold;">Old Password</label>
+        </div>
+        <div class="col-md-8 col-6">
+        <input type="password" id="pass" name="opass" placeholder="Your old password..">
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-sm-3 col-md-2 col-5">
+        <label style="font-weight:bold;">New Password</label>
+        </div>
+        <div class="col-md-8 col-6">
+        <input type="password" id="pass" name="npass" placeholder="Your new password..">
+        </div>
+    </div>
+  <hr />
+    <div class="row">
+        <div class="col-sm-3 col-md-2 col-5">
+        <label style="font-weight:bold;">Confirm Password</label>
+        </div>
+        <div class="col-md-8 col-6">
+        <input type="password" id="pass" name="cpass" placeholder="Retype Your password..">
+        </div>
+    </div>
+  <hr />
+  <div class="row">
+    <div class="col-sm-3 col-md-2 col-5">
+        <input type="submit" class="btn btn-primary" value="Change Password" name="submit">
+        <!-- <input type="button" class="btn btn-primary" name="submit" value="Change Password" /> -->
+    </div>
+  </div>
+  </form>
+
