@@ -15,6 +15,8 @@ include_once "../config/connect.php";
             $phone=$row['phoneNo'];
             $address=$row['address'];
             $joinDate=$row['joinDate'];
+            $dob=$row['dob'];
+            $image=$row['image'];
 			
     }
    
@@ -71,7 +73,7 @@ include_once "../config/connect.php";
                         </form>
                     </li>
                     <li class="nav-item mr-3">
-                        <a class="nav-link active"   href="#">Home</a>
+                        <a class="nav-link active"   href="index.php">Home</a>
                     </li>
                     <li class="nav-item mr-3">
                         <a class="nav-link " href="#">About</a>

@@ -20,6 +20,7 @@ $db = new Database();
                 $res = $db->SelectData($query);
                 if($res){
                     while($fdData = $res->fetch_assoc()){
+                    
                 ?>
                     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 mt-4">
                         <div class="card">
@@ -37,12 +38,14 @@ $db = new Database();
                             <div class="d-block ">
                                 <p class=" text-center mt-4 font-weight-bold "><?php echo $fdData['fd_name']; ?></p>
                                 <p class=" text-center  "><span>Type of food:<?php echo $fdData['fd_catagoery']; ?></span></p>
-                                <div class="d-flex justify-content-center"><a class="btn btn-outline-danger" href="confirm_order.php">Order Now</a></div>
+                                <div class="d-flex justify-content-center">
+                                <?php echo" <a class='btn btn-outline-danger' href='confirm_order.php?id=".$fdData['fd_id']."'>Order Now</a>"?></div>
                             </div>
                             <div class="mt-3">
-                                <div class="clearfix brd">
+                                <div class="clearfix brd ">
                                     <div class="float-left brd-l pt-3 pr-5">
-                                        <span class="popularFoodRating"><i class="fa fa-star-o"></i> <?php echo $fdData['fd_rating']; ?></span>
+                                       <span class="popularFoodRating "><i class="fa fa-star-o"></i> <?php echo $fdData['fd_rating']; ?></span>
+                                       
                                     </div>
                                     <div class="float-right pt-3 ">
                                         <span class="popularFoodCat"><i class="fa fa-home"></i>Related Food</span>
@@ -57,8 +60,6 @@ $db = new Database();
             </div>
         </div>
     </section>
-
-    <!--
 
 
   
