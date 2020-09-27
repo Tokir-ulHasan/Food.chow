@@ -33,12 +33,7 @@ if(isset($_POST['save']))
 ?>
    
 <!----Header Section---->
-<?php include 'includesUser/header.php' ?>
-    <!----Login Section------>
-    <?php include 'login.php' ?>
-    <!----Registration Section------>
-    <?php include 'registration.php' ?>
-    <!---Search Section--->
+<?php include 'includesUser/user_header.php' ?>
     
 <br>
 <section>

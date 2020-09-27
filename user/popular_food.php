@@ -37,7 +37,7 @@ $db = new Database();
                             </div>
                             <div class="d-block ">
                                 <p class=" text-center mt-4 font-weight-bold "><?php echo $fdData['fd_name']; ?></p>
-                                <p class=" text-center  "><span>Type of food:<?php echo $fdData['fd_catagoery']; ?></span></p>
+                                <p class=" text-center  "><span>Type of food:<?php echo $fdData['fd_catagoery_name']; ?></span></p>
                                 <div class="d-flex justify-content-center">
                                 <?php echo" <a class='btn btn-outline-danger' href='confirm_order.php?id=".$fdData['fd_id']."'>Order Now</a>"?></div>
                             </div>

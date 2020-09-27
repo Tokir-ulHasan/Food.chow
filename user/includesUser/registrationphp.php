@@ -31,7 +31,7 @@ if(isset($_POST['signup'])){
 	$pass=$_POST['userpass'];
 	$file = addslashes(file_get_contents("http://placehold.it/150x150"));
 	if($name=="" || $email=="" || $mobile=="" || $address=="" || $pass==""){
-	//	echo "<script>alert('All fields should be filled.Either one or many fields are empty.');</script>";
+		echo "<script>alert('All fields should be filled.Either one or many fields are empty.');</script>";
 		}
 	else{
 
@@ -40,7 +40,7 @@ if(isset($_POST['signup'])){
 		$res = $db->QueryExcute($inst);
 		if($res == TRUE)
             {
-              //  echo "<script>alert('Your Registration Successful..!');window.location='';</script>";   
+                echo "<script>alert('Your Registration Successful..!');window.location='';</script>";   
             }
 		//else{echo mysqli_error($db);}
 	}

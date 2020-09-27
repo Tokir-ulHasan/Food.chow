@@ -27,90 +27,45 @@
                                 <p class="float-left "> No Account? Please </p>
                                 <p class="float-right"><a class="text-danger" href="#regitration" data-toggle="modal" data-dismiss="modal" aria-label="Close">Registration</a></p>
                             </div>
-
                         </div>
-                    
-                          <div class="modal-body ">
-                            <div class="d-flex justify-content-center boxuser"><i class="fa fa-user"></i></div>
-                            <form action="demo.php" method="POST" onsubmit="return Validation()">
-                                <div class="container box pb-3">
-                                    <div class=" d-flex justify-content-center"><p class="pt-5 font-weight-bolder userfont">User Login</p>
-                                    </div>
-                                    <div class="my-2 boxinfo ">
-                                        <input type="email"  placeholder="Enter Your Email" name="userEmail" id="userEmail" autocomplete="off" >
-                                        <span id="userEmailMess" class="text-danger"></span>
-                                    </div>
-                                    <div class="my-2 boxinfo" >
-                                        <input type="Password" placeholder="Enter Your Password" name="userpass" id="userpass" autocomplete="off" >
-                                        <span id="userpassMess" class="text-danger"></span>
-                                    </div>
-                                    <div class="my-4 d-flex justify-content-center" >
-                                        <input type="submit" class="btn btn-sm btn-outline-danger btnSin px-5 font-weight-bolder mt-3" value="Signin" name="singin" >
-                                    </div>
-                                    <div class="container  Loginuserfooter">
-                                        <p class="text-muted my-4" style="font-size:15px">If You Have no Account You can <a href="#regitration"  data-toggle="modal" data-dismiss="modal" aria-label="Close" class="text-danger">Signup</a></p>
-                                    </div>
-                                </div>
-                            </form>
-                          </div>
+                         </form>
                     </div>
+                </div>
+            
             </div>
         </div>
     </section>
-<script>
-        function Validation(){
-          
-          var userEmail = document.getElementById('userEmail').value.trim();
-          var userpass  = document.getElementById('userpass').value;
-    
-        
-         var userEmail = userEmailValid(userEmail);
-         var userpass  = userpassValid(userpass);
-         
-         if(userEmail == true && userpass == true){
-           return true;
-         }
-         else{
-           return false;
-         }
-          return true;
-        }
+<?php
 
-    
-    /* -----------------User Email Validation------------------- */
-    function  userEmailValid(userEmail){
-      if(userEmail == ""){
-          document.getElementById('userEmailMess').innerHTML ="Please enter your email address!";
-          document.getElementById('userEmail').classList.add("error-bg");
-          return false;
-        }
-        if(userEmail.indexOf('@')<=0) {
-            document.getElementById('userEmailMess').innerHTML ="Invalid Positon of @ !";
-            document.getElementById('userEmail').classList.add("error-bg");
-            return false;
-        }
-        else{
-            document.getElementById('userEmailMess').innerHTML ="";
-            document.getElementById('userEmail').classList.remove("error-bg");
-            document.getElementById('userEmail').classList.add("success-bg");
-            return true;
-        }
-    }
-   
-    
-     /* -----------------User Password Validation------------------- */
-    function  userpassValid(userpass){
-        var PassPattern =/^[A-za-z0-9]{6,15}$/;
-        if(userpass == ""){
-          document.getElementById('userpassMess').innerHTML ="Please Given a Password";
-          document.getElementById('userpass').classList.add("error-bg");
-          return false;
-        }
-        else{
-            document.getElementById('userpassMess').innerHTML ="";
-            document.getElementById('userpass').classList.remove("error-bg");
-            document.getElementById('userpass').classList.add("success-bg");
-            return true;
-        }
-    }
-</script>
+include_once '../lib/Database.php';
+
+$db = new Database();
+if(isset($_POST['login']))
+{
+	$email=$_POST['loginEmail'];
+	$pass=$_POST['loginpass'];
+
+	$sql="select id,email,password from tbl_user where email='$email' and password='$pass'";
+            $r=$db->SelectData($sql);
+			$row=mysqli_fetch_assoc($r);
+			$id=$row['id'];
+            if(mysqli_num_rows($r)>0)
+            {
+                $_SESSION['user_id']=$id;
+                $_SESSION['customer_login_status']="loged in";
+                //header("Location:index.php");
+                //echo "<script>alert('Logged in successfully..!');window.location='index.php';</script>";
+            }
+            else
+            {
+                
+                echo "<div class='alert alert-primary|secondary|success|danger|warning|info|light|dark alert-dismissible fade show' role='alert'>
+                  <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                  <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                  </button>
+                </div>";
+            }
+	
+}
+?>
