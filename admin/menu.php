@@ -44,14 +44,14 @@ if($res){
      </li>';
 
      $fdCtId  = $fdData['cat_id'] ;
-     $queryFd = "SELECT * FROM `tbl_fooddetails` WHERE `fd_catagoery` = '$fdCtId' ";
+     $queryFd = "SELECT * FROM `tbl_fooddetails` WHERE `fd_cat_id` = '$fdCtId' ";
      $result  = $db->SelectData($queryFd);
      if($result){
      while($fd_data = $result->fetch_assoc()){
         $tab_content .=' <li class="nav-item clearfix">
         <a class="nav-link float-left mt-2" id="profile-tab" data-toggle="tab" href="#Asian" role="tab" aria-controls="profile" aria-selected="false">'.$fd_data['fd_name'].'</a>
 
-        <span class="float-right mr-3 mt-1" id="menuitem"><a class="float-right mt-3" href="edit_dish_item.php?chgdishitem='.$fd_data['fd_id'].'" ><i class="fa fa-edit"></i></a></span> 
+        <span class="float-right mr-3 mt-1" id="menuitem"><a class="float-right mt-3" href="edit_dish_item.php?chgdishitem='.$fd_data['id'].'" ><i class="fa fa-edit"></i></a></span> 
         </li>';
      }}
      $tab_content .=' </ul> </div> </div>';

@@ -34,14 +34,14 @@ class Database{
         }
         else{
 
-            return  false;
+            return  0;
         }
     }
     /* All Query Excute */
     public function QueryExcute($query)
     {
         $query_Excute = $this->link->query($query) or die($this->link->error.__LINE__);
-        if ($query_Excute ) {
+        if ($query_Excute) {
             return $query_Excute;
             exit();
         }

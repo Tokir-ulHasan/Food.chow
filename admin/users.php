@@ -1,5 +1,7 @@
 <?php include_once "adminincludes/header.php" ?>
-
+<?php
+$db = new Database();
+?>
 <div id="content" class="wrappwer">
 
     <!--==========Sidebar Section============-->
@@ -32,61 +34,42 @@
         <div class="table-responsive " id="user-tbl">
             <table class="table   table-bordered table-sm" id="tbl-user">
             <caption>List of users</caption>
-            <thead class="thead-dark|thead-light " style="display=flex" id="tbl-user-head">
+            <thead class="thead-dark" style="display=flex" id="tbl-user-head">
                 <tr>
                 <th scope="col" width="10%" class="text-center">No.</th>
                 <th scope="col" width="15%" class="text-center">IMAGE</th>
                 <th scope="col" width="15%" class="text-center">NAME</th>
                 <th scope="col" width="15%" class="text-center">EMAIL</th>
                 <th scope="col" width="10%" class="text-center">PHONE</th>
+                <th scope="col" width="10%" class="text-center">ADDRESS</th>
                 <th scope="col" width="15%" class="text-center">JOIN ON</th>
                 <th scope="col" width="10%" class="text-center">ACTION</th>
                 </tr>
             </thead>
             <tbody id="tbl-user-body">
+            <?php
+              $query  = "SELECT * FROM `tbl_user`";
+              $res    = $db->SelectData($query);
+              $i      = 0;
+              while($user_data = $res->fetch_assoc()){
+                  $i++;
+              
+            ?>
                 <tr>
-                    <td>10000000</td>
+                    <td><?php echo $i; ?></td>
                     <td><img class="img-fluid" src="../asset/images/blog-img-06.jpg" alt=""></td>
-                    <td>Abullah Rahman</td>
-                    <td>Rahman@gmail.com</td>
-                    <td>01835472379</td>
-                    <td>3:40 PM ,20/2/2020</td>
+                    <td><?php echo $user_data['name']; ?></td>
+                    <td><?php echo $user_data['emai']; ?></td>
+                    <td><?php echo $user_data['phoneNo']; ?></td>
+                    <td><?php echo $user_data['address']; ?></td>
+                    <td><?php echo $user_data['joinDate']; ?></td>
                     <td><a class="btn btn-info" href="">Edit</a></td>
                 </tr>
-                <tr>
-                    <td>10000000</td>
-                    <td><img class="img-fluid" src="../asset/images/blog-img-06.jpg" alt=""></td>
-                    <td>Abullah Rahman</td>
-                    <td>Rahman@gmail.com</td>
-                    <td>01835472379</td>
-                    <td>3:40 PM ,20/2/2020</td>
-                    <td><a class="btn btn-info" href="">Edit</a></td>
-                </tr>
-                <tr>
-                    <td>10000000</td>
-                    <td><img class="img-fluid" src="../asset/images/blog-img-06.jpg" alt=""></td>
-                    <td>Abullah Rahman</td>
-                    <td>Rahman@gmail.com</td>
-                    <td>01835472379</td>
-                    <td>3:40 PM ,20/2/2020</td>
-                    <td><a class="btn btn-info" href="">Edit</a></td>
-                </tr>
-                <tr>
-                    <td>10000000</td>
-                    <td><img class="img-fluid" src="../asset/images/blog-img-06.jpg" alt=""></td>
-                    <td>Abullah Rahman</td>
-                    <td>Rahman@gmail.com</td>
-                    <td>01835472379</td>
-                    <td>3:40 PM ,20/2/2020</td>
-                    <td><a class="btn btn-info" href="">Edit</a></td>
-                </tr>
+            <?php }?>
             </tbody>
             </table>
         </div>
     </div>
-    
-    
-
 </div>
 <!--============Footer Section================-->
 <?php include_once "adminincludes/footer.php" ?> 

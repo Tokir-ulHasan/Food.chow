@@ -19,10 +19,12 @@ $error = -1;
 if(isset($_POST['addCat'])){
 
   $addDishcat = $fm->validation($_POST['add_cat']);
+  date_default_timezone_set("Asia/Dhaka");
+  $cat_date   =  date('j F Y, g:i a');
   if($addDishcat == "")
   { $error = 0;}
   else{
-    $query    = " INSERT INTO `tbl_cat`( `cat_name`) VALUES ('$addDishcat')";
+    $query    = " INSERT INTO `tbl_cat`(`cat_name`, `cat_add_date`) VALUES ('$addDishcat','$cat_date')";
     $result   = $db->QueryExcute($query);
     if($result){
         $error = 1 ;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
 include_once '../lib/Session.php';
-//Session::CheackSession();
+Session::CheackSession();
 include_once '../lib/Database.php';
 include_once '../lib/formatData.php';
 
@@ -21,7 +21,7 @@ Session::destroySession();
   <meta name="description" content="">
   <meta name="author" content="Dashboard">
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-  <title>Food Ordering</title>
+  <title> Food Ordering</title>
   <!--=====Add Css======-->
   <!--======Bootstrap Core====-->
   <link rel='stylesheet' type='text/css' media='screen' href='../asset/css/bootstrap.min.css'>
@@ -38,7 +38,7 @@ Session::destroySession();
   <div class="container-fluid" id="respon">
  
     <!--==============Header Section===============-->
-   <header id="header" style="">
+   <header id="header" >
       <!--Start Nav bar -->
       <div class="top-menu">
         <nav class="navbar navbar-expand-lg navbar-expand-md  navbar-dark bg-dark" id="nav_menu">
@@ -65,7 +65,7 @@ Session::destroySession();
                 </a>
              
               <li class="nav-item noyu" id="navmenuitem">
-                <a href="index.html#">
+                <a href="billing.php">
                   <i class="fa fa-btc"></i>
                   <span class="badge ">Biling</span>
                 </a>

@@ -10,28 +10,40 @@ $fm = new Formate();
   
     <div class="container-fluid">
       <h3 class="h4 m-2"> Food List</h3>
-      <div class="clearfix">
-            <div class="float-left w-50" >
-                <form class="form-inline ">
-                <input class="form-control mr-sm-1 " id="frmW" type="search" placeholder="Search by name/email/phone/address" aria-label="Search" >
-                <button class="btn btn-sm my-2 my-sm-0" type="submit">Search</button>
+      <div class="clearfix mt-5">
+            <div class="float-right w-50" >
+                <form class="form-inline" action="" method="post">
+                    <div class="input-group mb-3" style="width:80%">
+                        <input type="text" class="form-control" name="search" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2" >
+                        <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
                 </form>
             </div>
-            <div class="float-right">
-                 <a href=""><span><i class="fa fa-download mr-1"></i>Download File</span></a>
-            </div>
+            
         </div>
         <br>
-        <div >
-                <select class="float-left" name="" id="">
-                    <option value="">10</option>
-                    <option value="">20</option>
-                    <option value="">30</option>
-                    <option value="">50</option>
-                    <option value="">50</option>
-               </select>
-        </div>
-        
+        <form id="myForm" action="" method="post">
+            <h6>Show
+            <Select name="sel_name" onChange=selectChange(this.value)>
+                 <?php
+                     
+                     $i = $row = 0;
+                     // number of rows per page
+                    $rowperpage = 5;
+                    $numrows_arr = array("5","10","25","50","100","250");
+                    foreach($numrows_arr as $nrow){
+                        if(isset($_POST['sel_name']) && $_POST['sel_name'] == $nrow){
+                            $rowperpage = $_POST['sel_name'];
+                            echo '<option value="'.$nrow.'" selected="selected">'.$nrow.'</option>';
+                        }else{
+                            echo '<option value="'.$nrow.'">'.$nrow.'</option>';
+                        }
+                    }
+                ?>
+            </select>Rows</h6>
+        </form>
         <div class="table-responsive " id="user-tbl">
             <br>
             <table class="table   table-bordere  table-md" id="tbl-user">
@@ -40,7 +52,7 @@ $fm = new Formate();
                 <tr>
                   <th scope="col" width="7%"  class="text-center">No.</th>
                   <th scope="col" width="10%" class="text-center">Name</th>
-                  <th scope="col" width="10%" class="text-center">Description</th>
+                  <th scope="col" width="15%" class="text-center">Description</th>
                   <th scope="col" width="7%"  class="text-center">Price</th>
                   <th scope="col" width="7%"  class="text-center">Discount</th>
                   <th scope="col" width="15%" class="text-center">Image</th>
@@ -53,16 +65,52 @@ $fm = new Formate();
             </thead>
             <tbody id="tbl-user-body">
             <?php
-                $query   = "SELECT * FROM `tbl_fooddetails`";
+               
+              
+               
+          
+            $page = 1;
+            if(isset($_GET['pages'])){
+                   
+
+                   $page =  $_GET['pages'];
+
+                   if($page > 1){
+                      
+                       $i = $row = ($page-1)*$rowperpage ;
+                   }
+                   else{
+                    $i = $row = 0;
+                    $page = 1;
+                    
+                   }
+                  
+            }
+
+
+                if(isset($_POST['search'])){
+                $serchKey = $_POST['search'];
+                $query = " SELECT * FROM `tbl_fooddetails` WHERE  
+                `fd_name`  like '%$serchKey%' or
+                `fd_catagoery_name`  like '%$serchKey%' or
+                `fd_description`  like '%$serchKey%' or
+                `fd_price`  like '%$serchKey%' or
+                `fd_discount`  like '%$serchKey%' or 
+                `fd_addDate`  like '%$serchKey%' or
+                `fd_rating`  like '%$serchKey%' or
+                `fd_id`  like '%$serchKey%'
+                order by id DESC ";
+                }
+                else{
+                $serchKey ="" ;
+                $query = "SELECT * FROM `tbl_fooddetails` order by id DESC limit $row,$rowperpage ";
+                }
                 $res  = $db->SelectData($query);
-                $i=0;
+               
+                if($res){
                 while($fd_data = $res->fetch_assoc()){
-                    $catid = $fd_data['fd_catagoery'];
-                    $query_cat  = "SELECT * FROM `tbl_cat` WHERE `cat_id` = $catid";
-                    $result  = $db->SelectData($query_cat);
-                    $cat_data = $result->fetch_assoc();
                 $i++;
-            ?>
+             ?>
                 <tr>
                     <td><?php echo $i; ?></td>
                     <td><?php echo $fd_data['fd_name']; ?></td>
@@ -70,16 +118,43 @@ $fm = new Formate();
                     <td><?php echo $fd_data['fd_price']; ?></td>
                     <td><?php echo $fd_data['fd_discount']; ?></td>
                     <td><img src="<?php echo $fd_data['fd_image']; ?>" alt=""></td>
-                    <td><?php echo $fd_data['fd_product']; ?></td>
-                    <td><?php echo $cat_data['cat_name'];; ?></td>
+                    <td><?php echo $fd_data['fd_id']; ?></td>
+                    <td><?php echo $fd_data['fd_catagoery_name']; ?></td>
                     <td><?php echo $fd_data['fd_rating']; ?></td>
-                    <td><?php echo $fd_data['fd_addDate']; ?></td>
-                    <td><a  href="edit_dish_item.php?chgdishitem=<?php echo $fd_data['fd_id']; ?>">Edit</a></td>
+                    <td><?php echo $fm->FormateDate($fd_data['fd_addDate']); ?></td>
+                    <td><a  href="edit_dish_item.php?chgdishitem=<?php echo $fd_data['id']; ?>">Edit</a></td>
                     
                 </tr>
-            <?php }?>
+               <?php }}else{?>
+                <tr width="10%">
+                <td></td>
+                <td></td>
+                <td>No result Found</td>
+             
+              </tr>
+              <?php }?>
             </tbody>
             </table>
+            <div class="clearfix pb-5 mr-3">
+              <?php 
+                 $querY = " SELECT * FROM `tbl_fooddetails`";
+                 $data =$db->SelectData($querY);
+                 $total_rows = mysqli_num_rows($data);
+                 $total_page = ceil($total_rows/$rowperpage);
+              ?>
+                <ul class="list-inline float-right">
+                <?php 
+                  if($page>1){
+                ?>
+                   <li class="list-inline-item"><a class = "btn" href="?pages=<?php echo ($page-1);?>">Previous</a></li>
+                <?php 
+                  }if($total_page>=$page){
+                ?>
+                   <li class="list-inline-item"><a class = "btn" href="?pages=<?php echo ($page+1);?>">Next</a></li>
+                <?php }
+                ?>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

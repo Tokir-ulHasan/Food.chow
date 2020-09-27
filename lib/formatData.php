@@ -61,7 +61,7 @@ class Formate{
       $img_temp = $_FILES[$imgTemp]['tmp_name'];
       move_uploaded_file($img_temp,$imgName);
     }
- /**---------text Formet-------- */
+ /**--------text Formet-------- */
   public function textshort($text,$limit = 400 )
 	{
 		$text = $text." ";
@@ -69,8 +69,41 @@ class Formate{
 		$text =substr($text,0,strrpos($text, ' '));
 		$text = $text."....";
 		return $text;
+  }
+  
+  public function PaymentMethod($pay){
+    if($pay == 1){
+      return $pay = "Cash";
+    }
+    elseif($pay == 2)
+    {
+      return $pay = "bekash";
+    }
+    else{
+      return $pay = "-----";
+    }
+
+  }
+  function TrakOrder($odTrack){
+
+    if($odTrack == 1 ){
+        return $odTrack = "Pending";
+    }
+    elseif($odTrack == 2 ){
+        return $odTrack = "Active";
+    }
+    elseif($odTrack == 4 ){
+        return $odTrack = "Rejected";
+    }
+    elseif($odTrack == 3 ){
+        return $odTrack = "Delevered";
+    }
+}
+  
+  public function FormateDate($date)
+	{
+		return date('j F Y, g:i a',strtotime($date));
 	}
-     
 }
 
 ?>

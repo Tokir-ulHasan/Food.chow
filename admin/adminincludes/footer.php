@@ -51,7 +51,12 @@ const readFile = (uploadedFile) => {
     reader.readAsDataURL(uploadedFile);
   }
 };
-  
+function selectChange(val) {
+    //Set the value of action in action attribute of form element.
+    //Submit the form
+    $('#myForm').submit();
+}
 </script>
 </body>
 </html>
+
