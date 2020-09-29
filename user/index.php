@@ -1,21 +1,4 @@
-
-<?php
-include_once '../lib/Database.php';
-
-?>
-    <!----Header Section---->
-    
-    <?php 
-    session_start();
-    
-   if($_SESSION['customer_login_status']=="loged in" and isset($_SESSION['user_id']) ){
-
-    include 'includesUser/user_header.php' ;
-    }
-    else {
-        include 'includesUser/header.php' ;
-    }
-    ?>
+    <?php include 'includesUser/header.php' ; ?>    
     <!----Login Section------>
     <?php include 'login.php' ?>
     <!----Registration Section------>
@@ -24,7 +7,49 @@ include_once '../lib/Database.php';
     <section class="mt-5 SearchHead" >
         <div class="container py-5 px-5 w-40">
             <div id="SearchConten">
-         
+            <?php
+                if(isset($_GET['regmsg']) && $_GET['regmsg'] == 0){
+                        echo ' <div class="alert alert-danger alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Warning!</strong>  Registration Failed Your email already exits or Somting was wrong.
+                        </div>';
+                
+                }
+                elseif(isset($_GET['regmsg']) && $_GET['regmsg'] == 1){
+                        echo '  <div class="alert alert-success alert-dismissible">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Success!</strong>  Registration Successfully.
+                    </div>';
+                
+                }
+                elseif(isset($_GET['regmsg']) && $_GET['regmsg'] == 2){
+                    echo '  <div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Warning!</strong>  Registration Failed.
+                </div>';
+                }
+                elseif(isset($_GET['logmsg']) && $_GET['logmsg'] == 3){
+                    echo '  <div class="alert alert-success alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Success!</strong>  Login Successfully.
+                </div>';
+            
+                }
+                elseif(isset($_GET['logmsg']) && $_GET['logmsg'] == 4){
+                    echo '  <div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Warning!</strong>  Invalid Password or Email.
+                </div>';
+                }
+                else{
+                    echo '  <div class="alert alert-info alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>info!</strong> Login Fisrt or Regijstration to order food.
+                </div>';
+                }
+            
+            ?>
+           
                 <h3 class="text-center txt h4 py-4">Unique Food Network...</h3>
                 <form class="form-inline my-2 my-lg-0 justify-content-center search-box">
                     <div class="input-group ">
@@ -35,7 +60,6 @@ include_once '../lib/Database.php';
                     </div>
                 </form>
                 <h6 class="text-center font-weight-light  py-4"><span class="fa fa-check-circle-o px-1"></span>69000+ People Served</h6>
-                
             </div>
         </div>
     </section>

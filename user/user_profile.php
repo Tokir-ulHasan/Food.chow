@@ -1,8 +1,14 @@
 <?php
-session_start();
+
+include_once '../lib/Session.php';
+   
+Session::CheackSession_user();
+
+
 include_once '../lib/Database.php';
 $db = new Database();
-$id=$_SESSION['user_id'];
+$id=$_SESSION['userId'];
+$email=$_SESSION['userEmail'];
 if(isset($_POST['save']))
 {
     $check = $_FILES["file"]["tmp_name"];
@@ -14,7 +20,7 @@ if(isset($_POST['save']))
     {
         $file=$image;
     }*/
-        $sqlcp = "UPDATE tbl_user set image='$file' where id='$id'";
+        $sqlcp = "UPDATE tbl_user set image='$file' where id='$id' or email = '$email'";
         $rcp= $db->QueryExcute($sqlcp);
         if($rcp)
         {
@@ -33,29 +39,40 @@ if(isset($_POST['save']))
 ?>
    
 <!----Header Section---->
-<?php include 'includesUser/user_header.php' ?>
+<?php 
+    include 'includesUser/header.php';
+?>
     
 <br>
-<section>
+<section class="pt-5">
+<br>
 <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="card">
+                <?php
+                  if($userId || $userEmail)
+                  {
+                      $query = "SELECT * FROM `tbl_user` WHERE `id` = $userId or `email` = '$userEmail'";
+                      $res = $db->SelectData($query);
+                      if($res){
+                       $data = mysqli_fetch_assoc($res);
+                ?>
                     <form action="" method="post" enctype="multipart/form-data">
                     <div class="card-body">
                         <div class="card-title mb-4">
                             <div class="d-flex justify-content-start">
                                 <div class="image-container">
-                                  <?php echo"  <img src='data:image/jpeg;base64,".base64_encode($row['image'])."' alt='No Image' id='imgProfile' style='width: 150px; height: 150px' class='img-thumbnail' /> "; ?>
+                                  <?php echo"  <img src='data:image/jpeg;base64,".base64_encode($data['image'])."' alt='No Image' id='imgProfile' style='width: 150px; height: 150px' class='img-thumbnail' /> "; ?>
                                     <div class="middle">
                                         <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
                                         <input type="file" style="display: none;" id="profilePicture" name="file" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="userData ml-3">
-                                    <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><?php echo "$name"; ?></h2>
-                                    <h6 class="d-block"><a href="javascript:void(0)"><?php echo "$email"; ?></a></h6>
-                                    <h6 class="d-block">Joined at <?php echo "$joinDate"; ?></h6>
+                                    <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><?php echo $data['name']; ?></h2>
+                                    <h6 class="d-block"><a href="javascript:void(0)"><?php echo $data['email']; ?></a></h6>
+                                    <h6 class="d-block">Joined at <?php echo $data['joinDate']; ?></h6>
                                 </div>
                                 <div class="ml-auto">
                                     <input type="button" class="btn btn-primary d-none" id="btnDiscard" value="Discard Changes" />
@@ -90,7 +107,7 @@ if(isset($_POST['save']))
                                                 <label style="font-weight:bold;">Full Name</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                            <?php echo "$name"; ?>
+                                            <?php echo $data['name']; ?>
                                             </div>
                                         </div>
                                         <hr />
@@ -100,7 +117,7 @@ if(isset($_POST['save']))
                                                 <label style="font-weight:bold;">Birth Date</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                            <?php echo "$dob"; 
+                                            <?php echo $data['dob']; 
                                             //echo date('D:M:Y');?>
                                             </div>
                                         </div>
@@ -112,7 +129,7 @@ if(isset($_POST['save']))
                                                 <label style="font-weight:bold;">Email</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                            <?php echo "$email"; ?>
+                                            <?php echo $data['email']; ?>
                                             </div>
                                         </div>
                                         <hr />
@@ -121,7 +138,7 @@ if(isset($_POST['save']))
                                                 <label style="font-weight:bold;">Phone Number</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                            <?php echo "$phone"; ?>
+                                            <?php echo $data['phoneNo']; ?>
                                             </div>
                                         </div>
                                         <hr />
@@ -130,7 +147,7 @@ if(isset($_POST['save']))
                                                 <label style="font-weight:bold;">Gender</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                            <?php echo $row['gender']; ?>
+                                            <?php echo $data['gender']; ?>
                                             </div>
                                         </div>
                                         <hr />
@@ -144,7 +161,7 @@ if(isset($_POST['save']))
                                                 <label style="font-weight:bold;">Address</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                            <?php echo "$address"; ?>
+                                            <?php echo $data['address']; ?>
                                             </div>
                                         </div>
                                         <hr />
@@ -153,7 +170,7 @@ if(isset($_POST['save']))
                                                 <label style="font-weight:bold;">Postal Code</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                            <?php echo $row['post_code']; ?>
+                                            <?php echo $data['post_code']; ?>
                                             </div>
                                         </div>
                                         <hr />
@@ -163,7 +180,7 @@ if(isset($_POST['save']))
                                                 <label style="font-weight:bold;">Upazilla</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                            <?php echo $row['upazilla']; ?>
+                                            <?php echo $data['upazilla']; ?>
                                             
                                             </div>
                                         </div>
@@ -175,7 +192,7 @@ if(isset($_POST['save']))
                                                 <label style="font-weight:bold;">City</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                            <?php echo $row['city']; ?>
+                                            <?php echo $data['city']; ?>
                                             </div>
                                         </div>
                                         <hr />
@@ -184,7 +201,7 @@ if(isset($_POST['save']))
                                                 <label style="font-weight:bold;">District</label>
                                             </div>
                                             <div class="col-md-8 col-6">
-                                            <?php echo $row['district']; ?>
+                                            <?php echo $data['district']; ?>
                                             </div>
                                         </div>
                                         <hr />
@@ -206,6 +223,7 @@ if(isset($_POST['save']))
                     </form>
 
                 </div>
+             <?php }}?>
             </div>
         </div>
     </div>

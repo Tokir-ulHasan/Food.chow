@@ -9,25 +9,25 @@
                     </div>
                     <div class="modal-body">
                         <div class="d-flex justify-content-center boxuser"><i class="fa fa-user"></i></div>
-                         <form action="index.php" method="post" >
-                         <div class="container box ">
-                            <div class=" d-flex justify-content-center"><p class="pt-5 font-weight-bolder userfont">User Login</p></div>
-                            <div class="my-1 boxinfo">
-                                <input type="text"  placeholder="Enter Your Email" id="loginEmail" name="loginEmail">
-                                <span id="loginEmailMess" class="text-danger"></span>
+                         <form action="registration_loginphp.php" method="post" onsubmit="return Validationlog()">
+                            <div class="container box ">
+                                <div class=" d-flex justify-content-center"><p class="pt-5 font-weight-bolder userfont">User Login</p></div>
+                                <div class="my-1 boxinfo">
+                                    <input type="text"  placeholder="Enter Your Email" id="loginEmail" name="loginEmail">
+                                    <span id="loginEmailMess" class="text-danger"></span>
+                                </div>
+                                <div class="my-1  boxinfo">
+                                    <input type="Password" placeholder="Enter Your Password" id="loginpass" name="loginpass">
+                                    <span id="loginpassmsg" class="text-danger"></span>
+                                </div>
+                                <div class="my-3 d-flex justify-content-center">
+                                    <input type="submit" class="btn btn-sm btn-outline-danger px-5 font-weight-bolder mt-3" value="Login" name="login">
+                                </div>
+                                <div class="container my-5 clearfix Loginuserfooter">
+                                    <p class="float-left "> No Account? Please </p>
+                                    <p class="float-right"><a class="text-danger" href="#regitration" data-toggle="modal" data-dismiss="modal" aria-label="Close">Registration</a></p>
+                                </div>
                             </div>
-                            <div class="my-1  boxinfo">
-                                <input type="Password" placeholder="Enter Your Password" id="loginpass" name="loginpass">
-                                <span id="" class="text-danger"></span>
-                            </div>
-                            <div class="my-3 d-flex justify-content-center">
-                                <input type="submit" class="btn btn-sm btn-outline-danger px-5 font-weight-bolder mt-3" value="Login" name="login">
-                            </div>
-                            <div class="container my-5 clearfix Loginuserfooter">
-                                <p class="float-left "> No Account? Please </p>
-                                <p class="float-right"><a class="text-danger" href="#regitration" data-toggle="modal" data-dismiss="modal" aria-label="Close">Registration</a></p>
-                            </div>
-                        </div>
                          </form>
                     </div>
                 </div>
@@ -35,37 +35,65 @@
             </div>
         </div>
     </section>
-<?php
+<script>
+        function Validationlog(){
+        
+          var userEmail = document.getElementById('loginEmail').value.trim();
+          var userpass  = document.getElementById('loginpass').value;
+    
+        
+         var userEmail = userEmailValidL(userEmail);
+         var userpass  = userpassValidL(userpass);
+         
+         if(userEmail == true  && userpass == true ){
+           return true;
+         }
+         else{
+           return false;
+         }
+      
+        }
 
-include_once '../lib/Database.php';
-
-$db = new Database();
-if(isset($_POST['login']))
-{
-	$email=$_POST['loginEmail'];
-	$pass=$_POST['loginpass'];
-
-	$sql="select id,email,password from tbl_user where email='$email' and password='$pass'";
-            $r=$db->SelectData($sql);
-			$row=mysqli_fetch_assoc($r);
-			$id=$row['id'];
-            if(mysqli_num_rows($r)>0)
-            {
-                $_SESSION['user_id']=$id;
-                $_SESSION['customer_login_status']="loged in";
-                //header("Location:index.php");
-                //echo "<script>alert('Logged in successfully..!');window.location='index.php';</script>";
-            }
-            else
-            {
-                
-                echo "<div class='alert alert-primary|secondary|success|danger|warning|info|light|dark alert-dismissible fade show' role='alert'>
-                  <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-                  <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                    <span aria-hidden='true'>&times;</span>
-                  </button>
-                </div>";
-            }
-	
-}
-?>
+  
+    /* -----------------User Email Validation------------------- */
+    function  userEmailValidL(userEmail){
+      if(userEmail == ""){
+          document.getElementById('loginEmailMess').innerHTML ="Please enter your email address!";
+          document.getElementById('loginEmail').classList.add("error-bg");
+          return false;
+        }
+        if(userEmail.indexOf('@')<=0) {
+            document.getElementById('loginEmailMess').innerHTML ="Invalid Positon of @ !";
+            document.getElementById('loginEmail').classList.add("error-bg");
+            return false;
+        }
+        if(userEmail.charAt(userEmail.length-4) != "." && userEmail.charAt(userEmail.length-3) != "."){
+            document.getElementById('loginEmailMess').innerHTML ="Invalid Positon of . !";
+            document.getElementById('loginEmail').classList.add("error-bg");
+            return false;
+        }
+        else{
+            document.getElementById('loginEmailMess').innerHTML ="";
+            document.getElementById('loginEmail').classList.remove("error-bg");
+            document.getElementById('loginEmail').classList.add("success-bg");
+            return true;
+        }
+    }
+    
+     /* -----------------User Password Validation------------------- */
+    function  userpassValidL(userpass){
+        
+        if(userpass == ""){
+          document.getElementById('loginpassmsg').innerHTML ="Please Given a Password";
+          document.getElementById('loginpass').classList.add("error-bg");
+          return false;
+        }
+        
+        else{
+            document.getElementById('loginpassmsg').innerHTML ="";
+            document.getElementById('loginpass').classList.remove("error-bg");
+            document.getElementById('loginpass').classList.add("success-bg");
+            return true;
+        }
+    }
+</script>

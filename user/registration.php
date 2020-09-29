@@ -1,4 +1,3 @@
-<?php include_once "includesUser/registrationphp.php"; ?>
 <section >
         <div class="modal fade modll" id="regitration" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
             <div class="modal-dialog  " role="document">
@@ -12,7 +11,7 @@
                     
                           <div class="modal-body ">
                             <div class="d-flex justify-content-center boxuser"><i class="fa fa-user"></i></div>
-                            <form method="post" action=""  onsubmit="return Validation()">
+                            <form action="registration_loginphp.php" method="post"  onsubmit="return Validation()">
                                 <div class="container box pb-3">
                                     <div class=" d-flex justify-content-center"><p class="pt-5 font-weight-bolder userfont">User Registration</p>
                                     </div>
@@ -24,9 +23,8 @@
                                         <input type="email"  placeholder="Enter Your Email" name="userEmail" id="userEmail" autocomplete="off" >
                                         <span id="userEmailMess" class="text-danger"></span>
                                     </div>
-                                    
                                     <div class=" my-2 boxinfo" >
-                                        <textarea class=""  rows="3" placeholder="Enter Your Address" name="userAdd" id="userAdd" autocomplete="off" ></textarea>
+                                        <textarea class=""  rows="3" placeholder="Enter Your Address" name="nameAdd" id="nameAdd" autocomplete="off" ></textarea>
                                         <span id="userAddMess" class="text-danger"></span>
                                     </div>
                                     <div class=" my-2 boxinfo">
@@ -38,7 +36,7 @@
                                         <span id="userpassMess" class="text-danger"></span>
                                     </div>
                                     <div class="my-4 d-flex justify-content-center" >
-                                        <input type="submit" class="btn btn-sm btn-outline-danger btnSin px-5 font-weight-bolder mt-3" value="SignUp" name="signup" required>
+                                        <input type="submit" class="btn btn-sm btn-outline-danger btnSin px-5 font-weight-bolder mt-3" value="SignUp" name="singup" required>
                                     </div>
                                     <div class="container  Loginuserfooter">
                                         <p class="text-muted my-4">If You Have an Account You can <a href="#login"  data-toggle="modal" data-dismiss="modal" aria-label="Close" class="text-danger">Login</a></p>
@@ -64,7 +62,7 @@
          var userNum   = userNumValid(userNum);
          var userpass  = userpassValid(userpass);
          
-         if(userName == true && userEmail == true && nameAdd == true && userNum == true || userpass == true){
+         if(userName == true && userEmail == true && nameAdd == true && userNum == true && userpass == true ){
            return true;
          }
          else{
@@ -164,6 +162,7 @@
             document.getElementById('userNumMess').innerHTML ="";
             document.getElementById('userNum').classList.remove("error-bg");
             document.getElementById('userNum').classList.add("success-bg");
+            return true;
             
         }
     }
@@ -180,7 +179,7 @@
           document.getElementById('userpass').classList.add("error-bg");
           return false;
         }
-        if(userpass.length <= 6 || userpass.length >= 15){
+        if(userpass.length < 6 || userpass.length > 15){
           document.getElementById('userpassMess').innerHTML ="Password Should contain 6 to 15 character";
           document.getElementById('userpass').classList.add("error-bg");
           return false;

@@ -1,6 +1,17 @@
-<?php
-include_once '../lib/Database.php';
+<?php 
 
+include_once '../lib/Session.php'; 
+include_once '../lib/Database.php'; 
+Session::initializedSession();
+
+$db = new Database();
+$userId = Session::getSession('userId');
+$userEmail = Session::getSession('userEmail');
+
+//===================Logout===============
+if (isset($_GET['logout'])&& $_GET['logout']='out'){
+    Session::destroySession_user();
+    }
 ?>
 
 
@@ -48,26 +59,35 @@ include_once '../lib/Database.php';
                     <li class="nav-item mr-3">
                         <a class="nav-link " href="#">About</a>
                     </li>
-                    <li class="nav-item dropdown  mr-3">
-                        <a class="nav-link " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" onclick="myFun()" aria-expanded="true">
-                            <span   >Pages<i class="fa fa-plus  pl-2 pr-1" style="font-size: small" id="iconChange"></i></span>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="dropcol">
-                            <a class="dropdown-item" href="#">Single Page</a>
-                            <a class="dropdown-item" href="#">404 Pages</a>
-                            <a class="dropdown-item" href="#">Catagory</a>
-                        
-                        </div>
-                    </li>
-                    <li class="nav-item mr-3">
-                        <a class="nav-link " href="#">Blog</a>
-                    </li>
                     <li class="nav-item mr-3">
                         <a class="nav-link " href="#">Contact</a>
                     </li>
-                    <li class="nav-item mr-3">
-                        <span class="nav-link log-res"> <a href="#login" data-toggle="modal" data-target="#login">Login</a>/<a href="#login" data-toggle="modal" data-target="#regitration">Registration</a></span>
+                    <?php
+                       if($userId || $userEmail)
+                       {
+                           $query = "SELECT * FROM `tbl_user` WHERE `id` = $userId or `email` = '$userEmail'";
+                           $res = $db->SelectData($query);
+                           if($res){
+                            $data = mysqli_fetch_assoc($res);
+                    ?>
+                     <li class="nav-item dropdown  mr-3">
+                        <a class="nav-link " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" onclick="myFun()" aria-expanded="true">
+                            <span   ><?php echo $data['name']; ?></i></span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="dropcol" style="top: 64px;left: -64%;">
+                            <a class="dropdown-item" href="../user/user_profile.php">View Profile</a>
+                            <a class="dropdown-item" href="#">View Order</a>
+                            <a class="dropdown-item" href="#">My Cart</a>
+                            <a class="dropdown-item" href="?logout=out">LogOut</a>
+                        
+                        </div>
                     </li>
+                    <?php
+                        }}else{ ?>
+                        <li class="nav-item mr-3">
+                            <span class="nav-link log-res"> <a href="#login" data-toggle="modal" data-target="#login">Login</a>/<a href="#login" data-toggle="modal" data-target="#regitration">Registration</a></span>
+                        </li>
+                   <?php }?>
                 </ul>
             </div>
         

@@ -56,6 +56,27 @@ class  Session{
           session::destroySession();
       }
     }
+
+    /*
+     *Session destroy for user;
+     *
+     * */
+    public static function  destroySession_user(){
+      session_destroy();
+      session_unset();
+      header("Location:index.php");
+  }
+  /*
+     *
+     * Cheak Session for user
+ 
+     * */
+    public static function CheackSession_user(){
+      self::initializedSession();
+      if (self::getSession('login') != true){
+          session::destroySession_user();
+      }
+    }
 }
 
 
