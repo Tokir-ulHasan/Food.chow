@@ -38,8 +38,7 @@
 <script>
         function Validationlog(){
         
-          var userEmail = document.getElementById('loginEmail').value.trim();
-          var userpass  = document.getElementById('loginpass').value;
+          
     
         
          var userEmail = userEmailValidL(userEmail);

@@ -2,9 +2,10 @@
 include_once '../lib/Session.php';
 Session::initializedSession();
 include_once '../lib/Database.php';
+include_once '../lib/formatData.php';
 
 $db = new Database();
-
+$fm = new Formate();
 
     ////================login=======================//
 if(isset($_POST['login']))
@@ -31,12 +32,21 @@ if(isset($_POST['login']))
     ////================Registration=======================//
     if(isset($_POST['singup'])){
         
-        $name     = $_POST['userName'];
-        $email    = $_POST['userEmail'];
-        $phone    = $_POST['userNum'];
-        $address  = $_POST['nameAdd'];
+        $name     =   mysqli_real_escape_string($db->link,$fm->validation($_POST['userName']));
+        $email    =   mysqli_real_escape_string($db->link,$fm->validation($_POST['userEmail']));
+        $phone    =   mysqli_real_escape_string($db->link,$fm->validation($_POST['userNum']));
+        $address  =   mysqli_real_escape_string($db->link,$fm->validation($_POST['nameAdd']));
+        $name=trim($name);
+        $email=trim($email);
+        $phone=trim($phone);
+        $address=trim($address);
         $password = $_POST['userpass'];
+      
+        ;
+       
+      
         
+
         date_default_timezone_set("Asia/Dhaka");
         $date   =  date('j F Y, g:i a');
 

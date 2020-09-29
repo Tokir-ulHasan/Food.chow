@@ -54,7 +54,7 @@ if (isset($_GET['logout'])&& $_GET['logout']='out'){
                         </form>
                     </li>
                     <li class="nav-item mr-3">
-                        <a class="nav-link active"   href="#">Home</a>
+                        <a class="nav-link active"   href="index.php">Home</a>
                     </li>
                     <li class="nav-item mr-3">
                         <a class="nav-link " href="#">About</a>
@@ -65,14 +65,15 @@ if (isset($_GET['logout'])&& $_GET['logout']='out'){
                     <?php
                        if($userId || $userEmail)
                        {
-                           $query = "SELECT * FROM `tbl_user` WHERE `id` = $userId or `email` = '$userEmail'";
+                           
+                           $query = "SELECT * FROM `tbl_user` WHERE `id` = $userId ";
                            $res = $db->SelectData($query);
                            if($res){
                             $data = mysqli_fetch_assoc($res);
                     ?>
                      <li class="nav-item dropdown  mr-3">
                         <a class="nav-link " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" onclick="myFun()" aria-expanded="true">
-                            <span   ><?php echo $data['name']; ?></i></span>
+                            <span   style="font-size:12px"><?php echo $data['name']; ?></i></span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="dropcol" style="top: 64px;left: -64%;">
                             <a class="dropdown-item" href="../user/user_profile.php">View Profile</a>

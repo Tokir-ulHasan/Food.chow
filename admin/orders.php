@@ -112,7 +112,7 @@ function PaymentStatus($payment)
                       where od_Loction like '%$serchKey%' or
                        od_id like '%$serchKey%' or 
                        tb_us.phoneNo like '%$serchKey%' or 
-                       tb_us.emai like '%$serchKey%' order by  `od_id` DESC limit $row,$rowperpage ";
+                       tb_us.email like '%$serchKey%' order by  `od_id` DESC limit $row,$rowperpage ";
                        
                 }
                 else{
@@ -127,7 +127,7 @@ function PaymentStatus($payment)
             ?>
                 <tr>
                     <td><?php echo $i; ?></td>
-                    <td><?php echo $od_data['emai']; ?></td>
+                    <td><?php echo $od_data['email']; ?></td>
                     <td><?php echo $od_data['phoneNo']; ?></td>
                     <td><?php echo $od_data['od_Loction']; ?></td>
                     <td><?php echo  PaymentStatus($od_data['od_paymentStatus']); ?></td>

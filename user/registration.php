@@ -51,7 +51,7 @@
 <script>
         function Validation(){
           var userName  = document.getElementById('userName').value.trim();
-          var userEmail = document.getElementById('userEmail').value.trim();
+          var userEmail = document.getElementById('userEmail');
           var nameAdd   = document.getElementById('nameAdd').value.trim();
           var userNum   = document.getElementById('userNum').value.trim();
           var userpass  = document.getElementById('userpass').value;

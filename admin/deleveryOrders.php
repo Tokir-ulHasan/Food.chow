@@ -95,7 +95,7 @@
                           tb_dlb.dlb_mail like '%$serchKey%' or 
                           tb_dlb.dlb_phone like '%$serchKey%'or
                           tb_us.phoneNo like '%$serchKey%' or 
-                          tb_us.emai like '%$serchKey%' order by  `od_id` DESC limit $row,$rowperpage ";
+                          tb_us.email like '%$serchKey%' order by  `od_id` DESC limit $row,$rowperpage ";
                           
                    }
                    else{
@@ -114,7 +114,7 @@
                 <tr>
                     <td><?php echo $i;?></td>
                     <td><?php echo $delevaty_data['od_Loction'];?></td>
-                    <td><?php echo $delevaty_data['emai'];?></td>
+                    <td><?php echo $delevaty_data['email'];?></td>
                     <td><?php echo $delevaty_data['phoneNo'];?></td>
                     <td><?php echo $delevaty_data['dlb_name'];?></td>
                     <td><?php echo $delevaty_data['dlb_phone'];?></td>

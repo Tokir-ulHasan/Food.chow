@@ -59,7 +59,7 @@ $db = new Database();
                     <td><?php echo $i; ?></td>
                     <td><img class="img-fluid" src="../asset/images/blog-img-06.jpg" alt=""></td>
                     <td><?php echo $user_data['name']; ?></td>
-                    <td><?php echo $user_data['emai']; ?></td>
+                    <td><?php echo $user_data['email']; ?></td>
                     <td><?php echo $user_data['phoneNo']; ?></td>
                     <td><?php echo $user_data['address']; ?></td>
                     <td><?php echo $user_data['joinDate']; ?></td>

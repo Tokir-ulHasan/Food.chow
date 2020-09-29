@@ -25,6 +25,21 @@
 <body>
     <div class="container-fluid d-flex justify-content-center align-items-center adminlog ">
      <div class="boxs">
+     <?php 
+       if(isset($_GET['msg']) && $_GET['msg'] == 1){
+            echo '  <div class="alert alert-success alert-dismissible">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Success!</strong>  Login Successfully.
+          </div>';
+
+        }
+        elseif(isset($_GET['msg']) && $_GET['msg'] == 0){
+          echo '  <div class="alert alert-danger alert-dismissible">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Warning!</strong>  Invalid Password or Email.
+          </div>';
+        }
+     ?>
         <form action="" method="post">
             <div class="d-flex justify-content-center">
                <div class="d-block">
@@ -46,6 +61,9 @@
           </form>
      </div>
         
-    </div>
+    </div>  
+<script src="../asset/js/jquery-3.5.1.slim.min.js" ></script>
+<script src="../asset/js/popper.min.js" ></script>
+<script src="../asset/js/bootstrap.min.js" ></script>
 </body>
 </html>
