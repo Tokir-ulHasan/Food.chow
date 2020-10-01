@@ -39,7 +39,7 @@ $db = new Database();
                                 <p class=" text-center mt-4 font-weight-bold "><?php echo $fdData['fd_name']; ?></p>
                                 <p class=" text-center  "><span>Type of food:<?php echo $fdData['fd_catagoery_name']; ?></span></p>
                                 <div class="d-flex justify-content-center">
-                                <?php echo" <a class='btn btn-outline-danger' href='orderpage.php?id=".$fdData['fd_id']."'>Order</a>"?></div>
+                                <?php echo" <a class='btn btn-outline-danger' href='detailspage.php?food_id=".$fdData['id']."'>Order</a>"?></div>
                             </div>
                             <div class="mt-3">
                                 <div class="clearfix brd ">
