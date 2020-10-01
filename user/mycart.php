@@ -24,14 +24,14 @@
 
 ?>
 
-<section id="cart" class="my-5">
+<section id="cart" class="my-5" style="height: 100%;">
 
 <div class="container">
   <h2 class="text-dark mt-3">Your Cart</h2>
     <?php
       $query = "SELECT * FROM `tbl_cart` WHERE `customer_id` = '$customer_id'  ";
       $result = $db->SelectData($query);
-      if($result){
+      if($result && $result->num_rows > 0){
     ?>
     <table class="table table-bordered text-center mt-5">
       <thead>
@@ -105,40 +105,41 @@
        </tbody>
       </table>
     </div>
+    <div class="clearfix">
+      <button class="btn btn-primary btn-lg float-left ">Continue To Order</button>
+      <button type="button" class="btn btn-info btn-lg float-right " data-toggle="modal" data-target="#myModal">checkout</button>
+        <!-- Modal -->
+      <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <div style="margin: 0 24%;"> 
+                <h4 class="">Payment Option</h4>
+            </div>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body pt-3 mb-3 pb-5">
+              <h5 class="text-center">Choose Your Payment Option</h5>
+              <div class="d-flex justify-content-center mt-5">
+                <a class="btn btn-info btn-sm mr-1" href="cash_hand.php">Cash On Hand</a> 
+                <a class="btn btn-primary btn-sm mr-1" href="">Payment With Bekash</a>
+                <a class="btn btn-secondary  btn-sm" href="">Payment With Other</a> 
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        </div>
+      </div>
+      <!-- Modal end -->
+    </div>
     <?php }else{  ?>
     <p class="text-center">Your Cart is Empty</p>
    <?php } ?>
 
-  <div class="clearfix">
-    <button class="btn btn-primary btn-lg float-left ">Continue To Order</button>
-    <button type="button" class="btn btn-info btn-lg float-right " data-toggle="modal" data-target="#myModal">checkout</button>
-     <!-- Modal -->
-    <div id="myModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <div style="margin: 0 24%;"> 
-             <h4 class="">Payment Option</h4>
-          </div>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body pt-3 mb-3 pb-5">
-           <h5 class="text-center">Choose Your Payment Option</h5>
-           <div class="d-flex justify-content-center mt-5">
-              <a class="btn btn-info btn-sm mr-1" href="cash_hand.php">Cash On Hand</a> 
-              <a class="btn btn-primary btn-sm mr-1" href="">Payment With Bekash</a>
-              <a class="btn btn-secondary  btn-sm" href="">Payment With Other</a> 
-           </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      </div>
-    </div>
-    <!-- Modal end -->
-  </div>
+
 
 </div>
 </section>

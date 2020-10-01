@@ -6,7 +6,6 @@ include_once '../lib/Database.php';
 include_once '../lib/formatData.php';
 
 
-echo "<br><br><br>";
 class Cart
 {
 
@@ -31,7 +30,7 @@ class Cart
             $fd_img = $food_data['fd_image'];
             $fd_price = $food_data['fd_price'];
             $price = $quantity*$fd_price;
-            $query = "INSERT INTO `tbl_cart`( `s_id`, `product_id`, `product_name`, `price`, `quantity`, `image`,`customer_id`) VALUES ('$session_id','$food_id','$fd_name','$price','$quantity','$fd_img','$customer_id')";
+            $query = "INSERT INTO `tbl_cart`( `s_id`, `product_id`, `product_name`, `price`, `quantity`, `total_price`,`image`,`customer_id`) VALUES ('$session_id','$food_id','$fd_name','$fd_price','$quantity','$price','$fd_img','$customer_id')";
             $res = $this->db->QueryExcute($query);
             if($res){
                   header('Location:mycart.php');
@@ -86,8 +85,9 @@ class Cart
       $res           = $this->db->SelectData($query_trans);
       if($res){
          $data          = $res->fetch_assoc();
-         $orderCustomId = $data['transitsion']+1;
+         $orderCustomId = $data['transitsion'];
       }
+      $orderCustomId += 1;
       //----------------------
       // location fecth from customer
       $od_Location = "" ;
@@ -101,34 +101,38 @@ class Cart
       $query        = "SELECT * FROM `tbl_cart` WHERE `customer_id` = '$customer_id'";
       $result       = $this->db->SelectData($query);
       if($result){
-         while( $cart_data     = $result->fetch_assoc()){
-            $foodName     = $cart_data['product_name'];
-            $foodID       = $cart_data['product_id'];
-            $foodPrice    = $cart_data['price'];
-            $foodQuantity = $cart_data['quantity'];
-            $image        = $cart_data['image'];
+         while( $cart_data = $result->fetch_assoc()){
+            $foodName      = $cart_data['product_name'];
+            $foodID        = $cart_data['product_id'];
+            $foodPrice     = $cart_data['total_price'];
+            $foodQuantity  = $cart_data['quantity'];
+            $image         = $cart_data['image'];
             
+            $temp = 0;
 
             $query_OD = "INSERT INTO `tbl_orders`( `od_type`, `od_items`, `od_items_name`, `od_paymentStatus`, `od_price`, `od_quantity`, `customer_id`, `od_Loction`, `od_image`,`orderCustomId`) VALUES ('$order_status','$foodID','$foodName','$payment_status','$foodPrice','$foodQuantity','$customer_id','$od_Location','$image','$orderCustomId')";
-            $result = $this->db->SelectData($query_OD);
-            if($result){
-               $queryCart = "DELETE FROM `tbl_cart` WHERE `customer_id` = ' $customer_id' ";
-               $resCart = $this->db->QueryExcute($queryCart);
-               if($resCart){
-                     header('Location:myorder.php');
-               }
-               else{
-                  header('Location:404.php');
-               }
+            $res = $this->db->SelectData($query_OD);
+            if($res){
+
+               $temp = 1;
+               
             }
             else{
                header('Location:404.php');
             }
 
          }
+         $queryCart = "DELETE FROM `tbl_cart` WHERE `customer_id` = ' $customer_id' ";
+         $resCart = $this->db->QueryExcute($queryCart);
+         if($resCart){
+               header('Location:myorder.php');
+         }
+         else{
+            header('Location:404.php');
+         }
       }
       else{
-         //header('Location:404.php');
+         header('Location:404.php');
       }
    }
 

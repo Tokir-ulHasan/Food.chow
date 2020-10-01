@@ -2,9 +2,11 @@
 
 include_once '../lib/Session.php'; 
 include_once '../lib/Database.php'; 
+include_once '../lib/formatData.php';
 Session::initializedSession();
 
 $db = new Database();
+$fm = new Formate();
 $userId = Session::getSession('userId');
 $userEmail = Session::getSession('userEmail');
 
