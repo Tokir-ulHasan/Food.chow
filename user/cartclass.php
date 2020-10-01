@@ -66,10 +66,8 @@ class Cart
 
    public function removecart($id){
 
-      $customer_id = $_SESSION['userId'];
-      $food_id    =  mysqli_real_escape_string($this->db->link,$id);
-      $session_id =   session_id();
-      $query = "DELETE FROM `tbl_cart` WHERE `product_id` = ' $food_id' ";
+     
+      $query = "DELETE FROM `tbl_cart` WHERE `c_id` = ' $id' ";
       $res = $this->db->QueryExcute($query);
       if($res){
             header('Location:mycart.php');
