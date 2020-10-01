@@ -518,3 +518,13 @@ color: #2d2c2c;
     text-decoration: none;
     color: black;
 }
+
+#cashtbl .table td, .table th {
+   
+     border-top: 0px solid #dee2e6; 
+}
+#cashtbl .form-control {
+    
+    border: 1px solid #ffffff;
+   
+}

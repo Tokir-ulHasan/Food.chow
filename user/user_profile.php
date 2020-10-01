@@ -1,5 +1,5 @@
 <?php
-
+ include 'includesUser/header.php';
 include_once '../lib/Session.php';
    
 Session::CheackSession_user();
@@ -8,7 +8,7 @@ Session::CheackSession_user();
 include_once '../lib/Database.php';
 $db = new Database();
 $id=$_SESSION['userId'];
-$email=$_SESSION['userEmail'];
+//$email=$_SESSION['userEmail'];
 if(isset($_POST['save']))
 {
     $check = $_FILES["file"]["tmp_name"];
@@ -38,14 +38,10 @@ if(isset($_POST['save']))
 }
 ?>
    
-<!----Header Section---->
-<?php 
-    include 'includesUser/header.php';
-?>
-    
-<br>
+
+
 <section class="pt-5">
-<br>
+
 <div class="container">
         <div class="row">
             <div class="col-12">

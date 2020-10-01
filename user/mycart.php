@@ -16,8 +16,8 @@
 
   if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['removecart'])){
  
-    $foodid = $_POST['cart_id'];
-    $addcart  = $cart->removecart($foodid);
+    $cartid = $_POST['cart_id'];
+    $removecart  = $cart->removecart($cartid);
 }
 
   
@@ -88,7 +88,7 @@
       </tbody>
     </table>
     <div >
-      <table class="table table-borderedless table-dark text-center  ">
+      <table class="table table-borderedless table-secondary text-center  ">
        <tbody>
          <tr>
             <td class="px-5">Sub Total</td>
@@ -108,14 +108,42 @@
     <?php }else{  ?>
     <p class="text-center">Your Cart is Empty</p>
    <?php } ?>
+
   <div class="clearfix">
-    <button class="btn btn-warning btnlarge float-left ">Continue To Order</button>
-    <button class="btn btn-warning btnlarge float-right ">CheckOut</button>
+    <button class="btn btn-primary btn-lg float-left ">Continue To Order</button>
+    <button type="button" class="btn btn-info btn-lg float-right " data-toggle="modal" data-target="#myModal">checkout</button>
+     <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <div style="margin: 0 24%;"> 
+             <h4 class="">Payment Option</h4>
+          </div>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body pt-3 mb-3 pb-5">
+           <h5 class="text-center">Choose Your Payment Option</h5>
+           <div class="d-flex justify-content-center mt-5">
+              <a class="btn btn-info btn-sm mr-1" href="cash_hand.php">Cash On Hand</a> 
+              <a class="btn btn-primary btn-sm mr-1" href="">Payment With Bekash</a>
+              <a class="btn btn-secondary  btn-sm" href="">Payment With Other</a> 
+           </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+    <!-- Modal end -->
   </div>
+
 </div>
-
-
 </section>
 
 <!----Footer Section---->
 <?php include 'includesUser/footer.php' ?>
+
+

@@ -28,7 +28,7 @@ class Database{
     public function SelectData($query)
     {
         $select_Data = $this->link->query($query) or die($this->link->error.__LINE__);
-        if ($select_Data->num_rows > 0) {
+        if ($select_Data) {
             return $select_Data;
             exit();
         }
