@@ -528,3 +528,10 @@ color: #2d2c2c;
     border: 1px solid #ffffff;
    
 }
+.v-center{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}

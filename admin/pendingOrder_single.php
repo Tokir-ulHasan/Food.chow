@@ -11,8 +11,8 @@ $fm = new Formate();
 
   /** Confirm to active Order By Admin */
   if(isset($_GET['con'])){
-    $od_id = $_GET['con'];
-    $queryUp = "UPDATE `tbl_orders` SET `od_type` = 2 WHERE `od_id` = $od_id ";
+    $trans_id = $_GET['con'];
+    $queryUp = "UPDATE `tbl_orders` SET `od_type` = 2 WHERE `orderCustomId` = $trans_id ";
     $result  = $db->QueryExcute($queryUp);        
   }
 
@@ -29,18 +29,12 @@ $fm = new Formate();
         }
         $path = $_SERVER['SCRIPT_FILENAME'];
         $current_page = basename($path,'.php');
-        $query   = "SELECT * FROM `tbl_orders` INNER JOIN tbl_user ON tbl_orders.`customer_id` = tbl_user.id where `od_type` = 1  order by od_id DESC limit $row,$rowperpage ";
+        $query   = "SELECT *, COUNT(*) as `Same_CUS_OD` FROM `tbl_orders` INNER JOIN tbl_user ON tbl_orders.`customer_id` = tbl_user.id  WHERE  `od_type` = 1 GROUP BY `orderCustomId` order by `orderCustomId` DESC limit $row,$rowperpage ";
         $res  = $db->SelectData($query);
     
         if($res){
         while($od_data = $res->fetch_assoc()){
-        $fd_item =  explode(',',$od_data['od_items']);
-        $fd_item_lenth = count($fd_item);
-        $fdProdId = $fd_item['0'] ;
-        $queryFd   = "SELECT * FROM `tbl_fooddetails` where `id` = '$fdProdId'";
-        $result  = $db->SelectData($queryFd);
-        if($result){
-        $fd_data = $result->fetch_assoc();
+        
         
     ?>
     <div class="col-md-6 ">
@@ -48,13 +42,13 @@ $fm = new Formate();
             <div class="col-6 " id="penord">
                 <p>Oreder ID -<span><a href=""><?php echo $od_data['orderCustomId']; ?></a></span></p>
                 <div id="penordimg">
-                    <img class="img-fluid" src="<?php echo $fd_data['fd_image']; ?>" alt="">
+                    <img class="img-fluid" src="<?php echo $od_data['od_image']; ?>" alt="">
                     <?php 
-                        if($fd_item_lenth == 1){
+                        if($od_data['Same_CUS_OD'] == 1){
                     ?>
-                    <span> <?php echo $fd_data['fd_name']; ?><strong class="ml-1"> Only</strong></span>
+                    <span> <?php echo $od_data['od_items_name']; ?><strong class="ml-1"> Only</strong></span>
                     <?php }else{?>
-                    <span> <?php echo $fd_data['fd_name']; ?> x <?php echo $fd_item_lenth-1; ?> <strong>More</strong></span>
+                    <span> <?php echo $od_data['od_items_name']; ?> x <?php echo $od_data['Same_CUS_OD']; ?> <strong>More</strong></span>
                     <?php }?>
                 </div>
                 <div id="penorduser">
@@ -68,12 +62,12 @@ $fm = new Formate();
                 <h6 class="ml-4">Payment-<?php echo $fm->PaymentMethod( $od_data['od_paymentStatus']); ?></h6>
                 <div id="penbtn" class="ml-4">
                     
-                    <a href="#reject<?php echo $od_data['od_id'];?>" data-toggle="modal" class="btn btn-secondary  btn-sm" ><span class="glyphicon glyphicon-trash"></span>Reject</a>
+                    <a href="#reject<?php echo $od_data['orderCustomId'];?>" data-toggle="modal" class="btn btn-secondary  btn-sm" ><span class="glyphicon glyphicon-trash"></span>Reject</a>
 
-                    <a href="#confirm<?php echo $od_data['od_id'];?>" data-toggle="modal" class="btn btn-info btn-sm" ><span class="glyphicon glyphicon-trash"></span> Confirm</a>
+                    <a href="#confirm<?php echo $od_data['orderCustomId'];?>" data-toggle="modal" class="btn btn-info btn-sm" ><span class="glyphicon glyphicon-trash"></span> Confirm</a>
                     
                     <!--===================Reject Model======================-->
-                    <div class="modal fade" id="reject<?php echo $od_data['od_id'];?>"  role="dialog" >
+                    <div class="modal fade" id="reject<?php echo $od_data['orderCustomId'];?>"  role="dialog" >
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -85,14 +79,14 @@ $fm = new Formate();
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>No</button>
 
-                                    <a href="<?php echo $current_page.'.php';?>?rej=<?php echo $od_data['od_id'];?>" class="btn btn-warning"><span class="glyphicon glyphicon-trash"></span> Yes</a>
+                                    <a href="<?php echo $current_page.'.php';?>?rej=<?php echo $od_data['orderCustomId'];?>" class="btn btn-warning"><span class="glyphicon glyphicon-trash"></span> Yes</a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!--===================Confirm Model======================-->
-                    <div class="modal fade" id="confirm<?php echo $od_data['od_id'];?>"  role="dialog" >
+                    <div class="modal fade" id="confirm<?php echo $od_data['orderCustomId'];?>"  role="dialog" >
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -104,7 +98,7 @@ $fm = new Formate();
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>No</button>
 
-                                    <a href="<?php echo $current_page.'.php';?>?con=<?php echo $od_data['od_id'];?>" class="btn btn-info"><span class="glyphicon glyphicon-trash"></span> Yes</a>
+                                    <a href="<?php echo $current_page.'.php';?>?con=<?php echo $od_data['orderCustomId'];?>" class="btn btn-info"><span class="glyphicon glyphicon-trash"></span> Yes</a>
                                 </div>
                             </div>
                         </div>
@@ -114,6 +108,6 @@ $fm = new Formate();
             </div> 
         </div>
     </div>
-    <?php }}}?>
+    <?php }}?>
 </div>
 

@@ -79,7 +79,7 @@ if (isset($_GET['logout'])&& $_GET['logout']='out'){
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="dropcol" style="top: 64px;left: -64%;">
                             <a class="dropdown-item" href="../user/user_profile.php">View Profile</a>
-                            <a class="dropdown-item" href="#">View Order</a>
+                            <a class="dropdown-item" href="myorder.php">View Order</a>
                             <a class="dropdown-item" href="../user/mycart.php">My Cart</a>
                             <a class="dropdown-item" href="?logout=out">LogOut</a>
                         

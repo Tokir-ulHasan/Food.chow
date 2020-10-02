@@ -125,7 +125,7 @@ class Cart
          $queryCart = "DELETE FROM `tbl_cart` WHERE `customer_id` = ' $customer_id' ";
          $resCart = $this->db->QueryExcute($queryCart);
          if($resCart){
-               header('Location:myorder.php');
+               header('Location:myorder.php?msg=1');
          }
          else{
             header('Location:404.php');

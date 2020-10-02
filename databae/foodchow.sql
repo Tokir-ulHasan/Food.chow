@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 01, 2020 at 05:06 PM
+-- Generation Time: Oct 02, 2020 at 04:37 PM
 -- Server version: 5.5.32
 -- PHP Version: 5.4.19
 
@@ -64,16 +64,10 @@ CREATE TABLE IF NOT EXISTS `tbl_cart` (
   `product_name` varchar(255) NOT NULL,
   `price` double NOT NULL,
   `quantity` int(11) NOT NULL,
+  `total_price` double NOT NULL,
   `image` varchar(300) NOT NULL,
   PRIMARY KEY (`c_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
-
---
--- Dumping data for table `tbl_cart`
---
-
-INSERT INTO `tbl_cart` (`c_id`, `s_id`, `customer_id`, `product_id`, `product_name`, `price`, `quantity`, `image`) VALUES
-(13, 'iuic6vi4d0306mfj2t507cqgs2', 1, 17, 'Barger', 30, 4, '../asset/UploadFile/FoodItemImg/8f5bf0a4a6.jpg');
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 -- --------------------------------------------------------
 
@@ -171,10 +165,13 @@ CREATE TABLE IF NOT EXISTS `tbl_orders` (
   `od_id` int(11) NOT NULL AUTO_INCREMENT,
   `od_type` int(11) NOT NULL,
   `od_items` varchar(255) NOT NULL,
+  `od_items_name` varchar(300) NOT NULL,
   `od_paymentStatus` int(11) NOT NULL,
   `od_price` double NOT NULL,
+  `od_quantity` int(11) NOT NULL,
   `customer_id` int(11) DEFAULT NULL,
   `od_Loction` varchar(300) NOT NULL,
+  `od_image` varchar(300) NOT NULL,
   `delvery_boy_id` int(11) DEFAULT '0',
   `delevery_reject_by` varchar(255) NOT NULL,
   `delever_date` datetime NOT NULL,
@@ -183,23 +180,23 @@ CREATE TABLE IF NOT EXISTS `tbl_orders` (
   PRIMARY KEY (`od_id`),
   KEY `customer_id` (`customer_id`),
   KEY `delvery_boy_id` (`delvery_boy_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `tbl_orders`
 --
 
-INSERT INTO `tbl_orders` (`od_id`, `od_type`, `od_items`, `od_paymentStatus`, `od_price`, `customer_id`, `od_Loction`, `delvery_boy_id`, `delevery_reject_by`, `delever_date`, `od_date`, `orderCustomId`) VALUES
-(9, 2, '20', 1, 250, 1, 'Sylate', 1, 'a,1', '2020-09-25 19:45:38', '2020-09-07 17:36:01', 125),
-(12, 4, '16,21', 2, 257, 2, 'Dahaka', 1, 'a,1', '2020-09-25 22:17:23', '2020-09-23 22:29:42', 128),
-(14, 2, '16', 1, 250, 1, 'Sylate', 1, 'a,1', '2020-09-25 19:43:15', '2020-09-07 17:36:01', 130),
-(17, 3, '17', 1, 250, 1, 'Sylate', 1, 'a,1', '2020-09-25 21:39:20', '2020-09-07 17:36:01', 133),
-(18, 3, '17', 1, 250, 1, 'Sylate', 1, 'a,1', '2020-09-25 21:45:16', '2020-09-07 17:36:01', 134),
-(20, 1, '21,16', 1, 250, 1, 'Dhaka', 0, '', '0000-00-00 00:00:00', '2020-09-25 16:19:42', 135),
-(21, 1, '21,16', 1, 500, 2, 'Ctg', 0, '', '0000-00-00 00:00:00', '2020-09-25 16:19:42', 136),
-(22, 0, '', 0, 0, NULL, '', 0, '', '0000-00-00 00:00:00', '2020-09-25 16:21:10', 0),
-(23, 0, '', 0, 0, NULL, '', 0, '', '0000-00-00 00:00:00', '2020-09-25 16:21:10', 0),
-(24, 3, '16,19', 1, 400, 1, 'syllet', 0, '', '0000-00-00 00:00:00', '2020-09-25 16:21:10', 138);
+INSERT INTO `tbl_orders` (`od_id`, `od_type`, `od_items`, `od_items_name`, `od_paymentStatus`, `od_price`, `od_quantity`, `customer_id`, `od_Loction`, `od_image`, `delvery_boy_id`, `delevery_reject_by`, `delever_date`, `od_date`, `orderCustomId`) VALUES
+(7, 1, '16', 'Rice with meat', 1, 100, 1, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/fb8b76c0a0.jpg', 0, '', '0000-00-00 00:00:00', '2020-10-02 12:28:08', 1),
+(8, 1, '21', 'Chicken ', 1, 100, 2, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/becd569420.jpg', 0, '', '0000-00-00 00:00:00', '2020-10-02 12:28:08', 1),
+(9, 1, '21', 'Chicken ', 1, 100, 2, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/becd569420.jpg', 0, '', '0000-00-00 00:00:00', '2020-10-02 12:28:08', 1),
+(10, 4, '16', 'Rice with meat', 1, 200, 2, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/fb8b76c0a0.jpg', 0, '', '2020-10-02 20:32:05', '2020-10-02 12:29:04', 2),
+(11, 3, '17', 'Barger', 1, 30, 3, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/8f5bf0a4a6.jpg', 1, 'a,1', '2020-10-02 20:37:27', '2020-10-02 12:31:23', 3),
+(12, 3, '21', 'Chicken ', 1, 200, 4, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/becd569420.jpg', 1, 'a,1', '2020-10-02 20:37:27', '2020-10-02 12:31:23', 3),
+(13, 1, '20', 'vagitable', 1, 90, 3, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/ff1312e284.jpg', 0, 'a,1', '2020-10-02 19:52:11', '2020-10-02 12:32:17', 4),
+(14, 2, '16', 'Rice with meat', 1, 200, 2, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/fb8b76c0a0.jpg', 0, '', '2020-10-02 20:31:54', '2020-10-02 12:33:00', 5),
+(15, 1, '21', 'Chicken ', 1, 100, 2, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/becd569420.jpg', 0, '', '0000-00-00 00:00:00', '2020-10-02 14:17:49', 6),
+(16, 1, '17', 'Barger', 1, 30, 1, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/8f5bf0a4a6.jpg', 0, '', '0000-00-00 00:00:00', '2020-10-02 14:33:30', 7);
 
 -- --------------------------------------------------------
 

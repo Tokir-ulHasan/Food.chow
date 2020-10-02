@@ -7,9 +7,9 @@ $current_page = basename($path,'.php');
 /** Confirm  Order to delevery By Admin */
 if(isset($_POST['confirmed'])){
     $deleveryID = "a,".$userId;
-    $odid = $_POST['odid'];
+    $trans_id = $_POST['transid'];
     $d_boy = $_POST['d_boy'];
-    $queryUp   = "UPDATE `tbl_orders` SET `od_type` = 3 ,`delevery_reject_by`  = '$deleveryID' , `delvery_boy_id` = '$d_boy', `delever_date` = now() WHERE `od_id` = '$odid' ";
+    $queryUp   = "UPDATE `tbl_orders` SET `od_type` = 3 ,`delevery_reject_by`  = '$deleveryID' , `delvery_boy_id` = $d_boy, `delever_date` = now() WHERE `orderCustomId` = '$trans_id' ";
     $result  = $db->QueryExcute($queryUp); 
   
   }
@@ -24,7 +24,7 @@ if(isset($_POST['confirmed'])){
            $page =  $_GET['seemore1'];
            $rowperpage = $page;
         }
-        $query   = "SELECT * FROM `tbl_orders` INNER JOIN tbl_user ON tbl_orders.`customer_id` = tbl_user.id    where `od_type` = 2   order by od_id DESC limit $row,$rowperpage";
+        $query   = "SELECT *, COUNT(*) as `Same_CUS_OD` FROM `tbl_orders` INNER JOIN tbl_user ON tbl_orders.`customer_id` = tbl_user.id  WHERE  `od_type` = 2 GROUP BY `orderCustomId` order by `orderCustomId` DESC limit $row,$rowperpage";
         $res  = $db->SelectData($query);
         if($res){
         while($od_data = $res->fetch_assoc()){
@@ -40,13 +40,13 @@ if(isset($_POST['confirmed'])){
             <div class="col-6 " id="penord">
                 <p>Oreder ID -<span><a href=""><?php echo $od_data['orderCustomId']; ?></a></span></p>
                 <div id="penordimg">
-                    <img class="img-fluid" src="<?php echo $fd_data['fd_image']; ?>" alt="">
+                    <img class="img-fluid" src="<?php echo $od_data['od_image']; ?>" alt="">
                     <?php 
-                        if($fd_item_lenth == 1){
+                        if($od_data['Same_CUS_OD'] == 1){
                     ?>
-                    <span> <?php echo $fd_data['fd_name']; ?><strong class="ml-1"> Only</strong></span>
+                    <span> <?php echo $od_data['od_items_name']; ?><strong class="ml-1"> Only</strong></span>
                     <?php }else{?>
-                    <span> <?php echo $fd_data['fd_name']; ?> x <?php echo $fd_item_lenth-1; ?> <strong>More</strong></span>
+                    <span> <?php echo $od_data['od_items_name']; ?> x <?php echo $od_data['Same_CUS_OD']; ?> <strong>More</strong></span>
                     <?php }?>
                 </div>
                 <div id="penorduser">
@@ -59,23 +59,26 @@ if(isset($_POST['confirmed'])){
                 
                 <h6 class="ml-4">Payment-<?php echo $fm->PaymentMethod($od_data['od_paymentStatus']); ?></h6>
                 <div id="penbtn" class="">
-                    <form action="<? echo $current_page.''?>" method="post">
+                    <form action="" method="post">
                         <div class="form-group">
                             <select class="form-control px-1 btn-ms" id="exampleFormControlSelect1" name = "d_boy">
                                  <option value="0">Select</option>
                                 <?php
-                                    $querys   = "SELECT * FROM `tbl_delevery_boy` where dlb_id !=0 ";
+                           
+                                    $querys   = "SELECT * FROM `tbl_delevery_boy` where dlb_id != 0 ";
                                     $ress  = $db->SelectData($querys);
                                     if($ress){
                                     while($dlb_data = $ress->fetch_assoc()){
+                                        $temp = $dlb_data['dlb_id'];
                                 ?>
                                 <option title="<?php echo $dlb_data['dlb_mail'].' '.$dlb_data['dlb_phone'].' '.$dlb_data['dlb_address']?>" data-toggle="popover"  data-placement="top"  data-content="Content" value="<?php echo $dlb_data['dlb_id']; ?>"><?php echo $dlb_data['dlb_name']; ?></option>
+                              
                                     <?php }}?>
                             </select>
-                            <input type="text" name="odid" hidden value="<?php echo $od_data['od_id']; ?>">
-                            <button type="button"  class="btn btn-info btn-sm mt-1 mx-5 " name="confirmed" data-toggle="modal" data-target="#myModal">Open Modal</button>
+                            <input type="text" name="transid" hidden value="<?php echo $od_data['orderCustomId']; ?>">
+                            <button type="button"  class="btn btn-info btn-sm mt-1 mx-5 " name="confirmed" data-toggle="modal" data-target="#confirm">Confirmed</button>
                             <!-- Modal -->
-                            <div id="myModal" class="modal fade" role="dialog">
+                            <div id="confirm" class="modal fade" role="dialog">
                                 <div class="modal-dialog">
                                 <!-- Modal content-->
                                 <div class="modal-content">
