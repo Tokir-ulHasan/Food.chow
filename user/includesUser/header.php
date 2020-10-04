@@ -31,6 +31,7 @@ if (isset($_GET['logout'])&& $_GET['logout']='out'){
     <link href="../asset/css/owl.theme.default.css" rel="stylesheet">
     <link href="../asset/css/style.css" rel="stylesheet">
     <link href="../asset/css/responsiveUser.css" rel="stylesheet">
+    <link href="../asset/css/profile_css.css" rel="stylesheet">
 </head>
 <body>
 <div class="container-fluid">
@@ -75,9 +76,10 @@ if (isset($_GET['logout'])&& $_GET['logout']='out'){
                     ?>
                      <li class="nav-item dropdown  mr-3">
                         <a class="nav-link " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" onclick="myFun()" aria-expanded="true">
-                            <span   style="font-size:12px"><?php echo $data['name']; ?></i></span>
+                            <!--<span   style="font-size:12px"><?php //echo $data['name']; ?></i></span>-->
+                            <span><?php echo $data['name']; ?><i class="fa fa-plus  pl-2 pr-1" style="font-size: small" id="iconChange"></i></span>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="dropcol" style="top: 64px;left: -64%;">
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="dropcol" style="top: 64px;left: -40%;">
                             <a class="dropdown-item" href="../user/user_profile.php">View Profile</a>
                             <a class="dropdown-item" href="myorder.php">View Order</a>
                             <a class="dropdown-item" href="../user/mycart.php">My Cart</a>

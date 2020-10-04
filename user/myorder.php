@@ -35,14 +35,14 @@
          <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
              <span aria-hidden='true'>&times;</span>
              <span class='sr-only'>Close</span>
-         </button><br>
-         <strong>Order Successfully </strong>
+         </button>
+         <strong>Order Successful </strong>
      </div> ";
        }
 
        
 
-      $query_G = "SELECT `od_type`,`od_date`,`orderCustomId`,COUNT(*) as Same_CUS_OD  FROM `tbl_orders` where `customer_id` = 1 GROUP BY `orderCustomId`";
+      $query_G = "SELECT `od_type`,`od_date`,`orderCustomId`,COUNT(*) as Same_CUS_OD  FROM `tbl_orders` where `customer_id` = $customer_id GROUP BY `orderCustomId`";
       $result = $db->SelectData($query_G);
       $i = 1;
       if($result && $result->num_rows > 0){
@@ -139,7 +139,7 @@
       </tbody>
     </table>
     <?php }else{ ?>
-     <p class="text-center">No Reuslt found</p>
+     <p class="text-center">You Haven't Ordered Yet! </p>
     <?php }?>
 
   

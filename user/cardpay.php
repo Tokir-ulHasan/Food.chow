@@ -1,7 +1,7 @@
 
 <?php 
-  include_once 'includesUser/header.php' ;
-  include_once 'cartclass.php';
+  include_once '../user/includesUser/header.php' ;
+  include_once '../user/cartclass.php';
 
   $customer_id = $_SESSION['userId'];
   $cart = new Cart();
@@ -21,6 +21,36 @@
 
 ?>
 
+
+<?php
+require('payment/config.php');
+
+if(isset($_POST['stripeToken']))
+{
+    \Stripe\Stripe::setVerifySslcerts(false);
+
+    $token= $_POST['stripeToken'];
+    $data = \Stripe\charge::create(array(
+        "amount"=>10000,
+        "currency"=>"BDT",
+        "description"=>"Payment With Stripe",
+        "source"=>$token,
+
+
+    ));
+
+    //echo"<pre>";
+    //print_r($data);
+
+    $tx_id= $data['id'];
+    $status= $data['status'];
+}
+
+if(!empty($tx_id) &&  $status=='succeeded')
+{
+    //include'../user/cash_hand.php'; 
+?>
+    
 <section id="cash_hand" class="my-5">
     <div class="container-fluid" >
         <div class="row" >
@@ -106,7 +136,7 @@
                 <?php } ?>
             </section>
             </div>
-            <!--=================Cash on hand===================--->
+            <!--=================pay with card===================--->
             <div class="col-6" id="cash_hand">
                 <section id="cart" class="my-3" style="border: 1px solid #decdcd;padding: 8px;border-radius: 2px;box-shadow: 4px 4px 24px 1px #e4c8c8;">
                     <div class="container">
@@ -161,6 +191,14 @@
                                     <td class="px-5">Grand Total</td>
                                     <td class="px-5"><?php echo  $subTotal+($subTotal*(10/100));?>$</td>
                                 </tr>
+                                <tr>
+                                    <td class="px-5">Payment </td>
+                                    <td class="px-5"><?php echo  $status;?></td>
+                                </tr>
+                                <tr>
+                                    <td class="px-5">Trans ID</td>
+                                    <td class="px-5"><?php echo  $tx_id;?></td>
+                                </tr>
                             </tbody>
                         </table>
                         </div>
@@ -175,7 +213,21 @@
     </div>
 </section>
 
+<?php
+}
+
+/*elseif(empty($tx_id)){
+
+    header("Location:../user/mycart.php");
+}*/
+?>
+
 <!----Footer Section---->
-<?php include 'includesUser/footer.php' ?>
+<?php include '../user/includesUser/footer.php'; ?>
+
+
+
+
+
 
 

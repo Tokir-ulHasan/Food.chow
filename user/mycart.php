@@ -100,13 +100,15 @@
          </tr>
          <tr>
             <td class="px-5">Grand Total</td>
-            <td class="px-5"><?php echo  $subTotal+($subTotal*(10/100));?>$</td>
+            <?php $grandtotal=$subTotal+($subTotal*(10/100)); ?>
+            <td class="px-5"><?php echo $grandtotal;  ?>$</td>
+            
          </tr>
        </tbody>
       </table>
     </div>
     <div class="clearfix">
-      <button class="btn btn-primary btn-lg float-left ">Continue To Order</button>
+      <a class="btn btn-primary btn-lg float-left "  href="index.php">Continue To Order</a>
       <button type="button" class="btn btn-info btn-lg float-right " data-toggle="modal" data-target="#myModal">checkout</button>
         <!-- Modal -->
       <div id="myModal" class="modal fade" role="dialog">
@@ -122,9 +124,27 @@
           <div class="modal-body pt-3 mb-3 pb-5">
               <h5 class="text-center">Choose Your Payment Option</h5>
               <div class="d-flex justify-content-center mt-5">
-                <a class="btn btn-info btn-sm mr-1" href="cash_hand.php">Cash On Hand</a> 
-                <a class="btn btn-primary btn-sm mr-1" href="">Payment With Bekash</a>
-                <a class="btn btn-secondary  btn-sm" href="">Payment With Other</a> 
+                <a class="btn btn-info btn-sm mr-1" href="cash_hand.php">Cash On Delibery</a> 
+                <!--<a class="btn btn-primary btn-sm mr-1" href="">Payment With Bekash</a>
+                <a class="btn btn-secondary  btn-sm" href="">Payment With Other</a>--> 
+                <!--Pay with card -->
+                <?php $amount=$grandtotal*100;?>
+                <?php require('payment/config.php');?>
+                  <form action="cardpay.php" method="POST">
+
+                  <script
+                  src= "https://checkout.stripe.com/checkout.js" class="stripe-button"
+                  data-key="<?php echo $pk; ?>"
+                  data-amount="<?php echo $amount;?>"
+                  data-name="Payment With Stripe"
+                  data-description="Payment With Stripe"
+                  data-currency="BDT"
+                  data-email="mohammadjobair02@gmail.com"
+
+                  >
+                  </script>
+
+                  <form>
               </div>
           </div>
           <div class="modal-footer">

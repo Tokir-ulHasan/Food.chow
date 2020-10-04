@@ -1,7 +1,12 @@
 <!----Header Section---->
 <?php 
+  include_once '../lib/Session.php'; 
+  include_once '../lib/Database.php'; 
+  include_once '../lib/formatData.php';
   include_once 'includesUser/header.php' ;
   include_once 'cartclass.php';
+  $userId = Session::getSession('userId');
+  $userEmail = Session::getSession('userEmail');
 ?>
 <?php
   
@@ -15,8 +20,19 @@
   }
 
   if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    if(!empty($userId)){
        $quantity = $_POST['quantity'];
        $addcart  = $cart->addtocart($quantity,$id);
+    }
+    else{
+      echo" <div class='alert alert-primary alert-dismissible fade show' role='alert'>
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                    <span class='sr-only'>Close</span>
+                </button><br>
+                <strong>Not Logged In!</strong> Please Login to Order Food. 
+            </div> ";
+    }
   }
 
   $sql2="select * from tbl_fooddetails where id='$id' ";

@@ -4,7 +4,7 @@ $db = new Database();
 if(isset($_POST['submit']))
 {
 
-    $id=$_SESSION['user_id'];
+    $id=$_SESSION['userId'];
     $opass=$_POST['opass'];
     $npass=$_POST['npass'];
 	$cpass=$_POST['cpass'];

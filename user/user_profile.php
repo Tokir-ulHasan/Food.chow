@@ -20,7 +20,7 @@ if(isset($_POST['save']))
     {
         $file=$image;
     }*/
-        $sqlcp = "UPDATE tbl_user set image='$file' where id='$id' or email = '$email'";
+        $sqlcp = "UPDATE tbl_user set image='$file' where id='$id'";
         $rcp= $db->QueryExcute($sqlcp);
         if($rcp)
         {
@@ -59,6 +59,7 @@ if(isset($_POST['save']))
                         <div class="card-title mb-4">
                             <div class="d-flex justify-content-start">
                                 <div class="image-container">
+                                  <?php //echo"  <img src='data:image/jpeg;base64,".base64_encode($data['image'])."' alt='No Image' id='imgProfile' style='width: 150px; height: 150px' class='img-thumbnail' /> "; ?>
                                   <?php echo"  <img src='data:image/jpeg;base64,".base64_encode($data['image'])."' alt='No Image' id='imgProfile' style='width: 150px; height: 150px' class='img-thumbnail' /> "; ?>
                                     <div class="middle">
                                         <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
@@ -73,7 +74,7 @@ if(isset($_POST['save']))
                                 <div class="ml-auto">
                                     <input type="button" class="btn btn-primary d-none" id="btnDiscard" value="Discard Changes" />
                                     <input type="submit" class="btn btn-primary d-none" id="btnSave"name="save" value="Save Changes" />
-                                    <a href="edit_profile.php?id=<?php echo $_SESSION['user_id'];?>" class="btn btn-info">Edit Profile</a>
+                                    <a href="edit_profile.php?id=<?php echo $_SESSION['userId'];?>" class="btn btn-info">Edit Profile</a>
                                 </div>
                             </div>
                         </div>

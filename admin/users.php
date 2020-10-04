@@ -57,7 +57,7 @@ $db = new Database();
             ?>
                 <tr>
                     <td><?php echo $i; ?></td>
-                    <td><img class="img-fluid" src="../asset/images/blog-img-06.jpg" alt=""></td>
+                    <td><?php echo"  <img src='data:image/jpeg;base64,".base64_encode($user_data['image'])."' alt='No Image' class='img-fluid' /> "; ?></td>
                     <td><?php echo $user_data['name']; ?></td>
                     <td><?php echo $user_data['email']; ?></td>
                     <td><?php echo $user_data['phoneNo']; ?></td>
