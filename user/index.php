@@ -1,10 +1,6 @@
-    <?php include 'includesUser/header.php' ; ?>    
-    <!----Login Section------>
-    <?php include 'login.php' ?>
-    <!----Registration Section------>
-    <?php include 'registration.php' ?>
-    <!---Search Section--->
-    <section class="mt-5 SearchHead" >
+<?php include 'includesUser/header.php' ; ?>    
+    
+    <section class="mt-2 SearchHead" >
         <div class="container py-5 px-5 w-40">
             <div id="SearchConten">
             <?php
@@ -41,13 +37,7 @@
                     <strong>Warning!</strong>  Invalid Password or Email.
                 </div>';
                 }
-                else{
-                    echo '  <div class="alert alert-info alert-dismissible">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>info!</strong> Login Fisrt or Regijstration to order food.
-                </div>';
-                }
-            
+                
             ?>
            
                 <h3 class="text-center txt h4 py-4">Unique Food Network...</h3>
@@ -74,19 +64,27 @@
             
             <div class="container mt-4">
                  <div class="owl-carousel owl-theme">
+                     <?php
+                       $cat_q = "SELECT * FROM `tbl_cat`"; 
+                       $cat_r = $db->SelectData($cat_q);
+                       if($cat_r){
+                           while($cat_d =mysqli_fetch_array($cat_r)){
+                       
                      
+                     ?>
                      <div class="ml-2 mr-2 slidcat">
-                        <a href="">
+                        <a href="catagoryfoodlist.php?catid=<?php echo $cat_d['cat_id']?>">
                             <div class="card slidecard ">
-                                <img id="slideImg" class="img-fluid" src="../asset/images/01.png">
+                                <img id="slideImg" class="img-fluid" src="<?php echo $cat_d['cat_logo']?>">
                             </div>
                             <div class="card-body">
-                                <div class="card-title font-weight-bold cat-font">BREAKFAST</div>
+                                <div class="card-title font-weight-bold cat-font"><?php echo $cat_d['cat_name']?></div>
                             </div>
                         </a>
                      </div>
-                     <div class="ml-2 mr-2 slidcat">
-                       <a href="">
+                     <?php }}?>
+                     <!-- <div class="ml-2 mr-2 slidcat">
+                       <a href="catagoryfoodlist.php?catname=Lunch">
                             <div class="card slidecard">
                                 <img id="slideImg" class="img-fluid" src="../asset/images/02.png">
                             </div>
@@ -96,7 +94,7 @@
                         </a>
                      </div>
                      <div class="ml-2 mr-2 slidcat">
-                        <a href="">
+                        <a href="catagoryfoodlist.php?catname=Diner">
                             <div class="card slidecard">
                                 <img id="slideImg" class="img-fluid" src="../asset/images/03.png">
                             </div>
@@ -106,7 +104,7 @@
                         </a>
                      </div>
                      <div class="ml-2 mr-2 slidcat">
-                        <a href="">
+                        <a href="catagoryfoodlist.php?catname=Drink">
                             <div class="card slidecard">
                                 <img class="img-fluid" id="slideImg" src="../asset/images/04.png">
                             </div>
@@ -116,7 +114,7 @@
                         </a>
                      </div>
                      <div class="ml-2 mr-2 slidcat">
-                        <a href="">
+                        <a href="catagoryfoodlist.php?catname=Juices">
                             <div class="card slidecard">
                                 <img class="img-fluid font-weight-bold cat-font"  id="slideImg" src="../asset/images/05.png">
                             </div>
@@ -126,7 +124,7 @@
                         </a>
                      </div>
                      <div class="ml-2 mr-2 slidcat">
-                        <a href="">
+                        <a href="catagoryfoodlist.php">
                             <div class="card slidecard">
                                 <img class="img-fluid " id="slideImg" src="../asset/images/06.png">
                             </div>
@@ -136,7 +134,7 @@
                         </a>
                      </div>
                      <div class="ml-2 mr-2 slidcat">
-                        <a href="">
+                        <a href="catagoryfoodlist.php">
                             <div class="card slidecard">
                                 <img class="img-fluid " id="slideImg" src="../asset/images/07.png">
                             </div>
@@ -146,7 +144,7 @@
                          </a>
                      </div>
                      <div class="ml-2 mr-2 slidcat">
-                     <a href="">
+                     <a href="catagoryfoodlist.php">
                          <div class="card slidecard">
                              <img class="img-fluid " id="slideImg" src="../asset/images/08.png">
                          </div>
@@ -154,8 +152,7 @@
                              <div class="card-title font-weight-bold cat-font">BEFF ROAST</div>
                          </div>
                          </a>
-                     </div>
-                     
+                     </div>-->
                 </div>
             </div>
         </div>

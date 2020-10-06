@@ -51,12 +51,97 @@ function myFun(){
 }
 
 $('#spinner').inputSpinner({
-    grouoClass: 'input-groupe-md',
-    buttonsClass: 'btn-danger',
+    grouoClass: 'input-group-sm',
+    buttonsClass: 'btn-outline-danger btn-sm',
     buttonsWidth: '.1rem',
     textAlign: 'center'
+    
 
   });
-  $('#spinner').on('input',function(e){
+  $('#spinner').css( 'height',' 30px');
+
+  /*$('#spinner').on('input',function(e){
       $('#minput').html($(this).val());
+      $('#minput').html($(this).val());
+  });*/
+  $('#spinner').on('input',function(e){
+    $('#minput').html($(this).val());
+    $('#minput').html($(this).val());
+    var price    =  $('#price').val();
+    var quantity    =  $('#spinner').val();
+    var totalprice = price*quantity;
+    $('#totalprice span').html(totalprice);
+
+  
+ });
+
+
+ 
+ // set the initial index
+ var ratedIndex = -1;
+ var uId = -1,fId= -1;
+ $("#lovefood").ready(function(){
+    
+    //default color is sate for love icon
+    defaultcolor();
+   
+    if(localStorage.getItem('ratedIndex') != null){
+        loverate(parseInt(localStorage.getItem('ratedIndex')));
+    }
+    //when click on love icon
+    $('.fa-heart').on('click',function(){
+        //get the present index of love icon
+        ratedIndex = parseInt($(this).data('index'));
+        //Store set the present index of local divce cookies
+        localStorage.setItem('ratedIndex',ratedIndex);
+
+        $.ajax({
+            url:'detailspage.php',
+            method : 'POST',
+            data:{"save":true, "rateindex":'ratedIndex'},
+             data:{ "ratedIndex":JSON.stringify(ratedIndex) },
+            //dataType :"JSON",
+            success:function(data){
+              alert(ratedIndex);
+            }
+        });
+      
+    });
+    
+    //action on mouseover
+    $('.fa-heart').mouseover(function(){
+        defaultcolor();
+        //get the current index
+        var currentIndex = parseInt($(this).data('index'));
+        loverate(currentIndex);
+      
+    });
+     //action on mouseleave
+    $('.fa-heart').mouseleave(function(){
+         defaultcolor();
+         //set love icon after mouse leave
+         if(ratedIndex != -1){
+            loverate(ratedIndex);
+         }
+    });
+    
+    function loverate(max){
+        for(var i = 0 ;i<=max ;i++){
+            $('.fa-heart:eq('+i+')').css('color','red');
+        }
+    }
+
+    function defaultcolor(){
+      $('.fa-heart').css('color','#b9bec3');
+    }
+ 
   });
+
+
+
+  
+ 
+     
+ 
+ 
+

@@ -63,7 +63,8 @@ if(isset($_POST['login']))
             if($result){
                     Session::setSession('login',true);
                     Session::setSession('userEmail',$email);
-                    header("Location:index.php?regmsg=1");
+                   // header("Location:index.php?regmsg=1");
+                    echo ("<script>location.href='index.php?regmsg=1'</script>");
                  
             }else{
                 header("Location:index.php?regmsg=2");

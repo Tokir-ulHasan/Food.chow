@@ -17,14 +17,13 @@
                 
                 </div>
                 <nav class="nav  justify-content-center py-3">
-                    <a class="nav-link text-light  " href="#">Active</a>
-                    <a class="nav-link text-light" href="#">Link</a>
-                    <a class="nav-link text-light" href="#">Link</a>
+                    <a class="nav-link text-light  " href="index.php">Home</a>
+                    <a class="nav-link text-light" href="about.php">About us</a>
+                    <a class="nav-link text-light" href="contact.php">Contant Us</a>
                 </nav>
-               
             </div>
             <div class="card-footer">
-                <p class="text-center text-light font-weight-light">&copy;2020 Food.Chow Desing by group F </p>
+                <p class="text-center text-light font-weight-light">&copy;Food.Chow Desing by group F 2020 </p>
             </div>
             </div>
        

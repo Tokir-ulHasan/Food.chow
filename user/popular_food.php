@@ -1,13 +1,10 @@
 <?php
-
 $db = new Database();
-
-
 ?>
 
 <section id="popularFoodsection">
         <div class="container">
-            <div class="card">
+            <div class="card" style="background:#0981e800;border:none">
                 <div class="mt-4" >
                     <h1 class="h3 text-center">Most Popular Foods</h1>
                     <p class="text-center font-weight-sm cat-font">Complete Network impactful users whereas next-generation application engage out thinking vai tactical action </p>
@@ -23,7 +20,7 @@ $db = new Database();
                     
                 ?>
                     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 mt-4">
-                        <div class="card">
+                        <div class="card" style="border: 1px solid rgba(0, 0, 0, 0.22);box-shadow: 1px 0px 20px 2px #a7c0d5;">
                             <div class="card">
                                 <div class="d-block" id="popularFoodimg">
                                     <img src="<?php echo $fdData['fd_image']; ?>">
@@ -39,15 +36,15 @@ $db = new Database();
                                 <p class=" text-center mt-4 font-weight-bold "><?php echo $fdData['fd_name']; ?></p>
                                 <p class=" text-center  "><span>Type of food:<?php echo $fdData['fd_catagoery_name']; ?></span></p>
                                 <div class="d-flex justify-content-center">
-                                <?php echo" <a class='btn btn-outline-danger' href='detailspage.php?food_id=".$fdData['id']."'>Order</a>"?></div>
+                                <?php echo" <a class='btn btn-outline-danger' href='detailspage.php?food_id=".$fdData['id']."'>Details</a>"?></div>
                             </div>
                             <div class="mt-3">
-                                <div class="clearfix brd ">
-                                    <div class="float-left brd-l pt-3 pr-5">
+                                <div class="d-flex brd ">
+                                    <div class=" brd-l py-3 px-3">
                                        <span class="popularFoodRating "><i class="fa fa-star-o"></i> <?php echo $fdData['fd_rating']; ?></span>
                                        
                                     </div>
-                                    <div class="float-right pt-3 ">
+                                    <div class="pl-5 py-3">
                                         <span class="popularFoodCat"><i class="fa fa-home"></i>Related Food</span>
                                     </div>
                                 </div>

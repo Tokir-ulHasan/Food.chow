@@ -1,7 +1,7 @@
 <?php 
 
 include_once '../lib/Session.php'; 
-Session::initializedSession();
+//Session::initializedSession();
 include_once '../lib/Database.php'; 
 include_once '../lib/formatData.php';
 
@@ -33,7 +33,7 @@ class Cart
             $query = "INSERT INTO `tbl_cart`( `s_id`, `product_id`, `product_name`, `price`, `quantity`, `total_price`,`image`,`customer_id`) VALUES ('$session_id','$food_id','$fd_name','$fd_price','$quantity','$price','$fd_img','$customer_id')";
             $res = $this->db->QueryExcute($query);
             if($res){
-                  header('Location:mycart.php');
+               echo ("<script>location.href='mycart.php'</script>");
             }
             else{
                   header('Location:404.php');
@@ -56,7 +56,8 @@ class Cart
       $res = $this->db->QueryExcute($query);
 
       if($res){
-            header('Location:mycart.php');
+         echo ("<script>location.href='mycart.php'</script>");
+           // header('Location:mycart.php');
       }
       else{
          header('Location:404.php');
@@ -67,7 +68,8 @@ class Cart
       $query = "DELETE FROM `tbl_cart` WHERE `c_id` = ' $id' ";
       $res = $this->db->QueryExcute($query);
       if($res){
-            header('Location:mycart.php');
+         echo ("<script>location.href='mycart.php'</script>");
+           // header('Location:mycart.php');
       }
       else{
          header('Location:404.php');

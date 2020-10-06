@@ -28,10 +28,47 @@ if (isset($_GET['logout'])&& $_GET['logout']='out'){
     <link href="../asset/css/animate.min.css" rel="stylesheet">
     <link href="../asset/css/font-awesome.min.css" rel="stylesheet">
     <link href="../asset/css/owl.carousel.min.css" rel="stylesheet">
+    <link href="../asset/css/jquery.rateyo.min.css" rel="stylesheet">
     <link href="../asset/css/owl.theme.default.css" rel="stylesheet">
     <link href="../asset/css/style.css" rel="stylesheet">
     <link href="../asset/css/responsiveUser.css" rel="stylesheet">
     <link href="../asset/css/profile_css.css" rel="stylesheet">
+    <style>
+    .rate_widget {
+    border:     1px solid #CCC;
+    overflow:   visible;
+    padding:    10px;
+    position:   relative;
+    width:      180px;
+    height:     32px;
+}
+.ratings_stars {
+    background: url('star_empty.png') no-repeat;
+    float:      left;
+    height:     28px;
+    padding:    2px;
+    width:      32px;
+}
+.ratings_vote {
+    background: url('star_full.png') no-repeat;
+}
+.ratings_over {
+    background: url('star_highlight.png') no-repeat;
+}
+.total_votes {
+    background: #eaeaea;
+    top: 58px;
+    left: 0;
+    padding: 5px;
+    position:   absolute;  
+} 
+.movie_choice {
+    font: 10px verdana, sans-serif;
+    margin: 0 auto 40px auto;
+    width: 180px;
+}
+    
+    </style>
 </head>
 <body>
 <div class="container-fluid">
@@ -57,16 +94,16 @@ if (isset($_GET['logout'])&& $_GET['logout']='out'){
                         </form>
                     </li>
                     <li class="nav-item mr-3">
-                        <a class="nav-link active"   href="index.php">Home</a>
+                        <a class="nav-link active" style="font-size:18px"  href="index.php">Home</a>
                     </li>
                     <li class="nav-item mr-3">
-                        <a class="nav-link " href="#">About</a>
+                        <a class="nav-link " style="font-size:18px" href="#">About</a>
                     </li>
                     <li class="nav-item mr-3">
-                        <a class="nav-link " href="#">Contact</a>
+                        <a class="nav-link " style="font-size:18px" href="#">Contact</a>
                     </li>
                     <?php
-                       if($userId || $userEmail)
+                       if($userId)
                        {
                            
                            $query = "SELECT * FROM `tbl_user` WHERE `id` = $userId ";
@@ -77,7 +114,7 @@ if (isset($_GET['logout'])&& $_GET['logout']='out'){
                      <li class="nav-item dropdown  mr-3">
                         <a class="nav-link " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" onclick="myFun()" aria-expanded="true">
                             <!--<span   style="font-size:12px"><?php //echo $data['name']; ?></i></span>-->
-                            <span><?php echo $data['name']; ?><i class="fa fa-plus  pl-2 pr-1" style="font-size: small" id="iconChange"></i></span>
+                            <span style="font-size:15px"><?php echo $data['name']; ?></span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="dropcol" style="top: 64px;left: -40%;">
                             <a class="dropdown-item" href="../user/user_profile.php">View Profile</a>
@@ -99,4 +136,8 @@ if (isset($_GET['logout'])&& $_GET['logout']='out'){
         </nav>
         <div class="overlay"></div>
     </header>
-   
+   <!----Login Section------>
+   <?php include 'login.php' ?>
+    <!----Registration Section------>
+    <?php include 'registration.php' ?>
+    <!---Search Section--->
