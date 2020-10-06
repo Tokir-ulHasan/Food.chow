@@ -98,8 +98,8 @@ $('#spinner').inputSpinner({
         $.ajax({
             url:'detailspage.php',
             method : 'POST',
-            data:{"save":true, "rateindex":'ratedIndex'},
-             data:{ "ratedIndex":JSON.stringify(ratedIndex) },
+            //data:{"save":true, "rateindex":'ratedIndex'},
+            // data:{ "ratedIndex":JSON.stringify(ratedIndex) },
             //dataType :"JSON",
             success:function(data){
               alert(ratedIndex);
