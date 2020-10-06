@@ -3,7 +3,7 @@
 include_once '../lib/Session.php'; 
 include_once '../lib/Database.php'; 
 include_once '../lib/formatData.php';
-Session::initializedSession();
+Session::initializedSession(); 
 
 $db = new Database();
 $fm = new Formate();
@@ -139,5 +139,5 @@ if (isset($_GET['logout'])&& $_GET['logout']='out'){
    <!----Login Section------>
    <?php include 'login.php' ?>
     <!----Registration Section------>
-    <?php include 'registration.php' ?>
+  <?php include 'registration.php' ?>
     <!---Search Section--->

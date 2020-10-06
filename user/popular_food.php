@@ -20,10 +20,10 @@ $db = new Database();
                     
                 ?>
                     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 mt-4">
-                        <div class="card" style="border: 1px solid rgba(0, 0, 0, 0.22);box-shadow: 1px 0px 20px 2px #a7c0d5;">
-                            <div class="card">
-                                <div class="d-block" id="popularFoodimg">
-                                    <img src="<?php echo $fdData['fd_image']; ?>">
+                        <div class="card fd_datails"  style="border: 1px solid rgba(0, 0, 0, 0.22);box-shadow: 1px 0px 20px 2px #a7c0d5;">
+                            <div class="card ">
+                                <div class="d-block " id="popularFoodimg">
+                                    <img  class="img_1" src="<?php echo $fdData['fd_image']; ?> " data-zoom-img='<?php echo $fdData['fd_image']; ?> '>
                                     <div class="d-flex">
                                     <span  id="popularFoodlogo">
                                     <img src="../asset/images/04.jpg">

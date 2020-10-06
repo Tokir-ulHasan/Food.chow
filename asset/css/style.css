@@ -235,6 +235,7 @@ color :red;
 /*==============How it Works=================*/
 #popularFoodsection{
     background-color: #0981e821;
+    padding: 20px 0;
 }
 
 #popularFoodimg{

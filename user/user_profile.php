@@ -1,10 +1,10 @@
 <?php
  include 'includesUser/header.php';
-include_once '../lib/Session.php';
-   
-Session::CheackSession_user();
+//Session::CheackSession_user();
 
-
+if (Session::getSession('login') != true){
+    session::destroySession_user();
+}
 include_once '../lib/Database.php';
 $db = new Database();
 $id=$_SESSION['userId'];

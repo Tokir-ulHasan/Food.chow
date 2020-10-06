@@ -31,6 +31,26 @@ $(document).ready(function () {
     $(".fa-bars").on("click",function () {
         $(".mobileMenu").toggleClass("open");
     }) ;
+
+
+    //===============animation js =============================
+
+    
+$('.fd_datails').hover(function(){
+    $(this).css({"transform": "scale(1.1)"});
+},function(){
+    $(this).css({"transform": "scale(1)"});
+});
+$('.img_1').hover(function(){
+    $(this).css({"transform": "scale(1.01)"});
+},function(){
+    $(this).css({"transform": "scale(1)"});
+});
+
+/*$('.fd_datails').mouseover(function(){
+    $(this).css({'left':'100px'},100);
+});*/
+    
 });
 
 
@@ -141,7 +161,7 @@ $('#spinner').inputSpinner({
 
   
  
-     
+ 
  
  
 
