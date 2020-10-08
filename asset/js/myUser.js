@@ -51,6 +51,7 @@ $('.img_1').hover(function(){
     $(this).css({'left':'100px'},100);
 });*/
     
+$('.mdb-select').materialSelect();
 });
 
 
@@ -156,6 +157,8 @@ $('#spinner').inputSpinner({
     }
  
   });
+
+  
 
 
 

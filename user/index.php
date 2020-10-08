@@ -39,13 +39,42 @@
                 }
                 
             ?>
-           
+                  
                 <h3 class="text-center txt h4 py-4">Unique Food Network...</h3>
-                <form class="form-inline my-2 my-lg-0 justify-content-center search-box">
+                <?php  
+                   
+                   if(isset($_GET['msgS'])){
+                       $msgS = $_GET['msgS'];
+                       echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                       <strong>Warning!</strong>Please Select Catagory
+                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                       </button>
+                     </div>';
+
+                   
+                   }
+                   
+                ?>
+                <form class="form-inline my-2 my-lg-0 justify-content-center search-box" action='search.php' method="post">
                     <div class="input-group ">
-                        <input class="form-control search-box-info my-0 py-0" type="text" placeholder="Search" aria-label="Search">
+                        <select id="secrch-select" placeholder-text="Item 1" name="catid">
+                        <option value="-1" class="select-dropdown__list-item bg-light">Select</option>
+                        <?php 
+                          
+                           $query_cat = 'SELECT * FROM `tbl_cat`';
+                           $res_cat   = $db->SelectData($query_cat);
+                           if($res_cat){
+                               while($data_cat = mysqli_fetch_array($res_cat)){
+                        ?>
+                            <option value="<?php echo $data_cat['cat_id'];?>" class="select-dropdown__list-item"><?php echo $data_cat['cat_name'];?></option>
+                            <?php }}?>
+
+                        </select>
+                        <?php ?>
+                        <input class="form-control search-box-info my-0 py-0" type="text" placeholder="Search" aria-label="Search" name="search1txt" data-toggle="popover"  data-placement="top"  data-content="Content" value="">
                         <div class="input-group-prepend search-box-btnn">
-                            <a class="btn search-box-btn text-info" href=""><span class="fa fa-search"></span></a>
+                            <button class="btn search-box-btn text-info" name="search1"><span class="fa fa-search"></span></button>
                         </div>
                     </div>
                 </form>

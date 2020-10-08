@@ -33,6 +33,7 @@ if (isset($_GET['logout'])&& $_GET['logout']='out'){
     <link href="../asset/css/style.css" rel="stylesheet">
     <link href="../asset/css/responsiveUser.css" rel="stylesheet">
     <link href="../asset/css/profile_css.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
     <style>
     .rate_widget {
     border:     1px solid #CCC;
@@ -83,13 +84,13 @@ if (isset($_GET['logout'])&& $_GET['logout']='out'){
                 
                 <ul class="navbar-nav  " id="navitem">
                     <li class="nav-item mr-3">
-                        <form class="form-inline my-2 my-lg-0">
+                        <form class="form-inline my-2 my-lg-0" action="search.php" method="post">
                             <div class="input-group">
                                 <div class="input-group-prepend" >
-                                    <a class="btn search text-danger" href=""><span class="fa fa-search"></span></a>
+                                    <button class="btn search text-danger" name="search"><span class="fa fa-search"></span></button>
                                    
                                 </div>
-                                <input class="form-control searchbox  pb-1" type="text" placeholder="Search" aria-label="Search">
+                                <input class="form-control searchbox  pb-1" type="text" placeholder="Search" aria-label="Search" name="searchtxt">
                             </div>
                         </form>
                     </li>

@@ -143,7 +143,10 @@
                 <!--==============Rating Food ========================-->
                <div class="mx-4 my-2" id="ratingSection" >
                   <h6 class=" my-1">Rating  Barger</h6>
-                  <div class="ratting clearfix" id="lovefood">
+                  <div class="mt-1">
+                    <div id="rateYo"></div> <span class='result'>0</span>
+                </div>
+                  <!-- <div class="ratting clearfix" id="lovefood">
                     <div class="float-left rating" >
                       <span class="star mr-1" ><i class="fa fa-heart fa-2x" data-index="0"></i></span>
                       <span class="star mr-1" ><i class="fa fa-heart fa-2x" data-index="1"></i></span>
@@ -154,7 +157,7 @@
                     <div class="float-right">
                       <span>5</span>
                     </div>
-                  </div>
+                  </div>-->
               </div>
             </form>
               <!--=================Rating Food end========================-->

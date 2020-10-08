@@ -572,3 +572,23 @@ color: #2d2c2c;
      color:red;
       
    }
+
+   /*========Search select============*/
+   #secrch-select{
+    border: none;
+    box-shadow: none;
+}
+ #secrch-select:focus{
+    border: white;
+    box-shadow: none;
+}
+.select-dropdown__list-item{
+    
+    border: none;
+    
+}
+.select-dropdown__list-item:hover{
+    
+   background-color: red;
+    
+}
