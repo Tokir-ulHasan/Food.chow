@@ -1,13 +1,16 @@
 <?php
-include_once '../lib/Session.php';
-   
-Session::CheackSession_user();
+// <!----Header Section---->
 
+include 'includesUser/header.php';
+//Session::CheackSession_user();
 
+if (Session::getSession('login') != true){
+    session::destroySession_user();
+}
 include_once '../lib/Database.php';
 $db = new Database();
 $id=$_SESSION['userId'];
-$email=$_SESSION['userEmail'];
+//$email=$_SESSION['userEmail'];
 if(isset($_POST['save']))
 {
     $check = $_FILES["file"]["tmp_name"];
@@ -19,7 +22,7 @@ if(isset($_POST['save']))
     {
         $file=$image;
     }*/
-        $sqlcp = "UPDATE tbl_user set image='$file' where id='$id' or email = '$email'";
+        $sqlcp = "UPDATE tbl_user set image='$file' where id='$id'";
         $rcp= $db->QueryExcute($sqlcp);
         if($rcp)
         {
@@ -38,8 +41,6 @@ if(isset($_POST['save']))
 
 ?>
    
-<!----Header Section---->
-<?php include 'includesUser/header.php' ?>
     
 <br>
 <section>

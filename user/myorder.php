@@ -14,6 +14,8 @@
     $trans_id = $_GET['cancel'];
     $queryUp   = "UPDATE `tbl_orders` SET `od_type` = 4 , `delever_date` = now() WHERE `orderCustomId` = '$trans_id' ";
     $result  = $db->QueryExcute($queryUp); 
+    $query1   = "UPDATE `tbl_orderdetails` SET `payment_status` ='Cenceled',`order_status` ='Cenceled', `packaging`='Cenceled',`shiping`='Cenceled',`delivery_status`='Cenceled',`t_daliv_date`= now()  WHERE `order_no` = '$trans_id' ";
+    $result  = $db->QueryExcute($query1); 
   }
 
   if(isset($_GET['confirm']) ){
@@ -21,6 +23,8 @@
     $trans_id = $_GET['confirm'];
     $queryUp   = "UPDATE `tbl_orders` SET `od_type` = 3 , `delever_date` = now() WHERE `orderCustomId` = '$trans_id' ";
     $result  = $db->QueryExcute($queryUp); 
+    $queryUp2   = "UPDATE `tbl_orderdetails` SET `payment_status` ='Paid',`packaging`='Complete',`shiping`='Shipped',`delivery_status`='Confirmed',`t_daliv_date`= now() WHERE `order_no` = '$trans_id' ";
+    $result2  = $db->QueryExcute($queryUp2); 
   }
 
 ?>
@@ -51,6 +55,7 @@
       <thead>
         <tr>
          <th>SL</th>
+         <th>Order No</th>
          <th>Items</th>
          <th>Date</th>
          <th>Status</th>
@@ -66,9 +71,13 @@
                <span style="padding:10% 0">
                   <?php echo $i++; ?>
                </span>
-              
+              </td>
+              <td >
+               <span style="padding:10% 0">
+                  <?php echo $G_data['orderCustomId']; ?>
+               </span>
+              </td>
                
-               </td>
               <td >
                   <?php
                     $G_custom = $G_data['orderCustomId'];
@@ -145,7 +154,9 @@
   
 
 </div>
+<?php include 'includesUser/tracking.php' ?>
 </section>
+
 
 <!----Footer Section---->
 <?php include 'includesUser/footer.php' ?>

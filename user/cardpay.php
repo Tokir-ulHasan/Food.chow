@@ -8,10 +8,11 @@
  
 
   
-  if(isset($_GET['payment_Sta']) && $_GET['payment_Sta'] == '1' ){
+  if(isset($_GET['payment_Sta']) && $_GET['payment_Sta'] == '2' ){
     
     $payment_status = $_GET['payment_Sta'];
-    $order_food     = $cart->orederFood($customer_id, $payment_status);
+    $txid = $_GET['tx'];
+    $order_food     = $cart->orederFood($customer_id, $payment_status, $txid);
 
   }
 
@@ -208,7 +209,7 @@ if(!empty($tx_id) &&  $status=='succeeded')
         </div>
         <div class="d-block m-auto">
             <!--=============Payment Status Id=================-->
-            <a href="?payment_Sta=1" class="btn btn-lg btn-danger">Order Now</a>
+            <a href="?payment_Sta=2&&tx=<?php echo  $tx_id;?>" class="btn btn-lg btn-danger">Order Now</a>
         </div>
     </div>
 </section>

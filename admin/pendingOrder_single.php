@@ -7,6 +7,8 @@ $fm = new Formate();
     $odtype = $_GET['rej'];
     $queryUp   = "UPDATE `tbl_orders` SET  `od_type` = 4 ,  `delevery_reject_by`  = '$rejectID' ,`delever_date` = now() WHERE `od_id` = $odtype ";
     $result  = $db->QueryExcute($queryUp);        
+    $queryUp3 = "UPDATE `tbl_orderdetails` SET `order_status` ='Rejected', `packaging`='Cenceled',`shiping`='Cenceled',`delivery_status`='Cenceled',`t_daliv_date`= now() WHERE `order_no` = $odtype ";
+    $result3  = $db->QueryExcute($queryUp3);
   }
 
   /** Confirm to active Order By Admin */
@@ -14,6 +16,8 @@ $fm = new Formate();
     $trans_id = $_GET['con'];
     $queryUp = "UPDATE `tbl_orders` SET `od_type` = 2 WHERE `orderCustomId` = $trans_id ";
     $result  = $db->QueryExcute($queryUp);        
+    $queryUp2 = "UPDATE `tbl_orderdetails` SET `order_status` ='Confirmed' WHERE `order_no` = $trans_id ";
+    $result2  = $db->QueryExcute($queryUp2);
   }
 
 ?>

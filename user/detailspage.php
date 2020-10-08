@@ -48,11 +48,11 @@
 
 <?php
            
-           if(isset($_POST['ratedIndex'])){
+           /*if(isset($_POST['ratedIndex'])){
          
             
              header("Location:404.php");
-            /* $ratedIndex = $_POST['ratedIndex'];
+            $ratedIndex = $_POST['ratedIndex'];
              $fid = $id;
              $uId = $userId;
              $ratedIndex++;
@@ -66,11 +66,11 @@
              else{
                $in_rating_q = "INSERT INTO ` ratingfood`(`fd_id`, `user_id`, `rating`) VALUES ($fid,$uId,$ratedIndex)";
                $in_rating_res = $db->QueryExcute($in_rating_q);
-             }*/
+             }
              //exit(json_encode(array('user_id' => $uId)));
-         
+            }*/
              
-           } ?>
+            ?>
 
    <section class="pt-1" style="background: rgba(0, 123, 255, 0.06);">
       <div class="row mx-3 pt-5">
@@ -80,14 +80,14 @@
                 <?php
                 include_once '../lib/Database.php';
                 $db = new Database();
-                $sql="select distinct cat_name from tbl_cat";
+                $sql="select distinct cat_name,cat_id from tbl_cat";
                 $r=$db->SelectData($sql);
                 
                 while($row=mysqli_fetch_array($r))
                     {
                         $type=$row['cat_name'];
-                        
-                        echo "<li class='list-item mt-3 listA'><a href='' > $type </a></li>";
+                        $ci=$row['cat_id'];
+                        echo "<li class='list-item mt-3 listA'><a href='catagoryfoodlist.php?catid=$ci' > $type </a></li>";
                     }
                 ?>
             </ul>

@@ -76,10 +76,18 @@ class Cart
       }
    }
 
-   public function orederFood($customer_id, $payment_status){
+   public function orederFood($customer_id, $payment_status,$tx_id){
     
 
       $order_status = 1 ; // Pending order = 0
+      if($payment_status==1){
+         $ptype="Cash";
+         $pstatus="Pendding";
+      }
+      elseif($payment_status==2){
+         $ptype="Card";
+         $pstatus="Paid";
+      }
       
       // Generate Transition Id
       $orderCustomId = 100;
@@ -102,14 +110,16 @@ class Cart
       //----------------------
       $query        = "SELECT * FROM `tbl_cart` WHERE `customer_id` = '$customer_id'";
       $result       = $this->db->SelectData($query);
+      $gtotal=0;
       if($result){
+        
          while( $cart_data = $result->fetch_assoc()){
             $foodName      = $cart_data['product_name'];
             $foodID        = $cart_data['product_id'];
             $foodPrice     = $cart_data['total_price'];
             $foodQuantity  = $cart_data['quantity'];
             $image         = $cart_data['image'];
-            
+            $gtotal= $gtotal+$foodPrice;
             $temp = 0;
 
             $query_OD = "INSERT INTO `tbl_orders`( `od_type`, `od_items`, `od_items_name`, `od_paymentStatus`, `od_price`, `od_quantity`, `customer_id`, `od_Loction`, `od_image`,`orderCustomId`) VALUES ('$order_status','$foodID','$foodName','$payment_status','$foodPrice','$foodQuantity','$customer_id','$od_Location','$image','$orderCustomId')";
@@ -124,10 +134,13 @@ class Cart
             }
 
          }
+         $query_Odetails = "INSERT INTO tbl_orderdetails(order_no, customer_id, payment,payment_type, payment_status, order_status, packaging, shiping, delivery_status, trans_id)  VALUES ('$orderCustomId','$customer_id','$gtotal','$ptype','$pstatus','Pendding','Pendding','Pendding','Pendding','$tx_id')";
+         $resODtls = $this->db->QueryExcute($query_Odetails);
          $queryCart = "DELETE FROM `tbl_cart` WHERE `customer_id` = ' $customer_id' ";
          $resCart = $this->db->QueryExcute($queryCart);
          if($resCart){
-               header('Location:myorder.php?msg=1');
+            echo ("<script>location.href='myorder.php?msg=1'</script>");
+               //header('Location:myorder.php?msg=1');
          }
          else{
             header('Location:404.php');

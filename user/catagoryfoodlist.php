@@ -36,13 +36,11 @@
     }
   }
 
-  $sql2="select * from tbl_fooddetails where id='$id' ";
+  $sql2="select distinct cat_name from tbl_cat where cat_id='$id' ";
   $r2=$db->SelectData($sql2);
   $row=mysqli_fetch_assoc($r2);
-  $name=$row['fd_name'];
-  $des=$row['fd_description'];
-  $price=$row['fd_price'];
-  $image=$row['fd_image'];
+  
+  $cname=$row['cat_name'];
 
 ?>
 
@@ -56,25 +54,27 @@
                     <?php
                     include_once '../lib/Database.php';
                     $db = new Database();
-                    $sql="select distinct cat_name from tbl_cat";
+                    $sql="select distinct cat_name, cat_id from tbl_cat";
                     $r=$db->SelectData($sql);
                     
                     while($row=mysqli_fetch_array($r))
                         {
                             $type=$row['cat_name'];
+                            $ci=$row['cat_id'];
                             
-                            echo "<li class='list-item mt-3 listA'><a href='' > $type </a></li>";
+                            echo "<li class='list-item mt-3 listA'><a href='?catid=$ci' > $type </a></li>";
                         }
                     ?>
                 </ul>
             </div>
             <div class="col-10 " >
                 <div class="card-body">
-                    <h4>Barger</h4>
+                <h4><?php echo $cname; ?></h4>
                     <div class="row">
                     <?php
                     $query = "SELECT * FROM `tbl_fooddetails` where `fd_cat_id` =  $id ";
                     $res = $db->SelectData($query);
+                    
                     if($res && $res->num_rows > 0){
                         while($fdData = $res->fetch_assoc()){
                         
@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="d-block ">
                                     <p class=" text-center mt-4 font-weight-bold "><?php echo $fdData['fd_name']; ?></p>
-                                    <p class=" text-center  "><span>Type of food:<?php echo $fdData['fd_catagoery_name']; ?></span></p>
+                                    <p class=" text-center  "><span>Type of food: <?php echo $fdData['fd_catagoery_name']; ?></span></p>
                                     <div class="d-flex justify-content-center">
                                     <?php echo" <a class='btn btn-outline-danger' href='detailspage.php?food_id=".$fdData['id']."'>Details</a>"?></div>
                                 </div>

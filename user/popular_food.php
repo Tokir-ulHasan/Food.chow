@@ -45,7 +45,7 @@ $db = new Database();
                                        
                                     </div>
                                     <div class="pl-5 py-3">
-                                        <span class="popularFoodCat"><i class="fa fa-home"></i>Related Food</span>
+                                        <span class="popularFoodCat"><i class="fa fa-home"></i><a href="catagoryfoodlist.php?catid=<?php echo $fdData['fd_cat_id']?>">Related Food</a></span>
                                     </div>
                                 </div>
                             </div>
