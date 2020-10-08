@@ -9,9 +9,9 @@
 
   
   if(isset($_GET['payment_Sta']) && $_GET['payment_Sta'] == '1' ){
-    
+    $tx_id="N/A";
     $payment_status = $_GET['payment_Sta'];
-    $order_food     = $cart->orederFood($customer_id, $payment_status);
+    $order_food     = $cart->orederFood($customer_id, $payment_status,$tx_id);
 
   }
 

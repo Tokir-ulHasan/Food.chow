@@ -108,7 +108,7 @@
       </table>
     </div>
     <div class="clearfix">
-      <a class="btn btn-primary btn-lg float-left "  href="index.php">Continue To Order</a>
+      <a class="btn btn-primary btn-lg float-left "  href="catagoryfoodlist.php?catid=1">Continue To Order</a>
       <button type="button" class="btn btn-info btn-lg float-right " data-toggle="modal" data-target="#myModal">checkout</button>
         <!-- Modal -->
       <div id="myModal" class="modal fade" role="dialog">

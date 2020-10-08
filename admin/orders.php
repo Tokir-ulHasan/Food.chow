@@ -77,9 +77,9 @@ function PaymentStatus($payment)
                   <th scope="col" width="15%" class="text-center">Order EMAIL</th>
                   <th scope="col" width="10%" class="text-center">Order PHONE</th>
                   <th scope="col" width="15%" class="text-center">Order Location</th>
-                  <th scope="col" width="12%" class="text-center">Payment Status</th>
+                  <th scope="col" width="12%" class="text-center">Payment Type</th>
                   <th scope="col" width="10%" class="text-center">Oreder ID</th>
-                  <th scope="col" width="10%" class="text-center">Oreder Type</th>
+                  <th scope="col" width="10%" class="text-center">Oreder Status</th>
                   <th scope="col" width="12%" class="text-center">Oreder Date</th>
                 </tr>
             </thead>

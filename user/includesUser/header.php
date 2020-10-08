@@ -97,6 +97,9 @@ if (isset($_GET['logout'])&& $_GET['logout']='out'){
                         <a class="nav-link active" style="font-size:18px"  href="index.php">Home</a>
                     </li>
                     <li class="nav-item mr-3">
+                        <a class="nav-link" style="font-size:18px"  href="track_order.php">Track Order</a>
+                    </li>
+                    <li class="nav-item mr-3">
                         <a class="nav-link " style="font-size:18px" href="#">About</a>
                     </li>
                     <li class="nav-item mr-3">

@@ -11,6 +11,8 @@ if(isset($_POST['confirmed'])){
     $d_boy = $_POST['d_boy'];
     $queryUp   = "UPDATE `tbl_orders` SET `od_type` = 3 ,`delevery_reject_by`  = '$deleveryID' , `delvery_boy_id` = $d_boy, `delever_date` = now() WHERE `orderCustomId` = '$trans_id' ";
     $result  = $db->QueryExcute($queryUp); 
+    $odetlsUp   = "UPDATE `tbl_orderdetails` SET `packaging`='Complete',`shiping`='Shipped',`t_daliv_date`= now() WHERE `order_no` = '$trans_id' ";
+    $result2  = $db->QueryExcute($odetlsUp); 
   
   }
 

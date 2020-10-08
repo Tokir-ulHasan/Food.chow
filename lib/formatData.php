@@ -77,7 +77,7 @@ class Formate{
     }
     elseif($pay == 2)
     {
-      return $pay = "bekash";
+      return $pay = "Card";
     }
     else{
       return $pay = "-----";
