@@ -31,7 +31,8 @@
 </div>
 
 
-<script src="../asset/js/jquery-3.5.1.slim.min.js" ></script>
+<script  src="../asset/js/jquery-3.5.1.slim.min.js" ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="../asset/js/wow.min.js" ></script>
 <script src="../asset/js/popper.min.js" ></script>
 <script src="../asset/js/bootstrap.min.js" ></script>
@@ -39,29 +40,6 @@
 <script src="../asset/js/bootstrap-input-spinner.min.js" ></script>
 <script src="../asset/js/myUser.js" ></script>
 <script src="../asset/js/profile_js.js" ></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
-<script>
-$(function () {
- 
- $("#rateYo").rateYo({//
 
-   onSet: function (rating, rateYoInstance) {
-    $.ajax({
-            url:'detailspage.php',
-            method : 'POST',
-            data:{rat:"rating"},
-            // data:{ "ratedIndex":JSON.stringify(ratedIndex) },
-            dataType :"JSON",
-            success:function(data){
-               
-            //  alert(ratedIndex);
-            }
-        });
-        alert("Rating is set to: " + rating);
-    
-   }
- });
-});
-</script>
 </body>
 </html>

@@ -1,10 +1,6 @@
 <!----Header Section---->
 <?php 
-  include_once '../lib/Session.php'; 
-  include_once '../lib/Database.php'; 
-  include_once '../lib/formatData.php';
   include_once 'includesUser/header.php' ;
-  include_once 'cartclass.php';
   $userId = Session::getSession('userId');
   $userEmail = Session::getSession('userEmail');
 ?>
@@ -20,19 +16,11 @@
   }else{
     $id=$_GET['food_id'];
   }
-  if($_SERVER['REQUEST_METHOD'] == 'POST'){
+  if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addtocart'])){
     if(!empty($userId)){
        $quantity = $_POST['quantity'];
        $addcart  = $cart->addtocart($quantity,$id);
-    }
-    else{
-      echo" <div class='alert alert-primary alert-dismissible fade show' role='alert'>
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-                    <span aria-hidden='true'>&times;</span>
-                    <span class='sr-only'>Close</span>
-                </button><br>
-                <strong>Not Logged In!</strong> Please Login to Order Food. 
-            </div> ";
+       //echo "<br><br>sdf";
     }
   }
 
@@ -45,39 +33,14 @@
   $image=$row['fd_image'];
 
 ?>
-
-<?php
-           
-           /*if(isset($_POST['ratedIndex'])){
-         
-            
-             header("Location:404.php");
-            $ratedIndex = $_POST['ratedIndex'];
-             $fid = $id;
-             $uId = $userId;
-             $ratedIndex++;
-          
-             $s_rating_query = "SELECT * FROM ` ratingfood` WHERE `fd_id` = '$fid' and `user_id` = '$uId' ";
-             $s_rating_res = $db->SelectData($s_rating_query);
-             if($s_rating_res->num_rows > 0){
-               $u_rating_q = "UPDATE ` ratingfood` SET `fd_id`=[value-2] WHERE `user_id` = '$uId' and `fd_id` = '$fid' ";
-               $u_rating_res = $db->QueryExcute($u_rating_q);
-             }
-             else{
-               $in_rating_q = "INSERT INTO ` ratingfood`(`fd_id`, `user_id`, `rating`) VALUES ($fid,$uId,$ratedIndex)";
-               $in_rating_res = $db->QueryExcute($in_rating_q);
-             }
-             //exit(json_encode(array('user_id' => $uId)));
-            }*/
-             
-            ?>
-
    <section class="pt-1" style="background: rgba(0, 123, 255, 0.06);">
       <div class="row mx-3 pt-5">
         <div class="col-2 mr-4" style="border: 1px solid #e8cece;box-shadow: 1px 12px 13px 2px #d7cece;">
             <ul class="list-unstyled catod">
                 <h6 class="font-bold mt-2">Categories</h6>
                 <?php
+                 //  echo $_GET['ratedIndex'];
+                 //  echo json_encode($contents);
                 include_once '../lib/Database.php';
                 $db = new Database();
                 $sql="select distinct cat_name,cat_id from tbl_cat";
@@ -103,8 +66,8 @@
                       </div>
                       <div class="col-5">
                           <div class="clearfix mt-2">
-                              <h4 class="float-left text-dark"><?php echo "$name"; ?></h4>
-                              <h4 class="float-right">$<?php echo "$price"; ?></h4>
+                              <h6 class="float-left text-dark"><?php echo "$name"; ?></h6>
+                              <h6 class="float-right">$<?php echo "$price"; ?></h6>
                           </div>
                           <div class="clearfix mt-4">
                               <h6 class="float-left my-1 text-secondary">Order Quantity</h6>
@@ -120,19 +83,46 @@
                               <input  type="number" name='price' id="price" value="<?php echo $price?>" hidden/>
                               <h6 class="float-right  mt-2  text-secondary" id="totalprice" >Total Price <strong class=" text-danger">$</strong><span  class=" text-danger font-weight-bold"><?php echo $price?></span></h6>
                           </div>
+                          <?php
+                             
+                             /***=========Find rating avrage============ */
+                             $rat_q_fid = "SELECT SUM(`rating`) as totalrate, AVG(`rating`) as avgrate ,count(`rating`) as conutrate FROM ` ratingfood` WHERE `fd_id`= '$id' ";
+                             $rat_res_fid = $db->SelectData($rat_q_fid);
+                             $total_rate  = 0;
+                             $avg_rat     = 0;
+                             $count_rat   = 0;
+                             if($rat_res_fid){
+                              $data = mysqli_fetch_array($rat_res_fid);
+                              $total_rate =  $data['totalrate'];
+                              $count_rat  =  $data['conutrate'];
+                              $avg_rat    =  $data['avgrate'];
+                              $avg_rat    = round($avg_rat,2);
+                             }
+                           
+                          ?>
+                          <!--===============Take avg rat and total rate================-->
+                          <span id="totalrate" data-index="<?php echo $total_rate;?>"></span>
+                          <span id="avgrate" data-index="<?php echo $avg_rat;?>"></span>
+                          <span id="countrate" data-index="<?php echo $count_rat;?>"></span>
+                           <!--===============Take avg rat and total rate================-->
                           <div class="clearfix mt-4">
                                 <div class="float-left" id="food">
-                                    <span class="text-secondary"><i class="fa fa-heart-o fa-2x mt-1 text-secondary" style="font-size:25px"></i><strong style="font-size:20px"> 400.5</strong> </span>
+                                    <span class="d-flex text-secondary"><div class="outer-love">
+                                       <div class="inner-love" id="in_rate" ></div>
+                                    </div><strong id="ttlrate" style="font-size:18px;margin-top: 5px;"></strong></span>
                                 </div>
                                 <div class="float-right text-secondary ">
                                    <h6 style="font-size:20px" >Order <span class="mb-2"><i class="fa fa-cart-arrow-down" ></i> 200</span></h6>
                                    
                                 </div>
                            </div>
+                           <?php 
+                              if($userId != ""){
+                           ?>
                           <div class="d-flex justify-content-end mt-5">
                               <button name="addtocart" type="submit"  class="btn btn-outline-danger btn-sm " type="button" >Add to Cart   <i class="fa fa-cart-plus" aria-hidden="true"></i></button>
                           </div>
-                          
+                          <?php } ?>
                       </div>
                   </div>
                 </div>
@@ -142,22 +132,36 @@
                 <hr>
                 <!--==============Rating Food ========================-->
                <div class="mx-4 my-2" id="ratingSection" >
-                  <h6 class=" my-1">Rating  Barger</h6>
-                  <div class="mt-1">
-                    <div id="rateYo"></div> <span class='result'>0</span>
-                </div>
-                  <!-- <div class="ratting clearfix" id="lovefood">
-                    <div class="float-left rating" >
-                      <span class="star mr-1" ><i class="fa fa-heart fa-2x" data-index="0"></i></span>
-                      <span class="star mr-1" ><i class="fa fa-heart fa-2x" data-index="1"></i></span>
-                      <span class="star mr-1" ><i class="fa fa-heart fa-2x" data-index="2"></i></span>
-                      <span class="star mr-1" ><i class="fa fa-heart fa-2x" data-index="3"></i></span>
-                      <span class="star mr-1" ><i class="fa fa-heart fa-2x" data-index="4"></i></span>
+                 <!--=============Take user id and food id====================-->
+                 <?php 
+                    $rat_q = "SELECT * FROM ` ratingfood` WHERE `fd_id` = '$id' and `user_id` = '$userId' ";
+                    $rat_res = $db->SelectData($rat_q);
+                    $rat_fd = 0 ;
+                    if($rat_res && $rat_res->num_rows > 0){
+                      $rat_data = mysqli_fetch_array($rat_res); 
+                      $rat_fd = $rat_data['rating'];
+                    }
+                 ?>
+                    <span id="rating" data-index="<?php echo $rat_fd;?>"></span>
+                    <span id="fdid" data-index="<?php echo $id;?>"></span>
+                    <span id="userid" data-index="<?php echo $userId;?>"></span>
+                 <!--=============end====================-->
+               <?php 
+             
+                  if($userId != ""){
+               ?>  
+                  <h6 class=" my-1">Review of This food</h6>
+                  <div class="ratting d-flex" id="lovefood">
+                    <div class=" rating" >
+                      <span class="star mr-2" ><i class="fa fa-heart fa-2x" data-index="0"></i></span>
+                      <span class="star mr-2" ><i class="fa fa-heart fa-2x" data-index="1"></i></span>
+                      <span class="star mr-2" ><i class="fa fa-heart fa-2x" data-index="2"></i></span>
+                      <span class="star mr-2" ><i class="fa fa-heart fa-2x" data-index="3"></i></span>
+                      <span class="star mr-2" ><i class="fa fa-heart fa-2x" data-index="4"></i></span>
                     </div>
-                    <div class="float-right">
-                      <span>5</span>
+                    <div id='rating_count'>
                     </div>
-                  </div>-->
+                  </div>
               </div>
             </form>
               <!--=================Rating Food end========================-->
@@ -174,7 +178,7 @@
               </div>
                 <!--=================comment box end========================-->
               <hr>
-              
+                <?php } ?>
         </div>
       </div>
       <div class="row">

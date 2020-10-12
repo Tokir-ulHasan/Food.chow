@@ -39,42 +39,12 @@
                 }
                 
             ?>
-                  
                 <h3 class="text-center txt h4 py-4">Unique Food Network...</h3>
-                <?php  
-                   
-                   if(isset($_GET['msgS'])){
-                       $msgS = $_GET['msgS'];
-                       echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                       <strong>Warning!</strong>Please Select Catagory
-                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                         <span aria-hidden="true">&times;</span>
-                       </button>
-                     </div>';
-
-                   
-                   }
-                   
-                ?>
                 <form class="form-inline my-2 my-lg-0 justify-content-center search-box" action='search.php' method="post">
                     <div class="input-group ">
-                        <select id="secrch-select" placeholder-text="Item 1" name="catid">
-                        <option value="-1" class="select-dropdown__list-item bg-light">Select</option>
-                        <?php 
-                          
-                           $query_cat = 'SELECT * FROM `tbl_cat`';
-                           $res_cat   = $db->SelectData($query_cat);
-                           if($res_cat){
-                               while($data_cat = mysqli_fetch_array($res_cat)){
-                        ?>
-                            <option value="<?php echo $data_cat['cat_id'];?>" class="select-dropdown__list-item"><?php echo $data_cat['cat_name'];?></option>
-                            <?php }}?>
-
-                        </select>
-                        <?php ?>
                         <input class="form-control search-box-info my-0 py-0" type="text" placeholder="Search" aria-label="Search" name="search1txt" data-toggle="popover"  data-placement="top"  data-content="Content" value="">
                         <div class="input-group-prepend search-box-btnn">
-                            <button class="btn search-box-btn text-info" name="search1"><span class="fa fa-search"></span></button>
+                            <button type="submit" class="btn search-box-btn text-info" name="search1"><span class="fa fa-search"></span></button>
                         </div>
                     </div>
                 </form>
@@ -112,76 +82,7 @@
                         </a>
                      </div>
                      <?php }}?>
-                     <!-- <div class="ml-2 mr-2 slidcat">
-                       <a href="catagoryfoodlist.php?catname=Lunch">
-                            <div class="card slidecard">
-                                <img id="slideImg" class="img-fluid" src="../asset/images/02.png">
-                            </div>
-                            <div class="card-body">
-                                <div class="card-title font-weight-bold cat-font">LUNCH</div>
-                            </div>
-                        </a>
-                     </div>
-                     <div class="ml-2 mr-2 slidcat">
-                        <a href="catagoryfoodlist.php?catname=Diner">
-                            <div class="card slidecard">
-                                <img id="slideImg" class="img-fluid" src="../asset/images/03.png">
-                            </div>
-                            <div class="card-body">
-                                <div class="card-title font-weight-bold cat-font">DINNER</div>
-                            </div>
-                        </a>
-                     </div>
-                     <div class="ml-2 mr-2 slidcat">
-                        <a href="catagoryfoodlist.php?catname=Drink">
-                            <div class="card slidecard">
-                                <img class="img-fluid" id="slideImg" src="../asset/images/04.png">
-                            </div>
-                            <div class="card-body">
-                                <div class="card-title font-weight-bold cat-font">DRINK</div>
-                            </div>
-                        </a>
-                     </div>
-                     <div class="ml-2 mr-2 slidcat">
-                        <a href="catagoryfoodlist.php?catname=Juices">
-                            <div class="card slidecard">
-                                <img class="img-fluid font-weight-bold cat-font"  id="slideImg" src="../asset/images/05.png">
-                            </div>
-                            <div class="card-body">
-                                <div class="card-title font-weight-bold cat-font">JUICE</div>
-                            </div>
-                        </a>
-                     </div>
-                     <div class="ml-2 mr-2 slidcat">
-                        <a href="catagoryfoodlist.php">
-                            <div class="card slidecard">
-                                <img class="img-fluid " id="slideImg" src="../asset/images/06.png">
-                            </div>
-                            <div class="card-body">
-                                <div class="card-title font-weight-bold cat-font">COFFEE</div>
-                            </div>
-                        </a>
-                     </div>
-                     <div class="ml-2 mr-2 slidcat">
-                        <a href="catagoryfoodlist.php">
-                            <div class="card slidecard">
-                                <img class="img-fluid " id="slideImg" src="../asset/images/07.png">
-                            </div>
-                            <div class="card-body">
-                                <div class="card-title font-weight-bold cat-font">Tea</div>
-                            </div>
-                         </a>
-                     </div>
-                     <div class="ml-2 mr-2 slidcat">
-                     <a href="catagoryfoodlist.php">
-                         <div class="card slidecard">
-                             <img class="img-fluid " id="slideImg" src="../asset/images/08.png">
-                         </div>
-                         <div class="card-body">
-                             <div class="card-title font-weight-bold cat-font">BEFF ROAST</div>
-                         </div>
-                         </a>
-                     </div>-->
+                     
                 </div>
             </div>
         </div>

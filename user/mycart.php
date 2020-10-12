@@ -1,7 +1,7 @@
 
 <?php 
   include_once 'includesUser/header.php' ;
-  include_once 'cartclass.php';
+ 
 
 
   $customer_id = $_SESSION['userId'];

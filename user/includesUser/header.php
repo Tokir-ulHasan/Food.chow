@@ -3,6 +3,7 @@
 include_once '../lib/Session.php'; 
 include_once '../lib/Database.php'; 
 include_once '../lib/formatData.php';
+include_once 'cartclass.php';
 Session::initializedSession(); 
 
 $db = new Database();
@@ -33,7 +34,6 @@ if (isset($_GET['logout'])&& $_GET['logout']='out'){
     <link href="../asset/css/style.css" rel="stylesheet">
     <link href="../asset/css/responsiveUser.css" rel="stylesheet">
     <link href="../asset/css/profile_css.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
     <style>
     .rate_widget {
     border:     1px solid #CCC;
@@ -84,13 +84,12 @@ if (isset($_GET['logout'])&& $_GET['logout']='out'){
                 
                 <ul class="navbar-nav  " id="navitem">
                     <li class="nav-item mr-3">
-                        <form class="form-inline my-2 my-lg-0" action="search.php" method="post">
+                        <form class="form-inline my-2 my-lg-0" action="search.php" method='post'>
                             <div class="input-group">
                                 <div class="input-group-prepend" >
-                                    <button class="btn search text-danger" name="search"><span class="fa fa-search"></span></button>
-                                   
+                                   <button type="submit"  class="btn search text-danger" name="search" ><span class="fa fa-search" name="search"></span></button>
                                 </div>
-                                <input class="form-control searchbox  pb-1" type="text" placeholder="Search" aria-label="Search" name="searchtxt">
+                                <input class="form-control searchbox  pb-1" type="text" placeholder="Search" aria-label="Search" name="Searchtxt">
                             </div>
                         </form>
                     </li>
@@ -120,7 +119,7 @@ if (isset($_GET['logout'])&& $_GET['logout']='out'){
                             <!--<span   style="font-size:12px"><?php //echo $data['name']; ?></i></span>-->
                             <span style="font-size:15px"><?php echo $data['name']; ?></span>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="dropcol" style="top: 64px;left: -40%;">
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="dropcol" style="top: 64px; left: -206%; text-align: center; border-radius: 1% 32% 0% 30%; padding: 22px;box-shadow: 1px 2px 2px 2px #c7bfbf;">
                             <a class="dropdown-item" href="../user/user_profile.php">View Profile</a>
                             <a class="dropdown-item" href="myorder.php">View Order</a>
                             <a class="dropdown-item" href="../user/mycart.php">My Cart</a>

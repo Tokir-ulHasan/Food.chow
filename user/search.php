@@ -6,52 +6,31 @@ $catid ;
 $fdid  ;
 $txt ;
 $catname;
+
 if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['search1'] )){
-   $catid = $_POST['catid'];
    $txt = $_POST['search1txt'];
-   if($catid == -1){
-    $msg_search = $catid;
-   
-    //header('Location:index.php?msgS='.$msg_search);
-  //  exit();
-   }
 }
-$cat_query = "SELECT * FROM `tbl_cat` WHERE `cat_id` = $catid";
-$cat_res = $db->SelectData($cat_query);
 
-if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['search'] )){
-  
-    $txt = $_POST['Search'];
-    if($catid == -1){
-     $msg_search = $catid;
-    }
+elseif($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['search'] )){
+    $txt = $_POST['Searchtxt'];
  }
- $cat_query1 = "SELECT * FROM `tbl_cat` WHERE `cat_id` = $catid";
- $cat_res1   = $db->SelectData($cat_query1);
-
+ else{
+    $txt = "-1"; 
+ }
 ?>
-   
-    
 <section class="pt-1" >
       <div class="row mx-3 pt-3">
              
                 <div class="card-body mt-4">
-                    <?php
-                        if($cat_res){
-                        $cat_Data = $cat_res->fetch_assoc();
-                        echo '<h4 style="padding: 2px;font-size: 2rem;
-                        font-family: serif;font-weight: bolder;color: #ff0000;text-shadow: 14px 2px 17px #bf7a7a;">'.$cat_Data['cat_name'].'</h4>';
-                        }
-                    ?>
                     <div class="row">
-                    <?php
-                    $query = "SELECT * FROM `tbl_fooddetails` WHERE `fd_name` like '%$txt%' ";
-                    $res = $db->SelectData($query);
-                    if($res && $res->num_rows > 0){
-                        while($fdData = $res->fetch_assoc()){
-                    ?>
+                        <?php
+                        $query = "SELECT * FROM `tbl_fooddetails` WHERE `fd_name` like '%$txt%' ";
+                        $res = $db->SelectData($query);
+                        if($res && $res->num_rows > 0){
+                            while($fdData = $res->fetch_assoc()){
+                        ?>
                         <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 mt-4">
-                            <div class="card" style="border: 1px solid rgba(0, 0, 0, 0.22);box-shadow: 1px 0px 20px 2px #a7c0d5;">
+                            <div class="card" style="border: 1px solid rgba(0, 0, 0, 0.22);">
                                 <div class="card">
                                     <div class="d-block" id="popularFoodimg" style="height: 180px;">
                                         <img src="<?php echo $fdData['fd_image']; ?>">
@@ -76,19 +55,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['search'] )){
                                         
                                         </div>
                                         <div class="pl-3 py-3">
-                                            <span class="popularFoodCat" style=" font-size: 14px;"><i class="fa fa-home"></i>Related Food</span>
+                                                <span class="popularFoodCat"><i class="fa fa-home"></i><a href="catagoryfoodlist.php?catid=<?php echo $fdData['fd_cat_id']?>">Related Food</a></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        
                         </div>
-                    <?php  } }else{
-                        echo "No Result Found";
-                    }  ?> 
+                        <?php  } 
+                          }else{ echo "No Result Found"; } ?> 
                     </div>
                 </div>
-            
             </div>
        
     

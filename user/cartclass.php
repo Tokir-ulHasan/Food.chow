@@ -1,11 +1,4 @@
 <?php 
-
-include_once '../lib/Session.php'; 
-//Session::initializedSession();
-include_once '../lib/Database.php'; 
-include_once '../lib/formatData.php';
-
-
 class Cart
 {
 
@@ -17,6 +10,7 @@ class Cart
     }
 
     public function addtocart($quantity,$id){
+     
          $customer_id = $_SESSION['userId'];
          $quantity   =  mysqli_real_escape_string($this->db->link,$this->fm->validation($quantity));
          $food_id    =  mysqli_real_escape_string($this->db->link,$id);
@@ -30,17 +24,20 @@ class Cart
             $fd_img = $food_data['fd_image'];
             $fd_price = $food_data['fd_price'];
             $price = $quantity*$fd_price;
-            $query = "INSERT INTO `tbl_cart`( `s_id`, `product_id`, `product_name`, `price`, `quantity`, `total_price`,`image`,`customer_id`) VALUES ('$session_id','$food_id','$fd_name','$fd_price','$quantity','$price','$fd_img','$customer_id')";
+            $query = "INSERT INTO `tbl_cart`(  `product_id`, `product_name`, `price`, `quantity`, `total_price`,`image`,`customer_id`) VALUES ('$food_id','$fd_name','$fd_price','$quantity','$price','$fd_img','$customer_id')";
             $res = $this->db->QueryExcute($query);
             if($res){
                echo ("<script>location.href='mycart.php'</script>");
+            
             }
             else{
-                  header('Location:404.php');
+               echo ("<script>location.href='404.php'</script>");
+                 // header('Location:404.php');
                }
          }
          else{
-            header('Location:404.php');
+            echo ("<script>location.href='404.php'</script>");
+            //header('Location:404.php');
          }
     }
 
@@ -72,7 +69,8 @@ class Cart
            // header('Location:mycart.php');
       }
       else{
-         header('Location:404.php');
+         echo ("<script>location.href='mycart.php'</script>");
+        // header('Location:404.php');
       }
    }
 
@@ -130,7 +128,8 @@ class Cart
                
             }
             else{
-               header('Location:404.php');
+               echo ("<script>location.href='mycart.php'</script>");
+              // header('Location:404.php');
             }
 
          }
@@ -143,11 +142,13 @@ class Cart
                //header('Location:myorder.php?msg=1');
          }
          else{
-            header('Location:404.php');
+            echo ("<script>location.href='mycart.php'</script>");
+            //header('Location:404.php');
          }
       }
       else{
-         header('Location:404.php');
+         echo ("<script>location.href='mycart.php'</script>");
+         //header('Location:404.php');
       }
    }
 

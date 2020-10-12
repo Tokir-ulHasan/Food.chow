@@ -64,7 +64,7 @@ class  Session{
     public static function  destroySession_user(){
       session_destroy();
       session_unset();
-      echo "<script>window.location = 'index.php'</script>";
+      header("Location:index.php");
   }
   /*
      *

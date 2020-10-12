@@ -7,6 +7,7 @@ include_once '../lib/formatData.php';
 $db = new Database();
 $fm = new Formate();
 
+
     ////================login=======================//
 if(isset($_POST['login']))
 {
@@ -14,7 +15,7 @@ if(isset($_POST['login']))
 	$pass=$_POST['loginpass'];
     $query = "SELECT `id`,  `email`, `password` FROM `tbl_user` WHERE `email` = '$email' and `password` = '$pass' ";
     $res = $db->SelectData($query);
-    if ($res){
+    if ($res && $res->num_rows > 0){
         $data = mysqli_fetch_assoc($res);
         Session::setSession('login',true);
         Session::setSession('userEmail',$data['email']);
