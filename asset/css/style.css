@@ -551,44 +551,24 @@ color: #2d2c2c;
     left: 0;
      top: 0;
      overflow: hidden;
-     
     
-   
  }
  .outer-love::before{
  
-   content:  "\f004 \f004 \f004 \f004 \f004";
-   font-weight: 900;
+   content:  "\f08a";
+   font-weight: bolder;
+   font-family: "FontAwesome";
    letter-spacing: 5px;
-   font-size: 20px;
+   font-size: 25px;
    color:#b9bec3;
     
  }
  .inner-love::before{
-     content:  "\f004 \f004 \f004 \f004 \f004";
+     content:  "\f004";
      font-weight: 900;
+     font-family: "FontAwesome";
      letter-spacing: 5px;
-     font-size: 20px;
+     font-size: 25px;
      color:red;
       
    }
-
-   /*========Search select============*/
-   #secrch-select{
-    border: none;
-    box-shadow: none;
-}
- #secrch-select:focus{
-    border: white;
-    box-shadow: none;
-}
-.select-dropdown__list-item{
-    
-    border: none;
-    
-}
-.select-dropdown__list-item:hover{
-    
-   background-color: red;
-    
-}

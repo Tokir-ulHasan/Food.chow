@@ -51,7 +51,6 @@ $('.img_1').hover(function(){
     $(this).css({'left':'100px'},100);
 });*/
     
-$('.mdb-select').materialSelect();
 });
 
 
@@ -97,44 +96,95 @@ $('#spinner').inputSpinner({
  });
 
 
- 
- // set the initial index
- var ratedIndex = -1;
- var uId = -1,fId= -1;
+ /**==================Rating=================== */
+
  $("#lovefood").ready(function(){
     
+
+    //get total , avg ,countperson rate
+    var totalrate = $('#totalrate').data('index');
+    var avgrate   = $('#avgrate').data('index');
+    var countrate = $('#countrate').data('index');
+    //set avg for heart icon
+    var avgR      = avgrate*20;
+    // set initialy avg value
+    $('#ttlrate').html(avgrate);
+    $('#in_rate').css("width", `${avgR}%`);
+
+    
+    var initIndex    = -1;
+    var total_rat    = totalrate;
+    var privious_rat = 0;
+    var current_rate = 0;
+
+    
+
+    // set the initial index
+    var ratedIndex =  $('#rating').data('index');
+    ratedIndex--;
+        
+
     //default color is sate for love icon
     defaultcolor();
-   
-    if(localStorage.getItem('ratedIndex') != null){
-        loverate(parseInt(localStorage.getItem('ratedIndex')));
-    }
-    //when click on love icon
+    loverate(ratedIndex);
+  
+  
     $('.fa-heart').on('click',function(){
-        //get the present index of love icon
-        ratedIndex = parseInt($(this).data('index'));
+
+        //get the privious rating 
+        privious_rat = ratedIndex + 1;
+        //get the present/current rating
+        ratedIndex   = parseInt($(this).data('index'));
+        current_rate = ratedIndex + 1;
+      
+      
         //Store set the present index of local divce cookies
         localStorage.setItem('ratedIndex',ratedIndex);
 
-        $.ajax({
-            url:'detailspage.php',
-            method : 'POST',
-            //data:{"save":true, "rateindex":'ratedIndex'},
-            // data:{ "ratedIndex":JSON.stringify(ratedIndex) },
-            //dataType :"JSON",
+        //get userid and foodid
+        var fd_id   = $('#fdid').data('index');
+        var user_id = $('#userid').data('index');
+     
+       //set current total
+        if(privious_rat != current_rate){
+            total_rat = total_rat - privious_rat+current_rate;
+        }
+        if(countrate == 0){
+            total_rat = current_rate;
+            countrate++;
+        }
+        else{
+            total_rat = total_rat;
+        }
+     
+        //call ajaxs
+       $.ajax({
+            url:    'ratingPHP.php',
+            method: 'POST',
+            data:{  "ratedIndex":JSON.stringify(ratedIndex),
+                    "fd_id":JSON.stringify(fd_id),
+                    "user_id":JSON.stringify(user_id)
+               },
+
             success:function(data){
-              alert(ratedIndex);
+                // alert(total_rat);
+             // alert(`Totlal ${totalrate} Count ${countrate} Index ${initIndex}`);
+             averagerate(total_rat,countrate,);
             }
+            
         });
-      
+       
     });
     
     //action on mouseover
     $('.fa-heart').mouseover(function(){
         defaultcolor();
         //get the current index
+        var rat_count = $(this).data('index') + 1;
         var currentIndex = parseInt($(this).data('index'));
+        
         loverate(currentIndex);
+        $('#rating_count').html(`<sup style="background: red;padding: 3px 8px;border-radius: 5px 5px 5px 0;font-size: 11px;color: #ffff;font-weight: bolder;">${rat_count}</sup>`);
       
     });
      //action on mouseleave
@@ -144,6 +194,7 @@ $('#spinner').inputSpinner({
          if(ratedIndex != -1){
             loverate(ratedIndex);
          }
+         $('#rating_count').html("");
     });
     
     function loverate(max){
@@ -154,17 +205,18 @@ $('#spinner').inputSpinner({
 
     function defaultcolor(){
       $('.fa-heart').css('color','#b9bec3');
+     
     }
- 
-  });
 
-  
+    function averagerate(totalrate,countrate){
 
-
-
-  
- 
- 
- 
- 
-
+        var countPerson  = countrate;
+        var totalraing   = totalrate;
+        var avgrating = totalraing/countPerson;
+     
+        $('#ttlrate').html(avgrating);
+        $('#in_rate').css("width", `${avgrating*20}%`);
+       
+    }
+    
+});
