@@ -54,8 +54,8 @@ function PaymentStatus($payment)
                      
                      $i = $row = 0;
                      // number of rows per page
-                    $rowperpage = 5;
-                    $numrows_arr = array("5","10","25","50","100","250");
+                    $rowperpage = 10;
+                    $numrows_arr = array("10","15","20","30","50","100");
                     foreach($numrows_arr as $nrow){
                         if(isset($_POST['sel_name']) && $_POST['sel_name'] == $nrow){
                             $rowperpage = $_POST['sel_name'];
@@ -110,14 +110,14 @@ function PaymentStatus($payment)
                       INNER JOIN tbl_user as tb_us ON 
                       tb_od.customer_id = tb_us.id
                       where od_Loction like '%$serchKey%' or
-                       od_id like '%$serchKey%' or 
+                      customer_id like '%$serchKey%' or 
                        tb_us.phoneNo like '%$serchKey%' or 
-                       tb_us.email like '%$serchKey%' order by  `od_id` DESC limit $row,$rowperpage ";
+                       tb_us.email like '%$serchKey%'  group by `customer_id` order by  `od_id` DESC limit $row,$rowperpage ";
                        
                 }
                 else{
                  $serchKey ="" ;
-                 $query = " SELECT * FROM `tbl_orders` INNER JOIN tbl_user ON tbl_orders.`customer_id` = tbl_user.id  order by  `od_id` DESC limit $row,$rowperpage ";
+                 $query = " SELECT * FROM `tbl_orders` INNER JOIN tbl_user ON tbl_orders.`customer_id` = tbl_user.id  group by `customer_id` order by  `od_id` DESC limit $row,$rowperpage ";
                 }
                
                 $res  = $db->SelectData($query);
@@ -131,7 +131,7 @@ function PaymentStatus($payment)
                     <td><?php echo $od_data['phoneNo']; ?></td>
                     <td><?php echo $od_data['od_Loction']; ?></td>
                     <td><?php echo  PaymentStatus($od_data['od_paymentStatus']); ?></td>
-                    <td><a  href=""><?php echo $od_data['od_id']; ?></a></td>
+                    <td><a  href="detailseOd.php?oddetails=<?php echo $od_data['orderCustomId']; ?>"><?php echo $od_data['customer_id']; ?></a></td>
                     <td><?php echo TrakOrder($od_data['od_type']); ?></td>
                     <td><?php echo $od_data['od_date']; ?></td>
                 </tr>
@@ -147,7 +147,7 @@ function PaymentStatus($payment)
             </table>
             <div class="clearfix pb-5 mr-3">
               <?php 
-                 $querY = " SELECT * FROM `tbl_fooddetails`";
+                 $querY = " SELECT * FROM `tbl_orders` ";
                  $data =$db->SelectData($querY);
                  $total_rows = mysqli_num_rows($data);
                  $total_page = ceil($total_rows/$rowperpage);
@@ -158,7 +158,7 @@ function PaymentStatus($payment)
                 ?>
                    <li class="list-inline-item"><a class = "btn" href="?pages=<?php echo ($page-1);?>">Previous</a></li>
                 <?php 
-                  }if($total_page>=$page){
+                  }if($total_page>$page){
                 ?>
                    <li class="list-inline-item"><a class = "btn" href="?pages=<?php echo ($page+1);?>">Next</a></li>
                 <?php }

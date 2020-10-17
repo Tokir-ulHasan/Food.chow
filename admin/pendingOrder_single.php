@@ -3,12 +3,18 @@ $db = new Database();
 $fm = new Formate();
  /** Reject Order By Admin */
  if(isset($_GET['rej'])){
+
     $rejectID = "a,".$userId;
     $odtype = $_GET['rej'];
-    $queryUp   = "UPDATE `tbl_orders` SET  `od_type` = 4 ,  `delevery_reject_by`  = '$rejectID' ,`delever_date` = now() WHERE `od_id` = $odtype ";
-    $result  = $db->QueryExcute($queryUp);        
-    $queryUp3 = "UPDATE `tbl_orderdetails` SET `order_status` ='Rejected', `packaging`='Cenceled',`shiping`='Cenceled',`delivery_status`='Cenceled',`t_daliv_date`= now() WHERE `order_no` = $odtype ";
-    $result3  = $db->QueryExcute($queryUp3);
+    $queryUp   = "UPDATE `tbl_orders` SET  `od_type` = 4 ,  `delevery_reject_by`  = '$rejectID' ,`delever_date` = now() WHERE `orderCustomId` = $odtype ";
+    $result  = $db->QueryExcute($queryUp);
+    if($result){
+        $queryUp3 = "UPDATE `tbl_orderdetails` SET `order_status` ='Rejected', `packaging`='Cenceled',`shiping`='Cenceled',`delivery_status`='Cenceled',`t_daliv_date`= now() WHERE `order_no` = $odtype ";
+        $result3  = $db->QueryExcute($queryUp3);
+        echo ("<script>location.href=".$current_page.".php"."</script>");
+     
+    }   
+  
   }
 
   /** Confirm to active Order By Admin */
@@ -18,6 +24,7 @@ $fm = new Formate();
     $result  = $db->QueryExcute($queryUp);        
     $queryUp2 = "UPDATE `tbl_orderdetails` SET `order_status` ='Confirmed' WHERE `order_no` = $trans_id ";
     $result2  = $db->QueryExcute($queryUp2);
+    echo ("<script>location.href=".$current_page.".php"."</script>");
   }
 
 ?>
@@ -44,7 +51,7 @@ $fm = new Formate();
     <div class="col-md-6 ">
         <div class="row">
             <div class="col-6 " id="penord">
-                <p>Oreder ID -<span><a href=""><?php echo $od_data['orderCustomId']; ?></a></span></p>
+                <p>Oreder ID -<span><a href="detailseOd.php?oddetails=<?php echo $od_data['orderCustomId']; ?>"><?php echo $od_data['orderCustomId']; ?></a></span></p>
                 <div id="penordimg">
                     <img class="img-fluid" src="<?php echo $od_data['od_image']; ?>" alt="">
                     <?php 
@@ -102,7 +109,8 @@ $fm = new Formate();
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>No</button>
 
-                                    <a href="<?php echo $current_page.'.php';?>?con=<?php echo $od_data['orderCustomId'];?>" class="btn btn-info"><span class="glyphicon glyphicon-trash"></span> Yes</a>
+                                
+                                    <a href="<?php echo $current_page.'.php';?>?con=<?php echo $od_data['orderCustomId'];?>" class="btn btn-info" id="penOD"><span class="glyphicon glyphicon-trash"></span> Yes</a>
                                 </div>
                             </div>
                         </div>

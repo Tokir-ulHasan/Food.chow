@@ -61,8 +61,12 @@
                         {
                             $type=$row['cat_name'];
                             $ci=$row['cat_id'];
+                            if($type == $cname){
+                                echo "<li class='list-item mt-3 listA '><a class='active' href='?catid=$ci' > $type </a></li>";
+                            }else{
+                                echo "<li class='list-item mt-3 listA '><a  href='?catid=$ci' > $type </a></li>";
+                            }
                             
-                            echo "<li class='list-item mt-3 listA'><a href='?catid=$ci' > $type </a></li>";
                         }
                     ?>
                 </ul>
@@ -79,7 +83,7 @@
                         while($fdData = $res->fetch_assoc()){
                         
                     ?>
-                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4 mt-4">
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 mt-4">
                             <div class="card" style="border: 1px solid rgba(0, 0, 0, 0.22);box-shadow: 1px 0px 20px 2px #a7c0d5;">
                                 <div class="card">
                                     <div class="d-block" id="popularFoodimg" style="height: 180px;">
@@ -99,13 +103,12 @@
                                     <?php echo" <a class='btn btn-outline-danger' href='detailspage.php?food_id=".$fdData['id']."'>Details</a>"?></div>
                                 </div>
                                 <div class="mt-3">
-                                    <div class="d-flex brd " >
+                                    <div class="d-flex brd ">
                                         <div class=" brd-l py-3 px-3">
-                                        <span class="popularFoodRating " style=" font-size: 14px;"><i class="fa fa-star-o"></i> <?php echo $fdData['fd_rating']; ?></span>
-                                        
+                                            <span class="popularFoodRating "><i class="fa fa-heart-o"></i> <?php echo $fdData['fd_rating']; ?></span>
                                         </div>
-                                        <div class="pl-3 py-3">
-                                            <span class="popularFoodCat" style=" font-size: 14px;"><i class="fa fa-home"></i>Related Food</span>
+                                        <div class="pl-5 py-3">
+                                            <span class="popularFoodCat"><i class="fa fa-home pr-1"></i><a class="text-secondary" style="text-decoration:none" href="catagoryfoodlist.php?catid=<?php echo $fdData['fd_cat_id']?>">Related Food</a></span>
                                         </div>
                                     </div>
                                 </div>

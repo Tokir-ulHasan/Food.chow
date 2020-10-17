@@ -6,6 +6,7 @@ $current_page = basename($path,'.php');
 
 /** Confirm  Order to delevery By Admin */
 if(isset($_POST['confirmed'])){
+  
     $deleveryID = "a,".$userId;
     $trans_id = $_POST['transid'];
     $d_boy = $_POST['d_boy'];
@@ -40,7 +41,7 @@ if(isset($_POST['confirmed'])){
     <div class="col-md-6">
         <div class="row">
             <div class="col-6 " id="penord">
-                <p>Oreder ID -<span><a href=""><?php echo $od_data['orderCustomId']; ?></a></span></p>
+                <p>Oreder ID -<span><a href="detailseOd.php?oddetails=<?php echo $od_data['orderCustomId']; ?>"><?php echo $od_data['orderCustomId']; ?></a></span></p>
                 <div id="penordimg">
                     <img class="img-fluid" src="<?php echo $od_data['od_image']; ?>" alt="">
                     <?php 
@@ -63,6 +64,7 @@ if(isset($_POST['confirmed'])){
                 <div id="penbtn" class="">
                     <form action="" method="post">
                         <div class="form-group">
+                            <input type="text" name="transid" hidden value="<?php echo $od_data['orderCustomId']; ?>">
                             <select class="form-control px-1 btn-ms" id="exampleFormControlSelect1" name = "d_boy">
                                  <option value="0">Select</option>
                                 <?php
@@ -77,25 +79,9 @@ if(isset($_POST['confirmed'])){
                               
                                     <?php }}?>
                             </select>
-                            <input type="text" name="transid" hidden value="<?php echo $od_data['orderCustomId']; ?>">
-                            <button type="button"  class="btn btn-info btn-sm mt-1 mx-5 " name="confirmed" data-toggle="modal" data-target="#confirm">Confirmed</button>
-                            <!-- Modal -->
-                            <div id="confirm" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Are Sure to delevered this order</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button  type="submit" class="btn btn-info btn-sm mt-1 mx-5 " name="confirmed">Confirmed</button>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
+                           
+                            <button type="submit"  class="btn btn-info btn-sm mt-1 mx-5 " name="confirmed" data-toggle="modal" data-target="confirm">Confirmed</button>
+                           
                         </div>
                     </form>
                 </div>

@@ -29,11 +29,12 @@
                      
                      $i = $row = 0;
                      // number of rows per page
-                    $rowperpage = 5;
-                    $numrows_arr = array("5","10","25","50","100","250");
+                    $rowperpage = 10;
+                    $numrows_arr = array("10","15","20","30","50","100");
                     foreach($numrows_arr as $nrow){
                         if(isset($_POST['sel_name']) && $_POST['sel_name'] == $nrow){
                             $rowperpage = $_POST['sel_name'];
+                            $row = 0;
                             echo '<option value="'.$nrow.'" selected="selected">'.$nrow.'</option>';
                         }else{
                             echo '<option value="'.$nrow.'">'.$nrow.'</option>';
@@ -82,27 +83,27 @@
                     }
 
                    if(isset($_POST['search'])){
-                       $serchKey = $_POST['search'];
-                       $query = " SELECT * FROM `tbl_orders` as tb_od
+                        $serchKey = $_POST['search'];
+                        $query = " SELECT * FROM `tbl_orders` as tb_od
                          INNER JOIN tbl_delevery_boy as tb_dlb ON 
                          tb_od.delvery_boy_id = tb_dlb.dlb_id 
                          INNER JOIN tbl_user as tb_us ON 
                          tb_od.customer_id = tb_us.id
                          where `od_type` = 3 and  
-                          od_Loction like '%$serchKey%' or
+                         ( od_Loction like '%$serchKey%' or
                           od_id like '%$serchKey%' or 
                           tb_dlb.dlb_name like '%$serchKey%' or 
                           tb_dlb.dlb_mail like '%$serchKey%' or 
                           tb_dlb.dlb_phone like '%$serchKey%'or
                           tb_us.phoneNo like '%$serchKey%' or 
-                          tb_us.email like '%$serchKey%' order by  `od_id` DESC limit $row,$rowperpage ";
+                          tb_us.email like '%$serchKey%' ) GROUP BY `orderCustomId` order by  `od_id` DESC limit $row,$rowperpage ";
                           
                    }
                    else{
                     $serchKey ="" ;
                     $query = " SELECT * FROM `tbl_orders` 
                     INNER JOIN tbl_delevery_boy ON tbl_orders.delvery_boy_id = tbl_delevery_boy.dlb_id 
-                    INNER JOIN tbl_user ON tbl_orders.customer_id = tbl_user.id where `od_type` = 3 order by  `od_id` DESC limit $row,$rowperpage ";
+                    INNER JOIN tbl_user ON tbl_orders.customer_id = tbl_user.id where `od_type` = 3  GROUP BY `orderCustomId` order by  `od_id` DESC limit $row,$rowperpage ";
                    }
                    $res = $db->SelectData($query);
                    if($res){
@@ -120,7 +121,7 @@
                     <td><?php echo $delevaty_data['dlb_phone'];?></td>
                     <td><?php echo $delevaty_data['dlb_mail'];?></td>
                     <td><?php echo $fm->FormateDate($delevaty_data['delever_date']);?></td>
-                    <td><a  href=""><?php echo $delevaty_data['orderCustomId'];?></a></td>
+                    <td><a  href="detailseOd.php?oddetails=<?php echo $delevaty_data['orderCustomId']; ?>"><?php echo $delevaty_data['orderCustomId'];?></a></td>
                 </tr>
                 <?php }}else{?>
                 <tr width="10%">
@@ -134,7 +135,7 @@
             </table>
             <div class="clearfix pb-5 mr-3">
               <?php 
-                 $querY = "SELECT * FROM `tbl_orders` WHERE `od_type` = 3";
+                 $querY = "SELECT * FROM `tbl_orders` WHERE `od_type` = 3 GROUP BY `orderCustomId`";
                  $data =$db->SelectData($querY);
                  if($data){
                  $total_rows = mysqli_num_rows($data);
@@ -147,7 +148,7 @@
                 ?>
                    <li class="list-inline-item"><a class = "btn" href="?pages=<?php echo ($page-1);?>">Previous</a></li>
                 <?php 
-                  }if($total_page>=$page){
+                  }if($total_page>$page){
                 ?>
                    <li class="list-inline-item"><a class = "btn" href="?pages=<?php echo ($page+1);?>">Next</a></li>
                 <?php } }

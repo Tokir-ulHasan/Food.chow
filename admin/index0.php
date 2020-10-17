@@ -11,25 +11,25 @@
   $fodRow = 0;
   $catRow = 0;
 
-  $query    = "SELECT * FROM `tbl_orders` where `od_type` = 1";
+  $query    = "SELECT * FROM `tbl_orders` where `od_type` = 1 GROUP BY `orderCustomId`";
   $res_pen  = $db->SelectData($query);
   if($res_pen){
     $penRow = $res_pen->num_rows ;
   }
 
-  $query    = "SELECT * FROM `tbl_orders` where `od_type` = 2";
+  $query    = "SELECT * FROM `tbl_orders` where `od_type` = 2 GROUP BY `orderCustomId` ";
   $res_act  = $db->SelectData($query);
   if($res_act){
     $actRow = $res_act->num_rows ;
   }
 
-  $query    = "SELECT * FROM `tbl_orders` where `od_type` = 3";
+  $query    = "SELECT * FROM `tbl_orders` where `od_type` = 3 GROUP BY `orderCustomId` ";
   $res_dele = $db->SelectData($query);
   if($res_dele){
     $delRow = $res_dele->num_rows ;
   }
 
-  $query    = "SELECT * FROM `tbl_orders` where `od_type` = 4";
+  $query    = "SELECT * FROM `tbl_orders` where `od_type` = 4 GROUP BY `orderCustomId`";
   $res1_rej = $db->SelectData($query);
   if($res1_rej){
     $rejRow = $res1_rej->num_rows ;
@@ -55,7 +55,8 @@
             <div class="row">
                 <div class="col-md-4 col-sm-6 col-lg-4 col-xs-12" id="itemnav">
                     <a href="pendingOrder.php" id="navcard">
-                    <p class="navcard-br1">Panding Orders<span><br><?php echo $penRow;?></span></p>
+                   
+                    <p class="navcard-br1" >Panding Orders<span><br><?php echo $penRow;?></span></p>
                     </a>
                 </div>
                 <div class="col-md-4 col-sm-6 col-lg-4 col-xs-12" id="itemnav">

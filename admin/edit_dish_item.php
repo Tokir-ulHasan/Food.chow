@@ -22,6 +22,7 @@ include_once "dish_itemPHP.php" ;
                 <div class="form-group">
                     <label for="fdcat">Catagory of Food:</label>
                     <?php echo $fdcatnam; ?>
+                  
                 </div>
                 <div class="form-group">
                     <label for="comment">Discription of Food:</label>
@@ -39,12 +40,12 @@ include_once "dish_itemPHP.php" ;
                 </div>
                 <div class="containerr">
                     <input type="file" id="input-file" name="imgFd" onchange={handleChange()} hidden value="<?php echo $fdimge; ?>">
+                    <input type="text" name="imgFd_I" hidden value="<?php echo $fdimge; ?>">
                     <label class="btn-upload" for="input-file" role="button"> Upload Photo</label>
                     <div class="preview-box">
                     <img class="preview-content" src="<?php echo $fdimge; ?>">
                     </div>  
                 </div>
-
                 <button type="submit" class="btn btn-success" name="updatedish">Change</button>
                 <button type="submit" class="btn btn-danger" name="deletedish">Delete</button>
             </form>

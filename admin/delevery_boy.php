@@ -2,6 +2,43 @@
 <?php 
     $db = new Database();
     $fm = new Formate();
+
+    $Alertmess = "";
+    $Max = "";
+    $querMaxID      = "SELECT MAX(`dlb_curd_id`) as maxid FROM `tbl_delevery_boy`";
+    $dataMaxID      = $db->SelectData($querMaxID);
+    if($dataMaxID){
+        $user_Max = $dataMaxID->fetch_assoc();
+        $Max = $user_Max['maxid'];
+        $Max += 1;
+    }
+    if(isset($_POST['addboy'])){
+      $name  =  $_POST['name'];
+      $add   =  $_POST['address'];
+      $email = $_POST['Email'];
+      $phone = $_POST['phone'];
+      
+      date_default_timezone_set("Asia/Dhaka");
+      $date  =  date('j F Y, g:i a');
+     
+      $fd_img = 'img';
+      $uploadFolder = '../asset/UploadFile/Deleveryboy/';
+      $uploadImg = $fm->ImageSetup($fd_img,$uploadFolder);
+
+      
+    
+        $Q = "INSERT INTO `tbl_delevery_boy`( `dlb_name`, `dlb_mail`, `dlb_phone`, `dlb_address`, `dlb_img`, `dlb_curd_id`, `dlb_joinDate`) VALUES ('$name','$email','$phone','$add','$uploadImg','$Max','$date')";
+          $Q_R = $db->SelectData($Q);
+          if($Q_R){
+            $fm->MoveFile($fd_img,$uploadImg);
+          }
+     
+    }
+
+
+
+    
+
 ?>
 <div id="content" class="wrappwer">
     <!--==========Sidebar Section============-->
@@ -23,25 +60,29 @@
             </div>
         </div>
         <br>
-        <form id="myForm" action="" method="post">
-            <h6>Show
-            <Select name="sel_name" onChange=selectChange(this.value)>
-                 <?php
-                     $i = $row = 0;
-                     // number of rows per page
-                    $rowperpage = 5;
-                    $numrows_arr = array("5","10","25","50","100","250");
-                    foreach($numrows_arr as $nrow){
-                        if(isset($_POST['sel_name']) && $_POST['sel_name'] == $nrow){
-                            $rowperpage = $_POST['sel_name'];
-                            echo '<option value="'.$nrow.'" selected="selected">'.$nrow.'</option>';
-                        }else{
-                            echo '<option value="'.$nrow.'">'.$nrow.'</option>';
-                        }
-                    }
-                ?>
-            </select>Rows</h6>
-        </form>
+        <div class="clearfix">
+          <form id="myForm" action="" method="post" class="float-left">
+              <h6>Show
+              <Select name="sel_name" onChange=selectChange(this.value)>
+                  <?php
+                     
+                      $i = $row = 0;
+                      // number of rows per page
+                      $rowperpage = 10;
+                      $numrows_arr = array("10","20","30","50","100");
+                      foreach($numrows_arr as $nrow){
+                          if(isset($_POST['sel_name']) && $_POST['sel_name'] == $nrow){
+                              $rowperpage = $_POST['sel_name'];
+                              echo '<option value="'.$nrow.'" selected="selected">'.$nrow.'</option>';
+                          }else{
+                              echo '<option value="'.$nrow.'">'.$nrow.'</option>';
+                          }
+                      }
+                  ?>
+              </select>Rows</h6>
+          </form>
+          <a class=" float-right mr-3 font-weight-normal btn btn-dark mb-2"  href="" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus "></i></a>
+        </div>
         <div class="table-responsive " id="user-tbl">
             <table class="table   table-bordered table-sm" id="tbl-user">
             <br>
@@ -74,17 +115,16 @@
                     }
                    if(isset($_POST['search'])){
                        $serchKey = $_POST['search'];
-                       $query = "SELECT * FROM `tbl_delevery_boy` WHERE 
-                       `dlb_name` like '%$serchKey%' or 
+                       $query = "SELECT * FROM `tbl_delevery_boy` WHERE dlb_id != 0 and ( `dlb_name` like '%$serchKey%' or 
                        `dlb_mail` like '%$serchKey%' or 
                        `dlb_phone` like '%$serchKey%' or 
                        `dlb_address` like '%$serchKey%' or 
                        `dlb_curd_id` like '%$serchKey%' or 
-                       `dlb_joinDate` like '%$serchKey%' 
+                       `dlb_joinDate` like '%$serchKey%' )
                         order by  `dlb_id` DESC limit $row,$rowperpage ";
                    }
                    else{
-                         $query = " SELECT * FROM `tbl_delevery_boy`    order by  `dlb_id` DESC limit $row,$rowperpage ";
+                         $query = " SELECT * FROM `tbl_delevery_boy` where dlb_id != 0   order by  `dlb_id` DESC limit $row,$rowperpage ";
                    }
                     $res = $db->SelectData($query);
                     if($res){
@@ -100,7 +140,7 @@
                         <td><?php echo $delevary_boy['dlb_phone'];?></td>
                         <td><?php echo $delevary_boy['dlb_address'];?></td>
                         <td><?php echo $fm->FormateDate($delevary_boy['dlb_joinDate']);?></td>
-                        <td><a class="btn btn-info" href="">Edit</a></td>
+                        <td><a class="btn btn-danger" href="?del=<?php echo $delevary_boy['dlb_id'];?>">Remove</a></td>
                     </tr>
                     <?php }}else{?>
                         <tr width="10%">
@@ -114,7 +154,7 @@
             </table>
             <div class="clearfix pb-5 mr-3">
               <?php 
-                 $querY = "SELECT * FROM `tbl_delevery_boy`";
+                 $querY = "SELECT * FROM `tbl_delevery_boy` where dlb_id != 0";
                  $data =$db->SelectData($querY);
                  if($data){
                  $total_rows = mysqli_num_rows($data);
@@ -136,6 +176,60 @@
             </div>
         </div>
     </div>
+     <!----==Add Admin Modal ==---->
+     <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Add a Delevery Boy</h3>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form action="" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="Name">Name</label>
+                            <input type="text"  class="form-control" id="admime_name" name="name" Placeholder="Please Enter Full Name">
+                            <span id="NameMess" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="Name">Work Address</label>
+                            <input type="text" class="form-control" id="userName" name="address" Placeholder="Please Enter Address">
+                            <span id="userNameMess" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="Name">Email</label>
+                            <input type="Email" class="form-control" id="userEmail" name="Email" Placeholder="Please Enter an Email">
+                            <span id="userEmail" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="Name">Phone</label>
+                            <input type="text" class="form-control" id="userEmail" name="phone" Placeholder="Please Enter Phone number">
+                            <span id="userEmail" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mx-sm-3 mb-2">
+                            <div class="containerr">
+                                <input type="file" id="input-file" name="img"  onchange={handleChange()} hidden>
+                                <label class="btn-upload" for="input-file" role="button"> Upload Photo</label>
+                                <div class="preview-box"></div>  
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    <input type="submit" class="btn btn-sm btn-outline-primary  px-5 font-weight-bolder mt-3" value="ADD" name="addboy" required>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
 <!--============Footer Section================-->
 <?php include_once "adminincludes/footer.php" ?> 
+<?php
+if($_GET['del']){
+    $del = $_GET['del'];
+    $d_Q = "DELETE FROM `tbl_delevery_boy` WHERE `dlb_id` = '$del' ";
+    $d_R = $db->SelectData($d_Q);
+}
+
+?>

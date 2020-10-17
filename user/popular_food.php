@@ -13,7 +13,12 @@ $db = new Database();
             <div class="card-body">
                 <div class="row">
                 <?php
-                $query = "SELECT * FROM `tbl_fooddetails` ";
+                 $row = 0;
+                 $rowMore = 12;
+                if(isset($_POST['smore'])){
+                     $rowMore += 6; 
+                }
+                $query = "SELECT *  FROM `tbl_fooddetails`  order by `fd_rating` desc limit $row, $rowMore ";
                 $res = $db->SelectData($query);
                 if($res){
                     while($fdData = $res->fetch_assoc()){
@@ -41,11 +46,11 @@ $db = new Database();
                             <div class="mt-3">
                                 <div class="d-flex brd ">
                                     <div class=" brd-l py-3 px-3">
-                                       <span class="popularFoodRating "><i class="fa fa-star-o"></i> <?php echo $fdData['fd_rating']; ?></span>
+                                       <span class="popularFoodRating "><i class="fa fa-heart-o"></i> <?php echo $fdData['fd_rating']; ?></span>
                                        
                                     </div>
                                     <div class="pl-5 py-3">
-                                        <span class="popularFoodCat"><i class="fa fa-home"></i><a href="catagoryfoodlist.php?catid=<?php echo $fdData['fd_cat_id']?>">Related Food</a></span>
+                                        <span class="popularFoodCat"><i class="fa fa-home pr-1"></i><a class="text-secondary" style="text-decoration:none" href="catagoryfoodlist.php?catid=<?php echo $fdData['fd_cat_id']?>">Related Food</a></span>
                                     </div>
                                 </div>
                             </div>
@@ -53,6 +58,17 @@ $db = new Database();
                        
                     </div>
                    <?php  } }  ?> 
+                </div>
+                <div class="d-flex justify-content-center mt-4">
+                    <?php
+                     if($rowMore < $res->num_rows + 1){
+                      
+                    ?>
+                    <form action="" method="post">
+                      <button type="submit" name="smore" class="btn btn-md S_btn" >See More</button>
+                    </form>
+                     <?php }?>
+                  
                 </div>
             </div>
         </div>

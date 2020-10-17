@@ -11,8 +11,8 @@ $fm = new Formate();
     ////================login=======================//
 if(isset($_POST['login']))
 {
-	$email=$_POST['loginEmail'];
-	$pass=$_POST['loginpass'];
+	$email = $_POST['loginEmail'];
+	$pass  = $_POST['loginpass'];
     $query = "SELECT `id`,  `email`, `password` FROM `tbl_user` WHERE `email` = '$email' and `password` = '$pass' ";
     $res = $db->SelectData($query);
     if ($res && $res->num_rows > 0){
@@ -34,11 +34,11 @@ if(isset($_POST['login']))
     if(isset($_POST['singup'])){
         
         $name     =   mysqli_real_escape_string($db->link,$fm->validation($_POST['userName']));
-        $email    =   mysqli_real_escape_string($db->link,$fm->validation($_POST['userEmail']));
+       // $email    =   mysqli_real_escape_string($db->link,$fm->validation($_POST['userEmail']));
         $phone    =   mysqli_real_escape_string($db->link,$fm->validation($_POST['userNum']));
         $address  =   mysqli_real_escape_string($db->link,$fm->validation($_POST['nameAdd']));
         $name=trim($name);
-        $email=trim($email);
+        $email=$_POST['userEmail'];
         $phone=trim($phone);
         $address=trim($address);
         $password = $_POST['userpass'];
@@ -59,17 +59,35 @@ if(isset($_POST['login']))
             header("Location:index.php?regmsg=0");
         }else{
             
-            $query = "INSERT INTO `tbl_user`( `name`, `email`, `phoneNo`, `address`, `password`, `joinDate`) VALUES ('$name',' $email','$phone', '$address','$password','$date')";
-            $result = $db->QueryExcute($query);
+            $queryI = "INSERT INTO `tbl_user`( `name`, `email`, `phoneNo`, `address`, `password`, `joinDate`) VALUES ('$name','$email','$phone', '$address','$password','$date')";
+            $result = $db->QueryExcute($queryI);
             if($result){
                     Session::setSession('login',true);
                     Session::setSession('userEmail',$email);
-                   // header("Location:index.php?regmsg=1");
-                    echo ("<script>location.href='index.php?regmsg=1'</script>");
+                    reg_log($email,$password,$db);
+                    
+                   
                  
             }else{
                 header("Location:index.php?regmsg=2");
             }
         }
     }
+
+    function  reg_log($email,$password,$db){
+            $queryR = "SELECT `id`,  `email`, `password` FROM `tbl_user` WHERE `email` = '$email' and `password` = '$password' ";
+            $resR = $db->SelectData($queryR);
+            if ($resR && $resR->num_rows > 0){
+                $data = mysqli_fetch_assoc($resR);
+                Session::setSession('login',true);
+                Session::setSession('userEmail',$data['email']);
+                Session::setSession('userId',$data['id']);
+                echo ("<script>location.href='index.php?regmsg=1'</script>");
+            }
+            else{
+                header("Location:index.php?regmsg=2");
+            }
+    }
+
+   
 ?>

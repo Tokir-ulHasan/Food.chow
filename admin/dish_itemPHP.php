@@ -107,58 +107,70 @@ if(isset($_GET['chgdishitem'])){
    $fdcatnam .= '</select>';
 }
 
+
+
+
 /*============Change Dish Item==============*/
 if(isset($_POST['updatedish'])){
   
-   $fd_name        = mysqli_real_escape_string($db->link,$fm->validation($_POST['fdName']));
-   $fd_description = mysqli_real_escape_string($db->link,$fm->validation($_POST['fdDescription']));
-   $fd_price       = mysqli_real_escape_string($db->link,$fm->validation($_POST['fdprice']));
-   $fd_discount    = mysqli_real_escape_string($db->link,$fm->validation($_POST['fddiscount']));
-   $fd_cat_ID    = $_POST['fdcatid'];
-   $getMessage = "<p></p>";
+ 
+   $U_fd_name        = mysqli_real_escape_string($db->link,$fm->validation($_POST['fdName']));
+   $U_fd_description = mysqli_real_escape_string($db->link,$fm->validation($_POST['fdDescription']));
+   $U_fd_price       = mysqli_real_escape_string($db->link,$fm->validation($_POST['fdprice']));
+   $U_fd_discount    = mysqli_real_escape_string($db->link,$fm->validation($_POST['fddiscount']));
+   $U_fd_cat_ID      = $_POST['fdcatid'];
+   $getMessage       = "<p></p>";
+   
+      
+   $query_C      = "SELECT * FROM `tbl_cat` WHERE `cat_id` = $U_fd_cat_ID";
+   $result_C     = $db->SelectData($query_C);
+   $C_data       = $result_C->fetch_assoc();
+   $U_fdCatName  =  $C_data['cat_name'];
    
       /**===========Image Upload============**/
-      $fd_img = 'imgFd';
-      $uploadFolder = '../asset/UploadFile/FoodItemImg/';
-      $uploadImg    = $fm->ImageSetup($fd_img,$uploadFolder);
-
-
-   if( $fd_name == "" || $fd_cat_ID == 0 || $fd_price == "" ){
+      $U_fd_img       =  'imgFd';
+      $R_fd_img       =  $_POST['imgFd_I'];
+      $uploadFolder   = '../asset/UploadFile/FoodItemImg/';
+      $U_uploadImg    = $fm->ImageSetup($U_fd_img,$uploadFolder);
+      
+    
+      
+     if( $U_fd_name == "" || $U_fd_description == "" || $U_fd_price == "" ){
       $getMessage = '<div class="alert alert-danger alert-dismissible fade show">
       <strong>Error!</strong> Fill is empty !.
       <button type="button" class="close" data-dismiss="alert">&times;</button>
       </div>';
       return false;
    }
-   if(empty($uploadImg)){
-     
-     $query = "UPDATE `tbl_fooddetails` SET 
-     `fd_name`                = '$fd_name ',
-     `fd_description`         = '$fd_description',
-     `fd_price`               = '$fd_price',
-     `fd_discount`            = '$fd_discount',
-     `fd_catagoery_name`      = '$fdCatName',
-      `fd_cat_id`             =  '$fd_cat_ID'
+   if(empty($U_uploadImg)){
+    
+     $queryU = "UPDATE `tbl_fooddetails` SET 
+     `fd_name`                = '$U_fd_name',
+     `fd_description`         = '$U_fd_description',
+     `fd_price`               = '$U_fd_price',
+     `fd_discount`            = '$U_fd_discount',
+     `fd_catagoery_name`      = '$U_fdCatName',
+     `fd_cat_id`              = '$U_fd_cat_ID'
       WHERE `id`   = '$fdId' ";
-      $result = $db->QueryExcute($query);
+      $resultU = $db->QueryExcute($queryU);
    }
    else{
-    
-     $query = "UPDATE `tbl_fooddetails` SET 
-     `fd_name`        = '$fd_name ',
-     `fd_description` = '$fd_description',
-     `fd_price`       = '$fd_price',
-     `fd_discount`    = '$fd_discount',
-     `fd_image`       = '$uploadImg',
-     `fd_catagoery_name`      = '$fdCatName',
-     `fd_cat_id`             =  '$fd_cat_ID'
-      WHERE `fd_id`   = '$fdId' ";
-      $result = $db->QueryExcute($query);
-      if($result){
-            unlink($fdimge);
-            $fm->MoveFile($fd_img,$uploadImg);
+    $query_U = "UPDATE `tbl_fooddetails` SET 
+    `fd_name`          = '$U_fd_name',
+    `fd_description`   = '$U_fd_description',
+    `fd_price`         = '$U_fd_price',
+    `fd_discount`      = '$U_fd_discount',
+    `fd_image`         = '$U_uploadImg',
+    `fd_catagoery_name`= '$U_fdCatName',
+    `fd_cat_id`        = '$U_fd_cat_ID'
+     WHERE `id` = '$fdId'";
+      $result_U = $db->QueryExcute($query_U);
+      if($result_U){
+            unlink($R_fd_img);
+            $fm->MoveFile($U_fd_img,$U_uploadImg);
       }
    }
+   echo "<meta http-equiv='refresh' content='0'>";
 }
 
 

@@ -1,26 +1,26 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
--- https://www.phpmyadmin.net/
+-- version 4.0.4.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2020 at 09:39 AM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.3.9
+-- Generation Time: Oct 15, 2020 at 10:12 PM
+-- Server version: 5.5.32
+-- PHP Version: 5.4.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `foodchow`
 --
+CREATE DATABASE IF NOT EXISTS `foodchow` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `foodchow`;
 
 -- --------------------------------------------------------
 
@@ -28,8 +28,8 @@ SET time_zone = "+00:00";
 -- Table structure for table `chowadmin`
 --
 
-CREATE TABLE `chowadmin` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `chowadmin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `userName` varchar(255) NOT NULL,
   `name` varchar(300) NOT NULL,
   `email` varchar(300) NOT NULL,
@@ -37,8 +37,9 @@ CREATE TABLE `chowadmin` (
   `user_card_id` varchar(30) NOT NULL,
   `date` varchar(300) NOT NULL,
   `update` varchar(300) NOT NULL,
-  `pass` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `pass` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `chowadmin`
@@ -47,7 +48,8 @@ CREATE TABLE `chowadmin` (
 INSERT INTO `chowadmin` (`id`, `userName`, `name`, `email`, `img`, `user_card_id`, `date`, `update`, `pass`) VALUES
 (1, 'admin', 'Abdullah', 'Abdullah@gmail.com', '../asset/UploadFile/Addmin/44d46e9326.jpg', '1703310201526', '2020-09-09 08:24:22', '3 October 2020, 11:07 am', '1234'),
 (2, 'admin1', 'Arif', 'Arif@gmail.com', '../asset/UploadFile/Addmin/ccc362f2c5.jpg', '1703310201510', '2020-09-22 04:17:19', '22 September 2020, 1:00 am', '124'),
-(3, 'Admin3', 'Mohammad Jobair', 'Jubair@gmail.com', '../asset/UploadFile/Addmin/d2ab67100b.jpg', '1703310201527', '2020-09-22 12:17:25', '6 October 2020, 10:27 pm', '1526');
+(3, 'Admin3', 'Mohammad Jobair', 'Jubair@gmail.com', '../asset/UploadFile/Addmin/d2ab67100b.jpg', '1703310201527', '2020-09-22 12:17:25', '6 October 2020, 10:27 pm', '1526'),
+(4, 'arif', 'arif', 'arman@gmail.com', '', '1703310201528', '16 October 2020, 12:44 am', '', 'ari4');
 
 -- --------------------------------------------------------
 
@@ -55,19 +57,33 @@ INSERT INTO `chowadmin` (`id`, `userName`, `name`, `email`, `img`, `user_card_id
 -- Table structure for table ` ratingfood`
 --
 
-CREATE TABLE ` ratingfood` (
-  `rat_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS ` ratingfood` (
+  `rat_id` int(11) NOT NULL AUTO_INCREMENT,
   `fd_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `rating` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `rating` double NOT NULL,
+  `comment` text,
+  `date` varchar(300) DEFAULT NULL,
+  PRIMARY KEY (`rat_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table ` ratingfood`
 --
 
-INSERT INTO ` ratingfood` (`rat_id`, `fd_id`, `user_id`, `rating`) VALUES
-(1, 17, 1, 2);
+INSERT INTO ` ratingfood` (`rat_id`, `fd_id`, `user_id`, `rating`, `comment`, `date`) VALUES
+(1, 17, 1, 2, '', ''),
+(5, 21, 24, 1, '', ''),
+(6, 21, 1, 3, '', ''),
+(7, 25, 24, 5, '', ''),
+(8, 23, 24, 1, '', ''),
+(10, 19, 24, 5, '', ''),
+(11, 18, 1, 2, '', ''),
+(12, 19, 25, 5, '', ''),
+(13, 16, 25, 3, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem quaerat perferendis placeat repellendus consequuntur beatae veritatis ut, iure dolor! Iure ipsa blanditiis facilis vel quasi consequuntur, ad nulla dolore quas?', ''),
+(14, 18, 25, 3, '', ''),
+(15, 23, 25, 3, '', ''),
+(16, 16, 1, 4, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem quaerat perferendis placeat repellendus consequuntur beatae veritatis ut, iure dolor! Iure ipsa blanditiis facilis vel quasi consequuntur, ad nulla dolore quas?', '13 October 2020, 6:48 pm');
 
 -- --------------------------------------------------------
 
@@ -75,17 +91,24 @@ INSERT INTO ` ratingfood` (`rat_id`, `fd_id`, `user_id`, `rating`) VALUES
 -- Table structure for table `tbl_cart`
 --
 
-CREATE TABLE `tbl_cart` (
-  `c_id` int(11) NOT NULL,
-  `s_id` varchar(300) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_cart` (
+  `c_id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `product_name` varchar(255) NOT NULL,
   `price` double NOT NULL,
   `quantity` int(11) NOT NULL,
   `total_price` double NOT NULL,
-  `image` varchar(300) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `image` varchar(300) NOT NULL,
+  PRIMARY KEY (`c_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `tbl_cart`
+--
+
+INSERT INTO `tbl_cart` (`c_id`, `customer_id`, `product_id`, `product_name`, `price`, `quantity`, `total_price`, `image`) VALUES
+(3, 1, 16, 'Rice with meat', 100, 1, 100, '../asset/UploadFile/FoodItemImg/f0cdd3525f.jpg');
 
 -- --------------------------------------------------------
 
@@ -93,24 +116,26 @@ CREATE TABLE `tbl_cart` (
 -- Table structure for table `tbl_cat`
 --
 
-CREATE TABLE `tbl_cat` (
-  `cat_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_cat` (
+  `cat_id` int(11) NOT NULL AUTO_INCREMENT,
   `cat_name` varchar(255) NOT NULL,
   `cat_logo` varchar(300) NOT NULL,
-  `cat_add_date` varchar(300) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `cat_add_date` varchar(300) NOT NULL,
+  PRIMARY KEY (`cat_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `tbl_cat`
 --
 
 INSERT INTO `tbl_cat` (`cat_id`, `cat_name`, `cat_logo`, `cat_add_date`) VALUES
-(1, 'Lunch', '../asset/images/02.png', '2020-08-29 02:13:35'),
-(2, 'Breakfast', '../asset/images/06.png', '2020-08-29 02:14:13'),
-(3, 'Diner ', '../asset/images/03.png', '2020-08-29 02:14:13'),
-(4, 'Barger', '../asset/images/01.png', '2020-09-08 12:43:45'),
-(5, 'Juices', '../asset/images/05.png', '20 September 2020, 7:45 am'),
-(6, 'Drink', '../asset/images/04.png', '');
+(1, 'Lunch', '../asset/UploadFile/logo/b61846d41e.png', '2020-08-29 02:13:35'),
+(2, 'Breakfast', '../asset/UploadFile/logo/4239a555eb.png', '2020-08-29 02:14:13'),
+(3, 'Diner', '../asset/UploadFile/logo/cac7b6cb19.png', '2020-08-29 02:14:13'),
+(4, 'Barger', '../asset/UploadFile/logo/2d4fa60ddd.png', '2020-09-08 12:43:45'),
+(5, 'Juices', '../asset/UploadFile/logo/6df0cb4d0d.png', '20 September 2020, 7:45 am'),
+(6, 'Drink', '../asset/UploadFile/logo/914dd7b185.png', ''),
+(8, 'copy', '../asset/UploadFile/logo/ec82267186.png', '15 October 2020, 10:55 pm');
 
 -- --------------------------------------------------------
 
@@ -118,26 +143,28 @@ INSERT INTO `tbl_cat` (`cat_id`, `cat_name`, `cat_logo`, `cat_add_date`) VALUES
 -- Table structure for table `tbl_delevery_boy`
 --
 
-CREATE TABLE `tbl_delevery_boy` (
-  `dlb_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_delevery_boy` (
+  `dlb_id` int(11) NOT NULL AUTO_INCREMENT,
   `dlb_name` varchar(255) NOT NULL,
   `dlb_mail` varchar(255) NOT NULL,
   `dlb_phone` varchar(255) NOT NULL,
   `dlb_address` text NOT NULL,
   `dlb_img` varchar(255) NOT NULL,
   `dlb_curd_id` int(11) NOT NULL,
-  `dlb_joinDate` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `dlb_joinDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`dlb_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `tbl_delevery_boy`
 --
 
 INSERT INTO `tbl_delevery_boy` (`dlb_id`, `dlb_name`, `dlb_mail`, `dlb_phone`, `dlb_address`, `dlb_img`, `dlb_curd_id`, `dlb_joinDate`) VALUES
-(0, '----', '', '', '', '', 0, '2020-09-25 16:02:59'),
-(1, 'Abdul', 'Abdul@gmail.com', '123456789012', 'dhaka,bangladesg', '../asset/UploadFile/Deleveryboy/avt-img.jpg', 12345, '2020-09-04 20:04:43'),
-(2, 'Tokir', 'Abdul@gmail.com', '123456789012', 'dhaka,bangladesg', '../asset/UploadFile/Deleveryboy/avt-img.jpg', 12346, '2020-09-04 20:04:43'),
-(3, 'Jobair', 'Abdul@gmail.com', '123456789012', 'dhaka,bangladesg', '../asset/UploadFile/Deleveryboy/avt-img.jpg', 12347, '2020-09-04 20:04:43');
+(0, 'None', '', '', '', '', 0, '2020-09-25 16:02:59'),
+(1, 'Abdul', 'Abdul@gmail.com', '123456789012', 'dhaka,bangladesg', '../asset/UploadFile/Deleveryboy/avt-img.jpg', 1000, '2020-09-04 20:04:43'),
+(2, 'Tokir', 'Abdul@gmail.com', '123456789012', 'dhaka,bangladesg', '../asset/UploadFile/Deleveryboy/avt-img.jpg', 1001, '2020-09-04 20:04:43'),
+(3, 'Jobair', 'Abdul@gmail.com', '123456789012', 'dhaka,bangladesg', '../asset/UploadFile/Deleveryboy/avt-img.jpg', 1002, '2020-09-04 20:04:43'),
+(5, 'arif', 'arman@gmail.com', '012456', 'dahak', '../asset/UploadFile/Deleveryboy/e42d90a567.jpg', 1004, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -145,8 +172,8 @@ INSERT INTO `tbl_delevery_boy` (`dlb_id`, `dlb_name`, `dlb_mail`, `dlb_phone`, `
 -- Table structure for table `tbl_fooddetails`
 --
 
-CREATE TABLE `tbl_fooddetails` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_fooddetails` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `fd_name` varchar(300) NOT NULL,
   `fd_description` text NOT NULL,
   `fd_price` double NOT NULL,
@@ -156,23 +183,25 @@ CREATE TABLE `tbl_fooddetails` (
   `fd_catagoery_name` varchar(255) NOT NULL,
   `fd_cat_id` int(11) NOT NULL,
   `fd_rating` double DEFAULT NULL,
-  `fd_id` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `fd_id` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `fd_product` (`fd_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
 -- Dumping data for table `tbl_fooddetails`
 --
 
 INSERT INTO `tbl_fooddetails` (`id`, `fd_name`, `fd_description`, `fd_price`, `fd_discount`, `fd_image`, `fd_addDate`, `fd_catagoery_name`, `fd_cat_id`, `fd_rating`, `fd_id`) VALUES
-(16, 'Rice with meat', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae voluptatibus ab ducimus nisi laborum porro corrupti, rerum ipsa impedit quibusdam alias laudantium illo accusantium eaque. Culpa nam quas nulla sit.', 100, 0, '../asset/UploadFile/FoodItemImg/fb8b76c0a0.jpg', '18 September 2020, 11:22 pm', 'Lunch', 1, 2.5, 'LunRic1'),
+(16, 'Rice with meat', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae voluptatibus ab ducimus nisi laborum porro corrupti, rerum ipsa impedit quibusdam alias laudantium illo accusantium eaque. Culpa nam quas nulla sit.gg', 100, 0, '../asset/UploadFile/FoodItemImg/f0cdd3525f.jpg', '18 September 2020, 11:22 pm', 'Lunch', 1, 3.5, 'LunRic1'),
 (18, 'Mea', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae voluptatibus ab ducimus nisi laborum porro corrupti, rerum ipsa impedit quibusdam alias laudantium illo accusantium eaque. Culpa nam quas nulla sit.', 50, 0, '../asset/UploadFile/FoodItemImg/0f53d3778d.jpg', '18 September 2020, 11:24 pm', 'Diner ', 3, 2.5, 'DinMea0'),
-(19, 'Chicken ', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae voluptatibus ab ducimus nisi laborum porro corrupti, rerum ipsa impedit quibusdam alias laudantium illo accusantium eaque. Culpa nam quas nulla sit.', 50, 0, '../asset/UploadFile/FoodItemImg/1232ecda7d.jpg', '18 September 2020, 11:25 pm', 'Lunch', 1, 2.5, 'LunChi1'),
+(19, 'Chicken ', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae voluptatibus ab ducimus nisi laborum porro corrupti, rerum ipsa impedit quibusdam alias laudantium illo accusantium eaque. Culpa nam quas nulla sit.', 50, 0, '../asset/UploadFile/FoodItemImg/1232ecda7d.jpg', '18 September 2020, 11:25 pm', 'Lunch', 1, 5, 'LunChi1'),
 (20, 'vagitable', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae voluptatibus ab ducimus nisi laborum porro corrupti, rerum ipsa impedit quibusdam alias laudantium illo accusantium eaque. Culpa nam quas nulla sit.', 30, 0, '../asset/UploadFile/FoodItemImg/ff1312e284.jpg', '18 September 2020, 11:25 pm', 'Lunch', 1, 2.5, 'Lunvag5'),
 (21, 'Chicken ', 'sdf', 50, 0, '../asset/UploadFile/FoodItemImg/becd569420.jpg', '18 September 2020, 11:27 pm', 'Lunch', 1, 2.5, 'LunChi7'),
 (22, 'Sprites', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae voluptatibus ab ducimus nisi laborum porro corrupti, rerum ipsa impedit quibusdam alias laudantium illo accusantium eaque. Culpa nam quas nulla sit.', 50, 5, '../asset/UploadFile/FoodItemImg/579a2e96fe.png', '6 October 2020, 9:53 pm', 'Drink', 6, 2.5, 'DriSpr3'),
-(23, 'Water Maloon Juices', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae voluptatibus ab ducimus nisi laborum porro corrupti, rerum ipsa impedit quibusdam alias laudantium illo accusantium eaque. Culpa nam quas nulla sit.', 200, 0, '../asset/UploadFile/FoodItemImg/c294b58f6f.jpg', '6 October 2020, 9:54 pm', 'Juices', 5, 2.5, 'JuiWat3'),
+(23, 'Water Maloon Juices', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae voluptatibus ab ducimus nisi laborum porro corrupti, rerum ipsa impedit quibusdam alias laudantium illo accusantium eaque. Culpa nam quas nulla sit.', 200, 0, '../asset/UploadFile/FoodItemImg/c294b58f6f.jpg', '6 October 2020, 9:54 pm', 'Juices', 5, 2, 'JuiWat3'),
 (24, 'Berger', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae voluptatibus ab ducimus nisi laborum porro corrupti, rerum ipsa impedit quibusdam alias laudantium illo accusantium eaque. Culpa nam quas nulla sit.', 100, 0, '../asset/UploadFile/FoodItemImg/fc0fbeb31d.jpg', '6 October 2020, 10:22 pm', 'Barger', 4, 2.5, 'BarBer4'),
-(25, 'Egg', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae voluptatibus ab ducimus nisi laborum porro corrupti, rerum ipsa impedit quibusdam alias laudantium illo accusantium eaque. Culpa nam quas nulla sit.', 150, 0, '../asset/UploadFile/FoodItemImg/72a4f12fc1.jpg', '6 October 2020, 10:51 pm', 'Breakfast', 2, 2.5, 'BreEgg5');
+(25, 'Egg', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae voluptatibus ab ducimus nisi laborum porro corrupti, rerum ipsa impedit quibusdam alias laudantium illo accusantium eaque. Culpa nam quas nulla sit.', 150, 0, '../asset/UploadFile/FoodItemImg/ad39d5d487.jpg', '6 October 2020, 10:51 pm', 'Breakfast', 2, 2.5, 'BreEgg5');
 
 -- --------------------------------------------------------
 
@@ -180,7 +209,7 @@ INSERT INTO `tbl_fooddetails` (`id`, `fd_name`, `fd_description`, `fd_price`, `f
 -- Table structure for table `tbl_orderdetails`
 --
 
-CREATE TABLE `tbl_orderdetails` (
+CREATE TABLE IF NOT EXISTS `tbl_orderdetails` (
   `order_no` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `payment` int(11) NOT NULL,
@@ -199,12 +228,17 @@ CREATE TABLE `tbl_orderdetails` (
 --
 
 INSERT INTO `tbl_orderdetails` (`order_no`, `customer_id`, `payment`, `payment_type`, `payment_status`, `order_status`, `packaging`, `shiping`, `t_daliv_date`, `delivery_status`, `trans_id`) VALUES
-(18, 28, 0, 'Card', 'Paid', 'Rejected', 'Cenceled', 'Cenceled', '2020-10-07', 'Cenceled', 'ch_1HZZTUGQNPpqXUagsqQ4GuPA'),
+(18, 28, 0, 'Card', 'Paid', 'Confirmed', 'Complete', 'Shipped', '2020-10-15', 'Cenceled', 'ch_1HZZTUGQNPpqXUagsqQ4GuPA'),
 (19, 24, 0, 'Cash', 'Pendding', 'Confirmed', 'Complete', 'Shipped', '2020-10-07', 'Pendding', 'N/A'),
-(20, 29, 0, 'Card', 'Paid', 'Confirmed', 'Complete', 'Shipped', '2020-10-07', 'Cenceled', 'ch_1HZeGRGQNPpqXUag31zXXfQ7'),
-(21, 29, 0, 'Cash', 'Pendding', 'Cenceled', 'Cenceled', 'Cenceled', '2020-10-07', 'Cenceled', 'N/A'),
-(22, 23, 300, 'Card', 'Cenceled', 'Cenceled', 'Cenceled', 'Cenceled', '2020-10-08', 'Cenceled', 'ch_1HZfRTGQNPpqXUagWwetXF9f'),
-(23, 24, 200, 'Card', 'Paid', 'Confirmed', 'Pendding', 'Pendding', '0000-00-00', 'Pendding', 'ch_1HZsjlGQNPpqXUag5yges0LC');
+(20, 29, 0, 'Card', 'Paid', 'Confirmed', 'Complete', 'Shipped', '2020-10-15', 'Cenceled', 'ch_1HZeGRGQNPpqXUag31zXXfQ7'),
+(21, 29, 0, 'Cash', 'Pendding', 'Confirmed', 'Complete', 'Shipped', '2020-10-15', 'Cenceled', 'N/A'),
+(22, 23, 300, 'Card', 'Cenceled', 'Confirmed', 'Complete', 'Shipped', '2020-10-15', 'Cenceled', 'ch_1HZfRTGQNPpqXUagWwetXF9f'),
+(23, 24, 200, 'Card', 'Paid', 'Rejected', 'Cenceled', 'Cenceled', '2020-10-15', 'Cenceled', 'ch_1HZsjlGQNPpqXUag5yges0LC'),
+(24, 24, 50, 'Cash', 'Cenceled', 'Rejected', 'Cenceled', 'Cenceled', '2020-10-15', 'Cenceled', 'N/A'),
+(25, 24, 50, 'Cash', 'Pendding', 'Confirmed', 'Cenceled', 'Cenceled', '2020-10-14', 'Cenceled', 'N/A'),
+(26, 24, 130, 'Cash', 'Pendding', 'Confirmed', 'Complete', 'Shipped', '2020-10-15', 'Cenceled', 'N/A'),
+(27, 1, 100, 'Cash', 'Pendding', 'Pendding', 'Pendding', 'Pendding', '0000-00-00', 'Pendding', 'N/A'),
+(28, 1, 100, 'Cash', 'Pendding', 'Pendding', 'Pendding', 'Pendding', '0000-00-00', 'Pendding', 'N/A');
 
 -- --------------------------------------------------------
 
@@ -212,8 +246,8 @@ INSERT INTO `tbl_orderdetails` (`order_no`, `customer_id`, `payment`, `payment_t
 -- Table structure for table `tbl_orders`
 --
 
-CREATE TABLE `tbl_orders` (
-  `od_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_orders` (
+  `od_id` int(11) NOT NULL AUTO_INCREMENT,
   `od_type` int(11) NOT NULL,
   `od_items` varchar(255) NOT NULL,
   `od_items_name` varchar(300) NOT NULL,
@@ -223,42 +257,49 @@ CREATE TABLE `tbl_orders` (
   `customer_id` int(11) DEFAULT NULL,
   `od_Loction` varchar(300) NOT NULL,
   `od_image` varchar(300) NOT NULL,
-  `delvery_boy_id` int(11) DEFAULT 0,
+  `delvery_boy_id` int(11) DEFAULT '0',
   `delevery_reject_by` varchar(255) NOT NULL,
   `delever_date` datetime NOT NULL,
-  `od_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `orderCustomId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `od_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `orderCustomId` int(11) NOT NULL,
+  PRIMARY KEY (`od_id`),
+  KEY `customer_id` (`customer_id`),
+  KEY `delvery_boy_id` (`delvery_boy_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
 
 --
 -- Dumping data for table `tbl_orders`
 --
 
 INSERT INTO `tbl_orders` (`od_id`, `od_type`, `od_items`, `od_items_name`, `od_paymentStatus`, `od_price`, `od_quantity`, `customer_id`, `od_Loction`, `od_image`, `delvery_boy_id`, `delevery_reject_by`, `delever_date`, `od_date`, `orderCustomId`) VALUES
-(7, 1, '16', 'Rice with meat', 1, 100, 1, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/fb8b76c0a0.jpg', 0, '', '0000-00-00 00:00:00', '2020-10-02 12:28:08', 1),
-(8, 1, '21', 'Chicken ', 1, 100, 2, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/becd569420.jpg', 0, '', '0000-00-00 00:00:00', '2020-10-02 12:28:08', 1),
-(9, 1, '21', 'Chicken ', 1, 100, 2, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/becd569420.jpg', 0, '', '0000-00-00 00:00:00', '2020-10-02 12:28:08', 1),
-(10, 4, '16', 'Rice with meat', 1, 200, 2, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/fb8b76c0a0.jpg', 0, '', '2020-10-02 20:32:05', '2020-10-02 12:29:04', 2),
-(11, 4, '17', 'Barger', 1, 30, 3, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/8f5bf0a4a6.jpg', 1, 'a,1', '2020-10-07 17:01:34', '2020-10-02 12:31:23', 3),
-(12, 4, '21', 'Chicken ', 1, 200, 4, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/becd569420.jpg', 1, 'a,1', '2020-10-07 20:49:37', '2020-10-02 12:31:23', 3),
+(7, 4, '16', 'Rice with meat', 1, 100, 1, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/fb8b76c0a0.jpg', 0, 'a,1', '2020-10-15 19:22:58', '2020-10-02 12:28:08', 1),
+(8, 4, '21', 'Chicken ', 1, 100, 2, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/becd569420.jpg', 0, 'a,1', '2020-10-15 19:22:58', '2020-10-02 12:28:08', 1),
+(9, 4, '21', 'Chicken ', 1, 100, 2, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/becd569420.jpg', 0, 'a,1', '2020-10-15 19:22:58', '2020-10-02 12:28:08', 1),
+(10, 1, '16', 'Rice with meat', 1, 200, 2, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/fb8b76c0a0.jpg', 0, '', '2020-10-02 20:32:05', '2020-10-02 12:29:04', 2),
+(11, 3, '17', 'Barger', 1, 30, 3, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/8f5bf0a4a6.jpg', 3, 'a,1', '2020-10-15 03:15:02', '2020-10-02 12:31:23', 3),
+(12, 3, '21', 'Chicken ', 1, 200, 4, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/becd569420.jpg', 3, 'a,1', '2020-10-15 03:15:02', '2020-10-02 12:31:23', 3),
 (13, 1, '20', 'vagitable', 1, 90, 3, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/ff1312e284.jpg', 0, 'a,1', '2020-10-02 19:52:11', '2020-10-02 12:32:17', 4),
-(14, 3, '16', 'Rice with meat', 1, 200, 2, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/fb8b76c0a0.jpg', 2, 'a,1', '2020-10-02 22:23:33', '2020-10-02 12:33:00', 5),
+(14, 1, '16', 'Rice with meat', 1, 200, 2, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/fb8b76c0a0.jpg', 2, 'a,1', '2020-10-02 22:23:33', '2020-10-02 12:33:00', 5),
 (15, 1, '21', 'Chicken ', 1, 100, 2, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/becd569420.jpg', 0, '', '0000-00-00 00:00:00', '2020-10-02 14:17:49', 6),
-(16, 1, '17', 'Barger', 1, 30, 1, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/8f5bf0a4a6.jpg', 0, '', '0000-00-00 00:00:00', '2020-10-02 14:33:30', 7),
-(17, 4, '18', 'Mea', 1, 100, 2, 2, 'Gohira', '../asset/UploadFile/FoodItemImg/0f53d3778d.jpg', 0, 'a,1', '2020-10-07 20:53:14', '2020-10-06 15:39:55', 8),
-(18, 4, '17', 'Barger', 1, 120, 4, 2, 'Gohira', '../asset/UploadFile/FoodItemImg/8f5bf0a4a6.jpg', 0, 'a,1', '2020-10-07 20:57:57', '2020-10-06 15:39:55', 8),
-(29, 1, '18', 'Mea', 2, 200, 4, 25, 'Coxbazar', '../asset/UploadFile/FoodItemImg/0f53d3778d.jpg', 0, '', '0000-00-00 00:00:00', '2020-10-07 09:50:02', 16),
-(30, 1, '23', 'Water Maloon Juices', 2, 400, 2, 28, 'Hathazari', '../asset/UploadFile/FoodItemImg/c294b58f6f.jpg', 0, '', '0000-00-00 00:00:00', '2020-10-07 09:57:40', 17),
-(31, 1, '24', 'Berger', 2, 200, 2, 28, 'Hathazari', '../asset/UploadFile/FoodItemImg/fc0fbeb31d.jpg', 0, '', '0000-00-00 00:00:00', '2020-10-07 10:02:23', 18),
-(32, 1, '22', 'Sprites', 2, 100, 2, 28, 'Hathazari', '../asset/UploadFile/FoodItemImg/579a2e96fe.png', 0, '', '0000-00-00 00:00:00', '2020-10-07 10:02:23', 18),
-(33, 3, '25', 'Egg', 1, 300, 2, 24, 'Noapara', '../asset/UploadFile/FoodItemImg/72a4f12fc1.jpg', 1, 'a,1', '2020-10-07 17:07:29', '2020-10-07 10:16:26', 19),
-(34, 3, '22', 'Sprites', 1, 100, 2, 24, 'Noapara', '../asset/UploadFile/FoodItemImg/579a2e96fe.png', 1, 'a,1', '2020-10-07 17:07:29', '2020-10-07 10:16:27', 19),
-(35, 3, '20', 'vagitable', 2, 60, 2, 29, 'sdfsd', '../asset/UploadFile/FoodItemImg/ff1312e284.jpg', 3, 'a,1', '2020-10-07 21:24:00', '2020-10-07 15:09:27', 20),
-(36, 3, '23', 'Water Maloon Juices', 2, 200, 1, 29, 'sdfsd', '../asset/UploadFile/FoodItemImg/c294b58f6f.jpg', 3, 'a,1', '2020-10-07 21:24:00', '2020-10-07 15:09:27', 20),
-(37, 3, '25', 'Egg', 2, 150, 1, 29, 'sdfsd', '../asset/UploadFile/FoodItemImg/72a4f12fc1.jpg', 3, 'a,1', '2020-10-07 21:24:00', '2020-10-07 15:09:27', 20),
-(38, 4, '19', 'Chicken ', 1, 100, 2, 29, 'sdfsd', '../asset/UploadFile/FoodItemImg/1232ecda7d.jpg', 0, '', '2020-10-07 22:04:48', '2020-10-07 16:04:27', 21),
-(39, 4, '25', 'Egg', 2, 300, 2, 23, 'Gohira', '../asset/UploadFile/FoodItemImg/72a4f12fc1.jpg', 0, '', '2020-10-08 00:10:03', '2020-10-07 16:24:46', 22),
-(40, 2, '18', 'Mea', 2, 200, 5, 24, 'Noapara', '../asset/UploadFile/FoodItemImg/0f53d3778d.jpg', 0, '', '0000-00-00 00:00:00', '2020-10-08 06:36:48', 23);
+(16, 1, '17', 'Barger', 1, 30, 1, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/8f5bf0a4a6.jpg', 0, 'a,1', '2020-10-14 20:53:04', '2020-10-02 14:33:30', 7),
+(17, 1, '18', 'Mea', 1, 100, 2, 2, 'Gohira', '../asset/UploadFile/FoodItemImg/0f53d3778d.jpg', 0, 'a,1', '2020-10-07 20:53:14', '2020-10-06 15:39:55', 8),
+(18, 1, '17', 'Barger', 1, 120, 4, 2, 'Gohira', '../asset/UploadFile/FoodItemImg/8f5bf0a4a6.jpg', 0, 'a,1', '2020-10-07 20:57:57', '2020-10-06 15:39:55', 8),
+(29, 1, '18', 'Mea', 2, 200, 4, 25, 'Coxbazar', '../asset/UploadFile/FoodItemImg/0f53d3778d.jpg', 0, 'a,1', '2020-10-14 20:51:42', '2020-10-07 09:50:02', 16),
+(30, 1, '23', 'Water Maloon Juices', 2, 400, 2, 28, 'Hathazari', '../asset/UploadFile/FoodItemImg/c294b58f6f.jpg', 0, 'a,1', '2020-10-14 20:17:07', '2020-10-07 09:57:40', 17),
+(31, 3, '24', 'Berger', 2, 200, 2, 28, 'Hathazari', '../asset/UploadFile/FoodItemImg/fc0fbeb31d.jpg', 2, 'a,1', '2020-10-15 03:15:42', '2020-10-07 10:02:23', 18),
+(32, 3, '22', 'Sprites', 2, 100, 2, 28, 'Hathazari', '../asset/UploadFile/FoodItemImg/579a2e96fe.png', 2, 'a,1', '2020-10-15 03:15:42', '2020-10-07 10:02:23', 18),
+(33, 2, '25', 'Egg', 1, 300, 2, 24, 'Noapara', '../asset/UploadFile/FoodItemImg/72a4f12fc1.jpg', 1, 'a,1', '2020-10-07 17:07:29', '2020-10-07 10:16:26', 19),
+(34, 2, '22', 'Sprites', 1, 100, 2, 24, 'Noapara', '../asset/UploadFile/FoodItemImg/579a2e96fe.png', 1, 'a,1', '2020-10-07 17:07:29', '2020-10-07 10:16:27', 19),
+(35, 3, '20', 'vagitable', 2, 60, 2, 29, 'sdfsd', '../asset/UploadFile/FoodItemImg/ff1312e284.jpg', 2, 'a,1', '2020-10-15 03:15:15', '2020-10-07 15:09:27', 20),
+(36, 3, '23', 'Water Maloon Juices', 2, 200, 1, 29, 'sdfsd', '../asset/UploadFile/FoodItemImg/c294b58f6f.jpg', 2, 'a,1', '2020-10-15 03:15:15', '2020-10-07 15:09:27', 20),
+(37, 3, '25', 'Egg', 2, 150, 1, 29, 'sdfsd', '../asset/UploadFile/FoodItemImg/72a4f12fc1.jpg', 2, 'a,1', '2020-10-15 03:15:15', '2020-10-07 15:09:27', 20),
+(38, 1, '19', 'Chicken ', 1, 100, 2, 29, 'sdfsd', '../asset/UploadFile/FoodItemImg/1232ecda7d.jpg', 0, 'a,1', '2020-10-15 02:44:43', '2020-10-07 16:04:27', 21),
+(39, 1, '25', 'Egg', 2, 300, 2, 23, 'Gohira', '../asset/UploadFile/FoodItemImg/72a4f12fc1.jpg', 0, 'a,1', '2020-10-15 02:43:09', '2020-10-07 16:24:46', 22),
+(40, 4, '18', 'Mea', 2, 200, 5, 24, 'Noapara', '../asset/UploadFile/FoodItemImg/0f53d3778d.jpg', 0, 'a,1', '2020-10-15 19:18:22', '2020-10-08 06:36:48', 23),
+(41, 4, '18', 'Mea', 1, 50, 1, 24, 'Noapara', '../asset/UploadFile/FoodItemImg/0f53d3778d.jpg', 0, 'a,1', '2020-10-15 19:18:11', '2020-10-08 16:28:06', 24),
+(43, 3, '20', 'vagitable', 1, 30, 3, 24, 'Noapara', '../asset/UploadFile/FoodItemImg/ff1312e284.jpg', 0, 'a,1', '2020-10-15 03:04:56', '2020-10-12 05:34:56', 26),
+(44, 1, '16', 'Rice with meat', 1, 100, 1, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/fb8b76c0a0.jpg', 0, '', '0000-00-00 00:00:00', '2020-10-15 19:40:20', 27),
+(45, 1, '16', 'Rice with meat', 1, 100, 3, 1, 'Dalainagar,Gohira', '../asset/UploadFile/FoodItemImg/f0cdd3525f.jpg', 0, '', '0000-00-00 00:00:00', '2020-10-15 19:44:29', 28);
 
 -- --------------------------------------------------------
 
@@ -266,8 +307,8 @@ INSERT INTO `tbl_orders` (`od_id`, `od_type`, `od_items`, `od_items_name`, `od_p
 -- Table structure for table `tbl_user`
 --
 
-CREATE TABLE `tbl_user` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tbl_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `dob` date NOT NULL,
@@ -280,8 +321,9 @@ CREATE TABLE `tbl_user` (
   `district` varchar(20) NOT NULL,
   `city` varchar(20) NOT NULL,
   `post_code` varchar(20) NOT NULL,
-  `upazilla` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `upazilla` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=57 ;
 
 --
 -- Dumping data for table `tbl_user`
@@ -308,114 +350,14 @@ INSERT INTO `tbl_user` (`id`, `name`, `email`, `dob`, `phoneNo`, `address`, `pas
 (42, 'ertgert', ' as@gmail.com', '0000-00-00', '1234567890', 'dfgdg', '123sdf', '6 October 2020, 5:32 am', '', '', '', '', '', ''),
 (43, 'hdfrh', ' j@gmail.com', '0000-00-00', '123456789', 'sdf', 'dgfd122', '6 October 2020, 5:36 am', '', '', '', '', '', ''),
 (44, 'dhggh', ' A@gmail.com', '0000-00-00', '1234567890', 'sdf', 'asdf12345', '6 October 2020, 5:39 am', '', '', '', '', '', ''),
-(45, 'Rifat', ' rifat@gmail.com', '0000-00-00', '01475789654', 'jjfbdb', 'mr1526', '6 October 2020, 8:00 pm', '', '', '', '', '', '');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `chowadmin`
---
-ALTER TABLE `chowadmin`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table ` ratingfood`
---
-ALTER TABLE ` ratingfood`
-  ADD PRIMARY KEY (`rat_id`);
-
---
--- Indexes for table `tbl_cart`
---
-ALTER TABLE `tbl_cart`
-  ADD PRIMARY KEY (`c_id`);
-
---
--- Indexes for table `tbl_cat`
---
-ALTER TABLE `tbl_cat`
-  ADD PRIMARY KEY (`cat_id`);
-
---
--- Indexes for table `tbl_delevery_boy`
---
-ALTER TABLE `tbl_delevery_boy`
-  ADD PRIMARY KEY (`dlb_id`);
-
---
--- Indexes for table `tbl_fooddetails`
---
-ALTER TABLE `tbl_fooddetails`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `fd_product` (`fd_id`);
-
---
--- Indexes for table `tbl_orders`
---
-ALTER TABLE `tbl_orders`
-  ADD PRIMARY KEY (`od_id`),
-  ADD KEY `customer_id` (`customer_id`),
-  ADD KEY `delvery_boy_id` (`delvery_boy_id`);
-
---
--- Indexes for table `tbl_user`
---
-ALTER TABLE `tbl_user`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `chowadmin`
---
-ALTER TABLE `chowadmin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table ` ratingfood`
---
-ALTER TABLE ` ratingfood`
-  MODIFY `rat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `tbl_cart`
---
-ALTER TABLE `tbl_cart`
-  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
-
---
--- AUTO_INCREMENT for table `tbl_cat`
---
-ALTER TABLE `tbl_cat`
-  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `tbl_delevery_boy`
---
-ALTER TABLE `tbl_delevery_boy`
-  MODIFY `dlb_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `tbl_fooddetails`
---
-ALTER TABLE `tbl_fooddetails`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
---
--- AUTO_INCREMENT for table `tbl_orders`
---
-ALTER TABLE `tbl_orders`
-  MODIFY `od_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
-
---
--- AUTO_INCREMENT for table `tbl_user`
---
-ALTER TABLE `tbl_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+(45, 'Rifat', ' rifat@gmail.com', '0000-00-00', '01475789654', 'jjfbdb', 'mr1526', '6 October 2020, 8:00 pm', '', '', '', '', '', ''),
+(46, 'Mamun', ' Mamun@gmail.com', '0000-00-00', '12345678912', 'raozan', '123asd', '14 October 2020, 2:41 am', '', '', '', '', '', ''),
+(48, 'sdfg', ' Mamun@gmail.com', '0000-00-00', '12345678912', 'raozan', 'asdfgh', '14 October 2020, 2:44 am', '', '', '', '', '', ''),
+(49, 'sdfg', ' Mamun@gmail.com', '0000-00-00', '12345678912', 'raozan', 'asdfgh', '14 October 2020, 2:44 am', '', '', '', '', '', ''),
+(50, 'arman', ' arman@gmail.com', '0000-00-00', '12345678912', 'dfgdg', '123asd', '14 October 2020, 2:54 am', '', '', '', '', '', ''),
+(52, 'yakubb', ' yakubb@gmail.com', '0000-00-00', '12345678910', 'sadfsf', '123asd', '14 October 2020, 3:22 am', '', '', '', '', '', ''),
+(53, 'bbbc', ' bbbc@gmail.com', '0000-00-00', '12345678901', '123sdf', 'asdfgh', '14 October 2020, 3:39 am', '', '', '', '', '', ''),
+(56, 'mogA', 'mogA@gmail.com', '0000-00-00', '12345678912', 'asdf', '123asd', '14 October 2020, 3:58 am', '', '', '', '', '', '');
 
 --
 -- Constraints for dumped tables
@@ -427,7 +369,6 @@ ALTER TABLE `tbl_user`
 ALTER TABLE `tbl_orders`
   ADD CONSTRAINT `tbl_orders_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `tbl_user` (`id`),
   ADD CONSTRAINT `tbl_orders_ibfk_3` FOREIGN KEY (`delvery_boy_id`) REFERENCES `tbl_delevery_boy` (`dlb_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

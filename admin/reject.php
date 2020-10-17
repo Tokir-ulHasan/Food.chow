@@ -12,18 +12,15 @@
       <h3 class="h4 m-2">Reject Orders</h3>
       <div class="clearfix">
           <br>
-          <div class="float-left w-50" >
+          <div class="float-right w-50" >
                 <form class="form-inline" action="" method="post">
                     <div class="input-group mb-3" style="width:80%">
-                        <input type="text" class="form-control" name="search" placeholder="Search by Mail/ID..." aria-label="Recipient's username" aria-describedby="basic-addon2" >
+                        <input type="text" class="form-control" name="search" placeholder="Search order ID" aria-label="Recipient's username" aria-describedby="basic-addon2" >
                         <div class="input-group-append">
                         <button class="btn btn-outline-secondary" type="submit"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
                 </form>
-            </div>
-            <div class="float-right mr-5">
-                 <a href=""><span><i class="fa fa-download mr-1"></i>Download File</span></a>
             </div>
         </div>
         <br>
@@ -35,8 +32,8 @@
                      
                      $i = $row = 0;
                      // number of rows per page
-                    $rowperpage = 5;
-                    $numrows_arr = array("5","10","25","50","100","250");
+                    $rowperpage = 10;
+                    $numrows_arr = array("10","15","20","30","50","100");
                     foreach($numrows_arr as $nrow){
                         if(isset($_POST['sel_name']) && $_POST['sel_name'] == $nrow){
                             $rowperpage = $_POST['sel_name'];
@@ -85,14 +82,13 @@
                    
                     if(isset($_POST['search'])){
                     $serchKey = $_POST['search'];
-                    $query = " SELECT * FROM `tbl_orders` where `od_type` = 4  and  
-                        od_id like '%$serchKey%' or 
-                        order by  `od_id` DESC limit $row,$rowperpage ";
+                    $query = " SELECT * FROM `tbl_orders` where `od_type` = 4  and  orderCustomId like '%$serchKey%' GROUP BY `orderCustomId`
+                        order by  `od_id`  DESC limit $row,$rowperpage ";
                         
                     }
                     else{
                     $serchKey ="" ;
-                    $query = " SELECT * FROM `tbl_orders` where `od_type` = 4 order by  `od_id` DESC limit $row,$rowperpage ";
+                    $query = " SELECT * FROM `tbl_orders` where `od_type` = 4 GROUP BY `orderCustomId` order by  `od_id` DESC limit $row,$rowperpage ";
                     }  
                     
                    $res = $db->SelectData($query);
@@ -137,9 +133,7 @@
             </table>
             <div class="clearfix pb-5 mr-3">
               <?php 
-                 $querY = " SELECT *
-                 FROM `tbl_orders`
-                 WHERE `od_type` = 4 ";
+                 $querY = " SELECT * FROM `tbl_orders` WHERE `od_type` = 4 GROUP BY `orderCustomId`";
                  $data =$db->SelectData($querY);
                  if($data){
                  $total_rows = mysqli_num_rows($data);
@@ -152,7 +146,7 @@
                 ?>
                    <li class="list-inline-item"><a class = "btn" href="?pages=<?php echo ($page-1);?>">Previous</a></li>
                 <?php 
-                  }if($total_page>=$page){
+                  }if($total_page>$page){
                 ?>
                    <li class="list-inline-item"><a class = "btn" href="?pages=<?php echo ($page+1);?>">Next</a></li>
                 <?php }}

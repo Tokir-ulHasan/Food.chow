@@ -148,7 +148,7 @@ $fm = new Formate();
                 ?>
                    <li class="list-inline-item"><a class = "btn" href="?pages=<?php echo ($page-1);?>">Previous</a></li>
                 <?php 
-                  }if($total_page>=$page){
+                  }if($total_page>$page){
                 ?>
                    <li class="list-inline-item"><a class = "btn" href="?pages=<?php echo ($page+1);?>">Next</a></li>
                 <?php }

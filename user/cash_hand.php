@@ -34,7 +34,7 @@
                     if($res){
                     $data = mysqli_fetch_assoc($res);
                 ?>
-                <form action="">
+                <form action="" method="post">
                     <table class="table  table-sm " >
                         <tbody>
                             <tr>
@@ -42,7 +42,7 @@
                                 <td >:</td>
                                 <td >
                                     <div >
-                                        <input type="text" class="form-control" value = "<?php echo $data['name']?>">
+                                        <input type="text" name="uName" class="form-control" value = "<?php echo $data['name']?>" readonly>
                                     </div>
                                 </td>
                             </tr>
@@ -51,7 +51,7 @@
                                 <td >:</td>
                                 <td >
                                     <div >
-                                        <input type="text" class="form-control" value = "<?php echo $data['phoneNo']?>">
+                                        <input type="text" class="form-control" value = "<?php echo $data['phoneNo']?>" readonly>
                                     </div>
                                 </td>
                             </tr>
@@ -60,7 +60,7 @@
                                 <td >:</td>
                                 <td >
                                     <div >
-                                        <input type="text" class="form-control" value = "<?php echo $data['email']?>">
+                                        <input type="text" class="form-control" value = "<?php echo $data['email']?>" readonly>
                                     </div>
                                 </td>
                             </tr>
@@ -69,7 +69,7 @@
                                 <td >:</td>
                                 <td >
                                     <div >
-                                        <input type="text" class="form-control" value = "<?php echo $data['address']?>">
+                                        <input type="text" class="form-control" name="addressU" value = "<?php echo $data['address']?>">
                                     </div>
                                 </td>
                             </tr>
@@ -78,7 +78,7 @@
                                 <td >:</td>
                                 <td >
                                     <div >
-                                        <input type="text" class="form-control" value = "<?php echo $data['city']?>">
+                                        <input type="text" class="form-control" value = "<?php echo $data['city']?>" name="cityUSer">
                                     </div>
                                 </td>
                             </tr>
@@ -87,7 +87,7 @@
                                 <td >:</td>
                                 <td >
                                 
-                                        <input type="text" class="form-control" value = "<?php echo $data['post_code']?>">
+                                        <input type="text" class="form-control" value = "<?php echo $data['post_code']?>" name="Zipcode">
                                 
                                 </td>
                             </tr>
@@ -96,7 +96,7 @@
                                 <td ></td>
                                 <td >
                                     <div >
-                                        <input type="submit" class="form-control btn btn-primary" value="Update Details">
+                                        <input type="submit" class="form-control btn btn-primary" name="UpdateUSER" value="Update Details">
                                     </div>
                                 </td>
                             </tr>
@@ -177,5 +177,17 @@
 
 <!----Footer Section---->
 <?php include 'includesUser/footer.php' ?>
+<?php
 
+if(isset($_POST['UpdateUSER'])){
+   
+    $addressU = $_POST['addressU'];
+    $cityUSer = $_POST['cityUSer'];
+    $Zipcode = $_POST['Zipcode'];
+    $Q_up = "UPDATE `tbl_user` SET `address`='$addressU',`city`= '$cityUSer',`post_code`= '$Zipcode' WHERE `id` = '$customer_id' ";
+    $Q_u = $db->SelectData($Q_up);
+    echo "<meta http-equiv='refresh' content='0'>";
+}
+
+?>
 

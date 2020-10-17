@@ -81,7 +81,7 @@ $userId = Session::getSession('userId');
           <a class=" float-right mr-3 font-weight-normal btn btn-dark mb-2"  href="" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus "></i></a>
 
         </div>
-        
+         
         <div class="table-responsive " id="user-tbl">
             <table class="table   table-bordered table-sm" id="tbl-user">
               <caption>List of users</caption>
@@ -146,7 +146,7 @@ $userId = Session::getSession('userId');
                       <?php 
                        if($user_data['id'] == $userId || $userId == 1){
                       ?>
-                      <td><a class="btn btn-info" href="">Edit</a></td>
+                      <td><a class="btn btn-info" href="edit_admin.php?admin=<?php echo $user_data['id']; ?>">Edit</a></td>
                        <?php }?>
                   </tr>
                   <?php }}else{?>

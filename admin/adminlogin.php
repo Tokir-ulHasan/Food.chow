@@ -28,7 +28,7 @@
      <?php 
        if(isset($_GET['msg']) && $_GET['msg'] == 1){
             echo '  <div class="alert alert-success alert-dismissible">
-          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
           <strong>Success!</strong>  Login Successfully.
           </div>';
 

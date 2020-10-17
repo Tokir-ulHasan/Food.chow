@@ -5,10 +5,10 @@
   $userEmail = Session::getSession('userEmail');
 ?>
 <?php
-  
+  include_once '../lib/Database.php';
+  $db = new Database();
   $cart = new Cart();
   $id = "" ;
-
 
 
   if(!isset($_GET['food_id']) && $_GET['food_id'] == NULL){
@@ -32,6 +32,26 @@
   $price=$row['fd_price'];
   $image=$row['fd_image'];
 
+
+  ///===========Comment section==================//
+      if(isset($_POST['commentt'])){
+        $comment = $_POST['comment_txt'];
+
+        date_default_timezone_set("Asia/Dhaka");
+        $date   =  date('j F Y, g:i a');
+        echo "<br><br><br>";
+        $comment_q = "UPDATE ` ratingfood` SET `comment`='$comment',`date`='$date' WHERE `fd_id` = '$id' and `user_id` = '$userId'";
+        $commet_res = $db->QueryExcute($comment_q);
+        if($commet_res){
+           //comment
+        }
+        else{
+         
+          //header("Location:404.php");
+        }
+      }
+  ///====================================
+
 ?>
    <section class="pt-1" style="background: rgba(0, 123, 255, 0.06);">
       <div class="row mx-3 pt-5">
@@ -41,8 +61,7 @@
                 <?php
                  //  echo $_GET['ratedIndex'];
                  //  echo json_encode($contents);
-                include_once '../lib/Database.php';
-                $db = new Database();
+              
                 $sql="select distinct cat_name,cat_id from tbl_cat";
                 $r=$db->SelectData($sql);
                 
@@ -111,8 +130,17 @@
                                        <div class="inner-love" id="in_rate" ></div>
                                     </div><strong id="ttlrate" style="font-size:18px;margin-top: 5px;"></strong></span>
                                 </div>
+                                <?php
+                                   $odcount = 0;
+                                   $odcount_q = "SELECT count(`od_items`) as `odc` FROM `tbl_orders` WHERE `od_items` = '$id' ";
+                                   $odcount_res = $db->SelectData($odcount_q);
+                                   if($odcount_res && $odcount_res->num_rows > 0){
+                                    $OC_data = mysqli_fetch_array($odcount_res);
+                                    $odcount = $OC_data['odc'];
+                                   }
+                                ?>
                                 <div class="float-right text-secondary ">
-                                   <h6 style="font-size:20px" >Order <span class="mb-2"><i class="fa fa-cart-arrow-down" ></i> 200</span></h6>
+                                   <h6 style="font-size:20px" >Order <span class="mb-2"><i class="fa fa-cart-arrow-down mr-1" ></i><?php echo $odcount;?></span></h6>
                                    
                                 </div>
                            </div>
@@ -167,11 +195,11 @@
               <!--=================Rating Food end========================-->
                <!--=================comment box========================-->
               <div id=comment>
-                <form action="">
+                <form action="#" method="post">
                     <div class = "form-group py-1 mt-4">
-                        <textarea class = "form-control" rows = "3" placeholder = "Comment on this food" style="border: none;box-shadow: 1px 0px 2px 0px #e2c2c2;"></textarea>
+                        <textarea class = "form-control" rows = "3" placeholder = "Comment on this food" name="comment_txt" style="border: none;box-shadow: 1px 0px 2px 0px #e2c2c2;"></textarea>
                         <div class="d-flex justify-content-end  mt-1">
-                            <input type="submit" class="btn btn-secondary btn-sm" name="" id="" value="Sent">
+                            <input type="submit" class="btn btn-secondary btn-sm" name="commentt" id="" >
                         </div>
                     </div>
                 </form>
@@ -184,24 +212,41 @@
       <div class="row">
          <div class="col-2">
          </div>
-         <div class="col-10">
-               <div id="allcomment" class="mt-4 mx-4">
-                  <div class="card">
+         <div class="col-10 px-2" >
+               <div id="allcomment" class="mt-4 mx-4" style="padding: 0 8% 0 17px;">
+                <?php        
+                  $R_Q = "SELECT * FROM ` ratingfood` WHERE `fd_id`= '$id' order by `rating` desc";
+                  $R_res = $db->SelectData($R_Q);
+                  if($R_res &&  $R_res->num_rows > 0){
+
+                    while($rat_data = mysqli_fetch_array($R_res)){
+
+                        $user_id      = $rat_data['user_id'];
+                        $rating_Count = $rat_data['rating'];
+                        $user_Q = "SELECT * FROM `tbl_user` WHERE `id` = '$user_id' ";
+                        $user_result =  $db->SelectData($user_Q);
+                        $U_data = mysqli_fetch_array($user_result);
+                  ?>
+                  <div class="card ">
                     <div class="card-body">
                        <section class="d-flex mb-3">
-                          <div><img src="../asset/images/profile-7.jpg" alt="" style="height: 91px;width: 90px;border-radius: 50%;"></div>
+                          <div><img src="data:image/jpeg;base64,<?php echo base64_encode($U_data['image']);?>" alt="" style="height: 91px;width: 90px;border-radius: 50%;"></div>
                           <div class="clearfix ml-4 mt-1">
-                          <h5 class="">Arifur Rahman</h5>
-                          <div class="">
-                              <div class="fa outer-love">
-                                  <div class="inner-love">
-                                  </div>
-                              </div>
-                          </div>
+                            <h5 ><?php echo $U_data['name'];?></h5>
+                            <div id="c_rat" >
+                                <?php 
+                                  for($i = 1 ; $i<= $rating_Count ;$i++){
+                                ?>
+                                <span class="star mr-2" ><i class="fa fa-heart fa-x text-danger" ></i></span>
+                                <?php }?>
+                            </div>
                        </section>
-                       <p class="my-3 text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem quaerat perferendis placeat repellendus consequuntur beatae veritatis ut, iure dolor! Iure ipsa blanditiis facilis vel quasi consequuntur, ad nulla dolore quas?</p>
+                       <p class="my-3 text-secondary"><?php echo $rat_data['comment'];?></p>
+                    </div>
                   </div>
-              </div>
+                  <br>
+                <?php } }?>
+              
          </div>
       </div>
    </section>

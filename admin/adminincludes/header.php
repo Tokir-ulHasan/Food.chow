@@ -48,7 +48,7 @@ Session::destroySession();
          
           
           <!--Nav Brand-->
-          <a class="navbar-brand" href="#"><b>Food<span>.Chow</span></b></a>
+          <a class="navbar-brand" href="index0.php"><b>Food<span>.Chow</span></b></a>
 
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,7 +64,7 @@ Session::destroySession();
                   <span class="badge bg-theme">Viste Site</span>
                 </a>
              
-              <li class="nav-item noyu" id="navmenuitem">
+             <!-- <li class="nav-item noyu" id="navmenuitem">
                 <a href="billing.php">
                   <i class="fa fa-btc"></i>
                   <span class="badge ">Biling</span>
@@ -74,7 +74,7 @@ Session::destroySession();
                 <a href="index.html#">
                 <i class="fa fa-bell-o"><sup>4</sup></i>
                 </a>
-              </li>
+              </li>-->
             </ul>
             <div class="logot justify-content-right ml-auto">
               <a class="btn btn-info" href="?action=logout">Logout</a>

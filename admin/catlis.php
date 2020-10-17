@@ -30,8 +30,8 @@ $fm = new Formate();
                      
                     $i = $row = 0;
                      // number of rows per page
-                    $rowperpage = 5;
-                    $numrows_arr = array("5","10","25","50","100","250");
+                    $rowperpage = 10;
+                    $numrows_arr = array("10","15","20","30","50","100");
                     foreach($numrows_arr as $nrow){
                         if(isset($_POST['sel_name']) && $_POST['sel_name'] == $nrow){
                             $rowperpage = $_POST['sel_name'];
@@ -144,7 +144,7 @@ $fm = new Formate();
                 ?>
                    <li class="list-inline-item"><a class = "btn" href="?pages=<?php echo ($page-1);?>">Previous</a></li>
                 <?php 
-                  }if($total_page>=$page){
+                  }if($total_page>$page){
                 ?>
                    <li class="list-inline-item"><a class = "btn" href="?pages=<?php echo ($page+1);?>">Next</a></li>
                 <?php }

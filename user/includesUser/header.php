@@ -68,7 +68,23 @@ if (isset($_GET['logout'])&& $_GET['logout']='out'){
     margin: 0 auto 40px auto;
     width: 180px;
 }
-    
+ .u_d_menu a:hover{
+    font-size: 15px;
+    font-family: monospace;
+    color: #ef4242;
+    border-bottom: 2px solid red;
+ }   
+ .u_d_active{
+    font-size: 15px;
+    font-family: monospace;
+    color: #ef4242;
+    border-bottom: 2px solid red;
+ }
+ .S_btn:focus{
+     border:none;
+     box-shadow:none;
+ }
+
     </style>
 </head>
 <body>
@@ -81,7 +97,9 @@ if (isset($_GET['logout'])&& $_GET['logout']='out'){
                 <span class="fa fa-bars"></span>
             </button>
             <div class="collapse navbar-collapse d-flex flex-column flex-lg-row  flex-xl-row justify-content-lg-end  bg-light text-danger p-sm-3 p-lg-0 mt-lg-0 mt-sm-5 mobileMenu" id="navbarSupportedContent">
-                
+                <?php   $path = $_SERVER['SCRIPT_FILENAME'];
+                        $current_page = basename($path,'.php');
+                ?>
                 <ul class="navbar-nav  " id="navitem">
                     <li class="nav-item mr-3">
                         <form class="form-inline my-2 my-lg-0" action="search.php" method='post'>
@@ -93,17 +111,17 @@ if (isset($_GET['logout'])&& $_GET['logout']='out'){
                             </div>
                         </form>
                     </li>
-                    <li class="nav-item mr-3">
-                        <a class="nav-link active" style="font-size:18px"  href="index.php">Home</a>
+                    <li class="nav-item mr-3" >
+                        <a class="nav-link <?php if( $current_page == 'index'){echo 'active';}?>" style="font-size:15px"  href="index.php">Home</a>
                     </li>
                     <li class="nav-item mr-3">
-                        <a class="nav-link" style="font-size:18px"  href="track_order.php">Track Order</a>
+                        <a class="nav-link <?php if( $current_page == 'track_order'){echo 'active';}?>" style="font-size:15px" href="track_order.php">Track Order</a>
                     </li>
                     <li class="nav-item mr-3">
-                        <a class="nav-link " style="font-size:18px" href="#">About</a>
+                        <a class="nav-link <?php if( $current_page == 'about'){echo 'active';}?>" style="font-size:15px" href="about.php">About</a>
                     </li>
                     <li class="nav-item mr-3">
-                        <a class="nav-link " style="font-size:18px" href="#">Contact</a>
+                        <a class="nav-link  <a class="nav-link <?php if( $current_page == 'contact'){echo 'active';}?>" style="font-size:15px"href="contact.php">Contact</a>
                     </li>
                     <?php
                        if($userId)
@@ -114,15 +132,14 @@ if (isset($_GET['logout'])&& $_GET['logout']='out'){
                            if($res){
                             $data = mysqli_fetch_assoc($res);
                     ?>
-                     <li class="nav-item dropdown  mr-3">
-                        <a class="nav-link " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" onclick="myFun()" aria-expanded="true">
-                            <!--<span   style="font-size:12px"><?php //echo $data['name']; ?></i></span>-->
+                     <li class="nav-item dropdown py-1 mr-3">
+                        <a class=" "  href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" onclick="myFun()" aria-expanded="true" style="padding: 0px 0;text-decoration:none">
                             <span style="font-size:15px"><?php echo $data['name']; ?></span>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="dropcol" style="top: 64px; left: -206%; text-align: center; border-radius: 1% 32% 0% 30%; padding: 22px;box-shadow: 1px 2px 2px 2px #c7bfbf;">
-                            <a class="dropdown-item" href="../user/user_profile.php">View Profile</a>
-                            <a class="dropdown-item" href="myorder.php">View Order</a>
-                            <a class="dropdown-item" href="../user/mycart.php">My Cart</a>
+                        <div class="dropdown-menu u_d_menu" aria-labelledby="navbarDropdown" id="dropcol" style="top: 64px; left: -360%; text-align: center; border-radius: 1% 32% 0% 30%; padding: 22px;box-shadow: 1px 2px 2px 2px #c7bfbf;">
+                            <a class="dropdown-item <?php if( $current_page == 'user_profile'){echo 'u_d_active';}?>" href="../user/user_profile.php">View Profile</a>
+                            <a class="dropdown-item <?php if( $current_page == 'myorder'){echo 'u_d_active';}?>" href="myorder.php">View Order</a>
+                            <a class="dropdown-item <?php if( $current_page == 'mycart'){echo 'u_d_active';}?>" href="../user/mycart.php">My Cart</a>
                             <a class="dropdown-item" href="?logout=out">LogOut</a>
                         
                         </div>
@@ -130,7 +147,7 @@ if (isset($_GET['logout'])&& $_GET['logout']='out'){
                     <?php
                         }}else{ ?>
                         <li class="nav-item mr-3">
-                            <span class="nav-link log-res"> <a href="#login" data-toggle="modal" data-target="#login">Login</a>/<a href="#login" data-toggle="modal" data-target="#regitration">Registration</a></span>
+                            <span class="nav-link log-res" style="padding: 3px 0"> <a href="#login" data-toggle="modal" data-target="#login">Login</a>/<a href="#login" data-toggle="modal" data-target="#regitration">Registration</a></span>
                         </li>
                    <?php }?>
                 </ul>
